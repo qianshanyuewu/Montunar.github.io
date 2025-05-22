@@ -432,6 +432,11 @@
             e.preventDefault();
             showWhatIDidPage();
         });
+        
+        // 修复：让两个返回按钮都回到首页
+        backToArticles.addEventListener('click', showHomePage);
+        backToArticlesFromWhatIDid.addEventListener('click', showHomePage);
+        
         articleHeader.addEventListener('click', toggleArticle);
     </script>
 </body>
