@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简约网站</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            cursor: pointer;
+        }
+        #details {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="home">
+        <h1 onclick="showDetails()">一个小小的思考地方...</h1>
+    </div>
+    <div class="container" id="details">
+        <h1>一些事情...</h1>
+        <p>这里是详细的内容。</p>
+        <a href="#" onclick="showHome()">返回首页</a>
+    </div>
+
+    <script>
+        function showDetails() {
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('details').style.display = 'block';
+        }
+
+        function showHome() {
+            document.getElementById('details').style.display = 'none';
+            document.getElementById('home').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+
+
