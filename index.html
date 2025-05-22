@@ -60,6 +60,25 @@
                 transform: translateY(0);
                 opacity: 1;
             }
+            
+            .content-collapsed {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-out;
+            }
+            
+            .content-expanded {
+                max-height: 2000px;
+                transition: max-height 0.8s ease-in;
+            }
+            
+            .toggle-icon {
+                transition: transform 0.3s ease;
+            }
+            
+            .toggle-icon.expanded {
+                transform: rotate(180deg);
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -240,14 +259,19 @@
                     </p>
                 </div>
 
-                <!-- 新增文章 -->
-                <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8 md:p-12 slide-in" style="transition-delay: 0.2s">
-                    <h3 class="text-2xl font-semibold mb-4">5.22日值得庆祝的一天</h3>
-                    <p class="text-gray-600 mb-4">不言而喻，这天我创建了属于我自己的网站。</p>
-                    <p class="text-gray-600 mb-4">希望我能在考研的路途中，继续完善这个网站，终身学习！</p>
-                    <p class="text-gray-600 mb-4">看看明天要干什么？</p>
-                    <p class="text-gray-600 mb-4">嗯...早八的PLC课，持续到9点40，其次是IOT的实验课，从10点到12点。</p>
-                    <p class="text-gray-600">就先这样！</p>
+                <!-- 新增文章 - 修改为可折叠形式 -->
+                <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="transition-delay: 0.2s">
+                    <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
+                        <i id="toggle-icon" class="fa fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="article-content" class="px-8 md:px-12 pb-8 content-collapsed">
+                        <p class="text-gray-600 mb-4">不言而喻，这天我创建了属于我自己的网站。</p>
+                        <p class="text-gray-600 mb-4">希望我能在考研的路途中，继续完善这个网站，终身学习！</p>
+                        <p class="text-gray-600 mb-4">看看明天要干什么？</p>
+                        <p class="text-gray-600 mb-4">嗯...早八的PLC课，持续到9点40，其次是IOT的实验课，从10点到12点。</p>
+                        <p class="text-gray-600">就先这样！</p>
+                    </div>
                 </div>
             </div>
 
@@ -270,7 +294,15 @@
         const whatIDidLink = document.getElementById('what-i-did-link');
         const backToArticles = document.getElementById('back-to-articles');
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
-
+        
+        // 新增：文章折叠/展开功能
+        const articleHeader = document.getElementById('article-header');
+        const articleContent = document.getElementById('article-content');
+        const toggleIcon = document.getElementById('toggle-icon');
+        
+        // 文章默认折叠
+        let isArticleExpanded = false;
+        
         // 页面切换函数
         function showArticlesPage() {
             homePage.classList.add('opacity-0', 'pointer-events-none');
@@ -343,6 +375,21 @@
                 });
             }, 300);
         }
+        
+        // 新增：文章折叠/展开功能
+        function toggleArticle() {
+            isArticleExpanded = !isArticleExpanded;
+            
+            if (isArticleExpanded) {
+                articleContent.classList.remove('content-collapsed');
+                articleContent.classList.add('content-expanded');
+                toggleIcon.classList.add('expanded');
+            } else {
+                articleContent.classList.remove('content-expanded');
+                articleContent.classList.add('content-collapsed');
+                toggleIcon.classList.remove('expanded');
+            }
+        }
 
         // 添加事件监听
         homeTitle.addEventListener('click', showArticlesPage);
@@ -363,6 +410,9 @@
             e.preventDefault();
             showArticlesPage();
         });
+        
+        // 新增：文章折叠/展开事件监听
+        articleHeader.addEventListener('click', toggleArticle);
 
         // 初始化页面状态
         document.addEventListener('DOMContentLoaded', () => {
@@ -370,6 +420,9 @@
             articlesPage.classList.add('opacity-0', 'pointer-events-none');
             talkingPage.classList.add('opacity-0', 'pointer-events-none');
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            
+            // 初始化文章为折叠状态
+            articleContent.classList.add('content-collapsed');
         });
     </script>
 </body>
