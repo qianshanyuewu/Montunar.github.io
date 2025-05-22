@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,27 +28,34 @@
             .content-auto {
                 content-visibility: auto;
             }
+
             .transition-smooth {
                 transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             }
+
             .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
+
             .hover-scale {
                 transition: transform 0.3s ease;
             }
+
             .hover-scale:hover {
                 transform: scale(1.03);
             }
+
             .blur-title {
                 filter: blur(2px);
                 opacity: 0.7;
             }
+
             .slide-in {
                 transform: translateY(20px);
                 opacity: 0;
                 transition: transform 0.6s ease, opacity 0.6s ease;
             }
+
             .slide-in.active {
                 transform: translateY(0);
                 opacity: 1;
@@ -56,6 +64,7 @@
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden">
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
@@ -78,7 +87,10 @@
                 <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
                     <i class="fa fa-arrow-left mr-2"></i> 回到首页
                 </a>
-                <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">慢慢谈说</a>
+                <div class="flex space-x-4">
+                    <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">慢慢谈说</a>
+                    <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">干了啥</a>
+                </div>
             </header>
 
             <!-- 主内容区 -->
@@ -168,36 +180,65 @@
                     </div>
                 </div>
 
-               <!-- 新增：关于作者 -->
-<div class="w-full max-w-3xl bg-primary/5 rounded-2xl p-8 md:p-12 slide-in" style="transition-delay: 0.4s">
-    <div class="flex flex-col md:flex-row items-center gap-8">
-        <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
-            <!-- 新头像地址 - 请替换为你提供的头像 -->
-            <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover">
-        </div>
-        <div class="text-center md:text-left">
-            <h3 class="text-2xl font-light mb-3">关于作者</h3>
-            <p class="text-gray-600 mb-2">
-                一个喜欢思考的人，想要记录生活中的点滴感悟和思考。
-            </p>
-            <!-- 新增邮箱信息 -->
-            <p class="text-gray-600 mb-4 flex items-center justify-center md:justify-start">
-                <i class="fa fa-envelope-o mr-2"></i> 139107681@qq.com
-            </p>
-            <div class="flex justify-center md:justify-start gap-4">
-                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
-                    <i class="fa fa-github text-xl"></i>
-                </a>
-                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
-                    <i class="fa fa-twitter text-xl"></i>
-                </a>
-                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
-                    <i class="fa fa-linkedin text-xl"></i>
-                </a>
+                <!-- 新增：关于作者 -->
+                <div class="w-full max-w-3xl bg-primary/5 rounded-2xl p-8 md:p-12 slide-in" style="transition-delay: 0.4s">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
+                            <!-- 新头像地址 - 请替换为你提供的头像 -->
+                            <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-light mb-3">关于作者</h3>
+                            <p class="text-gray-600 mb-2">
+                                一个喜欢思考的人，想要记录生活中的点滴感悟和思考。
+                            </p>
+                            <!-- 新增邮箱信息 -->
+                            <p class="text-gray-600 mb-4 flex items-center justify-center md:justify-start">
+                                <i class="fa fa-envelope-o mr-2"></i> 139107681@qq.com
+                            </p>
+                            <div class="flex justify-center md:justify-start gap-4">
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                    <i class="fa fa-github text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                    <i class="fa fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                    <i class="fa fa-linkedin text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 干了啥页面 -->
+        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center">
+                <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">干了啥</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-light mb-4">
+                        干了啥系列
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        这里是我干了什么的记录。
+                    </p>
+                </div>
             </div>
 
             <!-- 页脚 -->
@@ -212,10 +253,13 @@
         const homePage = document.getElementById('home-page');
         const articlesPage = document.getElementById('articles-page');
         const talkingPage = document.getElementById('talking-page');
+        const whatIDidPage = document.getElementById('what-i-did-page');
         const homeTitle = document.getElementById('home-title');
         const backButton = document.getElementById('back-button');
         const talkingLink = document.getElementById('talking-link');
+        const whatIDidLink = document.getElementById('what-i-did-link');
         const backToArticles = document.getElementById('back-to-articles');
+        const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
 
         // 页面切换函数
         function showArticlesPage() {
@@ -225,7 +269,9 @@
             articlesPage.classList.add('opacity-100', 'pointer-events-auto');
             talkingPage.classList.add('opacity-0', 'pointer-events-none');
             talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
-            
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -235,9 +281,11 @@
             articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
             talkingPage.classList.add('opacity-0', 'pointer-events-none');
             talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
             homePage.classList.remove('opacity-0', 'pointer-events-none');
             homePage.classList.add('opacity-100', 'pointer-events-auto');
-            
+
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -247,13 +295,37 @@
             articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
             talkingPage.classList.remove('opacity-0', 'pointer-events-none');
             talkingPage.classList.add('opacity-100', 'pointer-events-auto');
-            
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
+
             // 触发动画
             setTimeout(() => {
                 const slideElements = document.querySelectorAll('.slide-in');
+                slideElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, index * 100);
+                });
+            }, 300);
+        }
+
+        function showWhatIDidPage() {
+            articlesPage.classList.add('opacity-0', 'pointer-events-none');
+            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
+            talkingPage.classList.add('opacity-0', 'pointer-events-none');
+            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
+            whatIDidPage.classList.remove('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.add('opacity-100', 'pointer-events-auto');
+
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 触发动画
+            setTimeout(() => {
+                const slideElements = document.querySelectorAll('#what-i-did-page .slide-in');
                 slideElements.forEach((el, index) => {
                     setTimeout(() => {
                         el.classList.add('active');
@@ -269,7 +341,15 @@
             e.preventDefault();
             showTalkingPage();
         });
+        whatIDidLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showWhatIDidPage();
+        });
         backToArticles.addEventListener('click', (e) => {
+            e.preventDefault();
+            showArticlesPage();
+        });
+        backToArticlesFromWhatIDid.addEventListener('click', (e) => {
             e.preventDefault();
             showArticlesPage();
         });
@@ -279,7 +359,9 @@
             homePage.classList.add('opacity-100', 'pointer-events-auto');
             articlesPage.classList.add('opacity-0', 'pointer-events-none');
             talkingPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
         });
     </script>
 </body>
+
 </html>
