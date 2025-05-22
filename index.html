@@ -60,24 +60,36 @@
                 transform: translateY(0);
                 opacity: 1;
             }
-            
+
             .content-collapsed {
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.5s ease-out;
             }
-            
+
             .content-expanded {
                 max-height: 2000px;
                 transition: max-height 0.8s ease-in;
             }
-            
+
             .toggle-icon {
                 transition: transform 0.3s ease;
             }
-            
+
             .toggle-icon.expanded {
                 transform: rotate(180deg);
+            }
+
+            /* 新增逐个字符出现动画样式 */
+            .char {
+                opacity: 0;
+                animation: fadeIn 0.3s forwards;
+            }
+
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
             }
         }
     </style>
@@ -91,7 +103,7 @@
         <section id="home-page" class="min-h-screen flex items-center justify-center px-4 py-12 transition-smooth">
             <div class="text-center max-w-3xl mx-auto">
                 <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-light leading-tight cursor-pointer hover:text-secondary transition-colors duration-300">
-                    一个小小的思考地方...
+                    <!-- 这里的文本将在 JavaScript 中逐个插入 -->
                 </h1>
                 <div class="mt-12 opacity-70">
                     <i class="fa fa-chevron-down text-xl animate-bounce"></i>
@@ -294,15 +306,15 @@
         const whatIDidLink = document.getElementById('what-i-did-link');
         const backToArticles = document.getElementById('back-to-articles');
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
-        
+
         // 新增：文章折叠/展开功能
         const articleHeader = document.getElementById('article-header');
         const articleContent = document.getElementById('article-content');
         const toggleIcon = document.getElementById('toggle-icon');
-        
+
         // 文章默认折叠
         let isArticleExpanded = false;
-        
+
         // 页面切换函数
         function showArticlesPage() {
             homePage.classList.add('opacity-0', 'pointer-events-none');
@@ -375,11 +387,11 @@
                 });
             }, 300);
         }
-        
+
         // 新增：文章折叠/展开功能
         function toggleArticle() {
             isArticleExpanded = !isArticleExpanded;
-            
+
             if (isArticleExpanded) {
                 articleContent.classList.remove('content-collapsed');
                 articleContent.classList.add('content-expanded');
@@ -390,6 +402,24 @@
                 toggleIcon.classList.remove('expanded');
             }
         }
+
+        // 新增：逐个字符出现动画
+        const titleText = '一个小小的思考地方...';
+        let charIndex = 0;
+
+        function typeTitle() {
+            if (charIndex < titleText.length) {
+                const char = document.createElement('span');
+                char.textContent = titleText.charAt(charIndex);
+                char.classList.add('char');
+                homeTitle.appendChild(char);
+                charIndex++;
+                setTimeout(typeTitle, 200); // 每个字符间隔200毫秒
+            }
+        }
+
+        // 页面加载完成后开始动画
+        window.addEventListener('load', typeTitle);
 
         // 添加事件监听
         homeTitle.addEventListener('click', showArticlesPage);
@@ -402,28 +432,7 @@
             e.preventDefault();
             showWhatIDidPage();
         });
-        backToArticles.addEventListener('click', (e) => {
-            e.preventDefault();
-            showArticlesPage();
-        });
-        backToArticlesFromWhatIDid.addEventListener('click', (e) => {
-            e.preventDefault();
-            showArticlesPage();
-        });
-        
-        // 新增：文章折叠/展开事件监听
         articleHeader.addEventListener('click', toggleArticle);
-
-        // 初始化页面状态
-        document.addEventListener('DOMContentLoaded', () => {
-            homePage.classList.add('opacity-100', 'pointer-events-auto');
-            articlesPage.classList.add('opacity-0', 'pointer-events-none');
-            talkingPage.classList.add('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-            
-            // 初始化文章为折叠状态
-            articleContent.classList.add('content-collapsed');
-        });
     </script>
 </body>
 
