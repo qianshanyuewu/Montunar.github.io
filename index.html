@@ -3,59 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简约网站</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.5s ease;
+    <title>一个小小的思考地方...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#1a1a1a',
+                        neutral: '#f5f5f5',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        .container {
-            text-align: center;
-        }
-        h1 {
-            font-size: 2em;
-            cursor: pointer;
-        }
-        #details {
-            display: none;
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .transition-smooth {
+                transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container" id="home">
-        <h1 onclick="showDetails()">一个小小的思考地方...</h1>
-    </div>
-    <div class="container" id="details">
-        <h1>一些事情...</h1>
-        <p>这里是详细的内容。</p>
-        <a href="#" onclick="showHome()">返回首页</a>
+<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden">
+    <!-- 页面容器 -->
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <!-- 首页 -->
+        <section id="home-page" class="min-h-screen flex items-center justify-center px-4 py-12 transition-smooth">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-light leading-tight cursor-pointer hover:text-secondary transition-colors duration-300">
+                    一个小小的思考地方...
+                </h1>
+                <div class="mt-12 opacity-70">
+                    <i class="fa fa-chevron-down text-xl animate-bounce"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章页面 -->
+        <section id="articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center">
+                <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 回到首页
+                </a>
+                <div class="text-xl font-light">一些事情...</div>
+            </header>
+
+            <!-- 文章列表 -->
+            <div class="flex-grow flex flex-col justify-center max-w-4xl mx-auto w-full mt-8">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-light mb-12 text-center">思考的片段</h2>
+                
+                <div class="space-y-8">
+                    <!-- 文章卡片 1 -->
+                    <article class="bg-white p-6 md:p-8 rounded-lg shadow-sm hover-scale">
+                        <h3 class="text-xl md:text-2xl font-medium mb-3">编程的本质</h3>
+                        <p class="text-gray-700 mb-4">编程的本质是将复杂的问题拆解为一系列简单的步骤，然后用精确的语言告诉计算机如何执行这些步骤。</p>
+                        <div class="text-sm text-gray-500">2025年5月20日</div>
+                    </article>
+                    
+                    <!-- 文章卡片 2 -->
+                    <article class="bg-white p-6 md:p-8 rounded-lg shadow-sm hover-scale">
+                        <h3 class="text-xl md:text-2xl font-medium mb-3">学习的艺术</h3>
+                        <p class="text-gray-700 mb-4">真正的学习不是简单的记忆，而是理解知识背后的逻辑，并能够将其应用到新的情境中。</p>
+                        <div class="text-sm text-gray-500">2025年5月15日</div>
+                    </article>
+                    
+                    <!-- 文章卡片 3 -->
+                    <article class="bg-white p-6 md:p-8 rounded-lg shadow-sm hover-scale">
+                        <h3 class="text-xl md:text-2xl font-medium mb-3">技术与人性</h3>
+                        <p class="text-gray-700 mb-4">最伟大的技术创新往往不是因为它们有多复杂，而是因为它们能够以简单而优雅的方式解决人类的问题。</p>
+                        <div class="text-sm text-gray-500">2025年5月10日</div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
     </div>
 
     <script>
-        function showDetails() {
-            document.getElementById('home').style.display = 'none';
-            document.getElementById('details').style.display = 'block';
+        // 获取DOM元素
+        const homePage = document.getElementById('home-page');
+        const articlesPage = document.getElementById('articles-page');
+        const homeTitle = document.getElementById('home-title');
+        const backButton = document.getElementById('back-button');
+
+        // 页面切换函数
+        function showArticlesPage() {
+            homePage.classList.add('opacity-0', 'pointer-events-none');
+            homePage.classList.remove('opacity-100', 'pointer-events-auto');
+            articlesPage.classList.remove('opacity-0', 'pointer-events-none');
+            articlesPage.classList.add('opacity-100', 'pointer-events-auto');
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showHome() {
-            document.getElementById('details').style.display = 'none';
-            document.getElementById('home').style.display = 'block';
+        function showHomePage() {
+            articlesPage.classList.add('opacity-0', 'pointer-events-none');
+            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
+            homePage.classList.remove('opacity-0', 'pointer-events-none');
+            homePage.classList.add('opacity-100', 'pointer-events-auto');
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // 添加事件监听
+        homeTitle.addEventListener('click', showArticlesPage);
+        backButton.addEventListener('click', showHomePage);
+
+        // 初始化页面状态
+        document.addEventListener('DOMContentLoaded', () => {
+            homePage.classList.add('opacity-100', 'pointer-events-auto');
+            articlesPage.classList.add('opacity-0', 'pointer-events-none');
+        });
     </script>
 </body>
 </html>
-
-
-
+    
