@@ -116,9 +116,201 @@
             }
         }
     </style>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9f9f9;
+            --bg-tertiary: #f0f0f0;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-tertiary: #666666;
+            --border-color: #e5e7eb;
+            --card-bg: #ffffff;
+            --card-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+            --button-bg: #000000;
+            --button-text: #ffffff;
+            --button-hover: #333333;
+            --transition-speed: 0.8s;
+        }
+
+        .dark-mode {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0e0;
+            --text-tertiary: #a0a0a0;
+            --border-color: #333333;
+            --card-bg: #1e1e1e;
+            --card-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --button-bg: #ffffff;
+            --button-text: #000000;
+            --button-hover: #e0e0e0;
+            --transition-speed: 0.8s;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .bg-neutral {
+            background-color: var(--bg-secondary);
+            transition: background-color var(--transition-speed);
+        }
+
+        .bg-white {
+            background-color: var(--bg-primary);
+            transition: background-color var(--transition-speed);
+        }
+
+        .bg-gray-50 {
+            background-color: var(--bg-tertiary);
+            transition: background-color var(--transition-speed);
+        }
+
+        .bg-gray-100 {
+            background-color: var(--bg-tertiary);
+            transition: background-color var(--transition-speed);
+        }
+
+        .text-primary {
+            color: var(--text-primary);
+            transition: color var(--transition-speed);
+        }
+
+        .text-secondary {
+            color: var(--text-secondary);
+            transition: color var(--transition-speed);
+        }
+
+        .text-gray-500, .text-gray-600 {
+            color: var(--text-tertiary);
+            transition: color var(--transition-speed);
+        }
+
+        .border-gray-200 {
+            border-color: var(--border-color);
+            transition: border-color var(--transition-speed);
+        }
+
+        .custom-card {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            box-shadow: var(--card-shadow);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .custom-button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+        }
+
+        .custom-button:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* 漩涡切换按钮样式 */
+        .theme-toggle-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .theme-toggle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .swirl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .swirl {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--bg-primary) 0%,
+                var(--text-primary) 25%,
+                var(--bg-primary) 50%,
+                var(--text-primary) 75%,
+                var(--bg-primary) 100%
+            );
+            opacity: 0;
+            transform: scale(0);
+            transform-origin: center;
+            transition: transform 0s, opacity 0s;
+        }
+
+        .swirl.active {
+            opacity: 1;
+            transform: scale(50);
+            transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.1s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .theme-toggle i {
+            animation: rotate 3s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .theme-toggle:hover i {
+            animation-play-state: running;
+        }
+    </style>
 </head>
 
-<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden">
+<body class="font-inter antialiased overflow-x-hidden">
+    <!-- 漩涡动画容器 -->
+    <div class="swirl-container">
+        <div class="swirl" id="theme-swirl"></div>
+    </div>
+
+    <!-- 主题切换按钮 -->
+    <div class="theme-toggle-container" id="theme-toggle-btn">
+        <div class="theme-toggle">
+            <i class="fas fa-sync-alt"></i>
+        </div>
+    </div>
+
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
         <!-- 首页 -->
@@ -191,7 +383,7 @@
                 <!-- 主题卡片 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
                     <!-- 卡片1：思考与探索 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.1s">
+                    <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.1s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover grayscale">
                         </div>
@@ -205,7 +397,7 @@
                     </div>
 
                     <!-- 卡片2：科技与未来 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.2s">
+                    <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.2s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover grayscale">
                         </div>
@@ -219,7 +411,7 @@
                     </div>
 
                     <!-- 卡片3：艺术与创意 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.3s">
+                    <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.3s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover grayscale">
                         </div>
@@ -294,7 +486,7 @@
                 <!-- 文章列表 -->
                 <div class="w-full max-w-3xl space-y-8">
                     <!-- 文章1：厌蠢还是不耐烦？ -->
-                    <div class="bg-white custom-card overflow-hidden slide-in" style="transition-delay: 0.1s">
+                    <div class="custom-card overflow-hidden slide-in" style="transition-delay: 0.1s">
                         <div id="thinking-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
                             <div>
                                 <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
@@ -360,7 +552,7 @@
                 </div>
 
                 <!-- 新增文章 - 修改为可折叠形式 -->
-                <div class="w-full max-w-3xl bg-white custom-card overflow-hidden slide-in" style="transition-delay: 0.2s">
+                <div class="w-full max-w-3xl custom-card overflow-hidden slide-in" style="transition-delay: 0.2s">
                     <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
                         <div class="flex items-center text-sm text-gray-500">
@@ -413,9 +605,23 @@
         const thinkingArticleContent = document.getElementById('thinking-article-content');
         const thinkingToggleIcon = document.getElementById('thinking-toggle-icon');
 
+        // 主题切换相关元素
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeSwirl = document.getElementById('theme-swirl');
+        const body = document.body;
+
         // 文章默认折叠
         let isArticleExpanded = false;
         let isThinkingArticleExpanded = false;
+
+        // 主题状态
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        // 初始化主题
+        if (isDarkMode) {
+            body.classList.add('dark-mode');
+            updateThemeToggleIcon();
+        }
 
         // 页面切换函数
         function showArticlesPage() {
@@ -552,6 +758,43 @@
             }
         }
 
+        // 主题切换功能
+        function toggleTheme() {
+            // 触发漩涡动画
+            themeSwirl.classList.add('active');
+            
+            // 延迟切换主题，等待动画完成
+            setTimeout(() => {
+                isDarkMode = !isDarkMode;
+                if (isDarkMode) {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+                
+                // 保存用户偏好
+                localStorage.setItem('darkMode', isDarkMode);
+                
+                // 更新按钮图标
+                updateThemeToggleIcon();
+                
+                // 重置漩涡动画
+                setTimeout(() => {
+                    themeSwirl.classList.remove('active');
+                }, 100);
+            }, 500);
+        }
+
+        // 更新主题切换按钮图标
+        function updateThemeToggleIcon() {
+            const icon = themeToggleBtn.querySelector('i');
+            if (isDarkMode) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
         // 逐个字符出现动画
         const titleText = '一个小小的思考地方...';
 
@@ -566,6 +809,7 @@
         thinkingArticlesLink.addEventListener('click', showThinkingArticlesPage);
         articleHeader.addEventListener('click', toggleArticle);
         thinkingArticleHeader.addEventListener('click', toggleThinkingArticle);
+        themeToggleBtn.addEventListener('click', toggleTheme);
 
         // 逐个字符插入标题
         function typeTitle() {
@@ -583,9 +827,12 @@
             }, 100);
         }
 
-        window.addEventListener('load', typeTitle);
+        // 初始化
+        window.addEventListener('load', () => {
+            typeTitle();
+            updateThemeToggleIcon();
+        });
     </script>
 </body>
 
 </html>
-    
