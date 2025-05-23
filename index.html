@@ -63,15 +63,22 @@
                 opacity: 1;
             }
 
+            /* 优化后的折叠动画 */
             .content-collapsed {
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.5s ease-out;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+                padding-top: 0;
+                padding-bottom: 0;
             }
 
             .content-expanded {
                 max-height: 2000px;
-                transition: max-height 0.8s ease-in;
+                transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 1;
+                padding-top: 1rem;
+                padding-bottom: 2rem;
             }
 
             .toggle-icon {
@@ -277,13 +284,18 @@
                 <div class="w-full max-w-3xl space-y-8">
                     <!-- 文章1：厌蠢还是不耐烦？ -->
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="transition-delay: 0.1s">
-                        <div class="p-8 md:p-12">
-                            <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
-                            <div class="flex items-center mt-4 text-sm text-gray-500">
-                                <span>2025年5月23日</span>
-                                <span class="mx-2">•</span>
-                                <span>思考与探索</span>
+                        <div id="thinking-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>2025年5月23日</span>
+                                    <span class="mx-2">•</span>
+                                    <span>思考与探索</span>
+                                </div>
                             </div>
+                            <i id="thinking-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0"></i>
+                        </div>
+                        <div id="thinking-article-content" class="px-8 md:px-12 content-collapsed">
                             <div class="mt-6">
                                 <p class="text-gray-600 mb-4">
                                     今天是25.5.23日，PLC课听不懂，但是我整节课在思考这件事。我是有厌蠢症，还是说单纯的浮躁，不耐烦？
@@ -291,10 +303,10 @@
                                 <p class="text-gray-600 mb-4">
                                     最近发现自己在面对一些似乎缺乏基本常识或学习能力的人时，会产生一种难以抑制的烦躁情绪。这种情绪让我开始反思自己：我是真的患有"厌蠢症"，还是只是因为自己变得越来越没有耐心？
                                 </p>
-                                <p class="text-gray-600">
+                                <p class="text-gray-600 mb-4">
                                     或许这两者都有一点。一方面，我确实对那些不愿意思考、不愿意学习的人感到失望；另一方面，我也意识到自己的耐心正在逐渐消失。这让我感到不安，因为我知道真正的智慧应该包含包容和理解。
                                 </p>
-                                <p class="text-gray-600 mb-4">
+                                <p class="text-gray-600 >
                                     中间这两段是ai写的，确实有给了我一点启发。我觉得这跟我的性格有关：喜欢独处。
                                     无论我做什么，你可以说为什么，有什么用？这都无关紧要，但是我不喜欢，我讨厌。
                                     我不喜欢解释，因为这跟你无关，我只想沉默，因为更多的沟通会带来更多的不解。
@@ -340,9 +352,14 @@
                 <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="transition-delay: 0.2s">
                     <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span>2025年5月22日</span>
+                            <span class="mx-2">•</span>
+                            <span>干了啥</span>
+                        </div>
                         <i id="toggle-icon" class="fa fa-chevron-down toggle-icon"></i>
                     </div>
-                    <div id="article-content" class="px-8 md:px-12 pb-8 content-collapsed">
+                    <div id="article-content" class="px-8 md:px-12 content-collapsed">
                         <p class="text-gray-600 mb-4">不言而喻，这天我创建了属于我自己的网站。</p>
                         <p class="text-gray-600 mb-4">希望我能在考研的路途中，继续完善这个网站，终身学习！</p>
                         <p class="text-gray-600 mb-4">看看明天要干什么？</p>
@@ -379,9 +396,15 @@
         const articleHeader = document.getElementById('article-header');
         const articleContent = document.getElementById('article-content');
         const toggleIcon = document.getElementById('toggle-icon');
+        
+        // 新增：思考与探索文章折叠/展开功能
+        const thinkingArticleHeader = document.getElementById('thinking-article-header');
+        const thinkingArticleContent = document.getElementById('thinking-article-content');
+        const thinkingToggleIcon = document.getElementById('thinking-toggle-icon');
 
         // 文章默认折叠
         let isArticleExpanded = false;
+        let isThinkingArticleExpanded = false;
 
         // 页面切换函数
         function showArticlesPage() {
@@ -503,6 +526,21 @@
             }
         }
 
+        // 新增：思考与探索文章折叠/展开功能
+        function toggleThinkingArticle() {
+            isThinkingArticleExpanded = !isThinkingArticleExpanded;
+
+            if (isThinkingArticleExpanded) {
+                thinkingArticleContent.classList.remove('content-collapsed');
+                thinkingArticleContent.classList.add('content-expanded');
+                thinkingToggleIcon.classList.add('expanded');
+            } else {
+                thinkingArticleContent.classList.remove('content-expanded');
+                thinkingArticleContent.classList.add('content-collapsed');
+                thinkingToggleIcon.classList.remove('expanded');
+            }
+        }
+
         // 新增：逐个字符出现动画
         const titleText = '一个小小的思考地方...';
 
@@ -516,6 +554,7 @@
         backToTalking.addEventListener('click', showTalkingPage);
         thinkingArticlesLink.addEventListener('click', showThinkingArticlesPage);
         articleHeader.addEventListener('click', toggleArticle);
+        thinkingArticleHeader.addEventListener('click', toggleThinkingArticle);
 
         // 逐个字符插入标题
         function typeTitle() {
