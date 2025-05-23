@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>一个小小的思考地方...</title>
-        <!-- 添加图标引用 -->
-<link rel="shortcut icon" href="/Montunar.github.io/favicon.ico" />
+    <!-- 添加图标引用 -->
+    <link rel="shortcut icon" href="/Montunar.github.io/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <script>
@@ -170,7 +170,7 @@
 
                 <!-- 主题卡片 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
-                    <!-- 卡片1 -->
+                    <!-- 卡片1：思考与探索 -->
                     <div class="bg-white rounded-xl shadow-lg p-6 hover-scale slide-in" style="transition-delay: 0.1s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover">
@@ -179,12 +179,12 @@
                         <p class="text-gray-600 mb-4">
                             探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
                         </p>
-                        <a href="#" class="text-primary hover:text-secondary inline-flex items-center">
+                        <a href="#" id="thinking-articles-link" class="text-primary hover:text-secondary inline-flex items-center">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                     </div>
 
-                    <!-- 卡片2 -->
+                    <!-- 卡片2：科技与未来 -->
                     <div class="bg-white rounded-xl shadow-lg p-6 hover-scale slide-in" style="transition-delay: 0.2s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover">
@@ -198,7 +198,7 @@
                         </a>
                     </div>
 
-                    <!-- 卡片3 -->
+                    <!-- 卡片3：艺术与创意 -->
                     <div class="bg-white rounded-xl shadow-lg p-6 hover-scale slide-in" style="transition-delay: 0.3s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover">
@@ -213,7 +213,7 @@
                     </div>
                 </div>
 
-                <!-- 新增：关于作者 -->
+                <!-- 关于作者 -->
                 <div class="w-full max-w-3xl bg-primary/5 rounded-2xl p-8 md:p-12 slide-in" style="transition-delay: 0.4s">
                     <div class="flex flex-col md:flex-row items-center gap-8">
                         <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
@@ -251,6 +251,63 @@
             </footer>
         </section>
 
+        <!-- 思考与探索文章页面 -->
+        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center">
+                <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">思考与探索</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-light mb-4">
+                        思考与探索
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
+                    </p>
+                </div>
+
+                <!-- 文章列表 -->
+                <div class="w-full max-w-3xl space-y-8">
+                    <!-- 文章1：厌蠢还是不耐烦？ -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="transition-delay: 0.1s">
+                        <div class="p-8 md:p-12">
+                            <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
+                            <div class="flex items-center mt-4 text-sm text-gray-500">
+                                <span>2025年5月23日</span>
+                                <span class="mx-2">•</span>
+                                <span>思考与探索</span>
+                            </div>
+                            <div class="mt-6">
+                                <p class="text-gray-600 mb-4">
+                                    今天是25.5.23日，PLC课听不懂，但是我整节课在思考这件事。我是有厌蠢症，还是说单纯的浮躁，不耐烦？
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    最近发现自己在面对一些似乎缺乏基本常识或学习能力的人时，会产生一种难以抑制的烦躁情绪。这种情绪让我开始反思自己：我是真的患有"厌蠢症"，还是只是因为自己变得越来越没有耐心？
+                                </p>
+                                <p class="text-gray-600">
+                                    或许这两者都有一点。一方面，我确实对那些不愿意思考、不愿意学习的人感到失望；另一方面，我也意识到自己的耐心正在逐渐消失。这让我感到不安，因为我知道真正的智慧应该包含包容和理解。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 可以添加更多文章 -->
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
         <!-- 干了啥页面 -->
         <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
@@ -276,7 +333,7 @@
                 <!-- 新增文章 - 修改为可折叠形式 -->
                 <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg overflow-hidden slide-in" style="transition-delay: 0.2s">
                     <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
-                        <h3 class="text-2xl font-semibold">2025.5.22日值得庆祝的一天</h3>
+                        <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
                         <i id="toggle-icon" class="fa fa-chevron-down toggle-icon"></i>
                     </div>
                     <div id="article-content" class="px-8 md:px-12 pb-8 content-collapsed">
@@ -302,12 +359,15 @@
         const articlesPage = document.getElementById('articles-page');
         const talkingPage = document.getElementById('talking-page');
         const whatIDidPage = document.getElementById('what-i-did-page');
+        const thinkingArticlesPage = document.getElementById('thinking-articles-page');
         const homeTitle = document.getElementById('home-title');
         const backButton = document.getElementById('back-button');
         const talkingLink = document.getElementById('talking-link');
         const whatIDidLink = document.getElementById('what-i-did-link');
         const backToArticles = document.getElementById('back-to-articles');
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
+        const backToTalking = document.getElementById('back-to-talking');
+        const thinkingArticlesLink = document.getElementById('thinking-articles-link');
 
         // 新增：文章折叠/展开功能
         const articleHeader = document.getElementById('article-header');
@@ -327,6 +387,8 @@
             talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
             whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
 
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -339,6 +401,8 @@
             talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
             whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
             homePage.classList.remove('opacity-0', 'pointer-events-none');
             homePage.classList.add('opacity-100', 'pointer-events-auto');
 
@@ -353,13 +417,15 @@
             talkingPage.classList.add('opacity-100', 'pointer-events-auto');
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
             whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
 
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             // 触发动画
             setTimeout(() => {
-                const slideElements = document.querySelectorAll('.slide-in');
+                const slideElements = document.querySelectorAll('#talking-page .slide-in');
                 slideElements.forEach((el, index) => {
                     setTimeout(() => {
                         el.classList.add('active');
@@ -375,6 +441,8 @@
             talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
             whatIDidPage.classList.remove('opacity-0', 'pointer-events-none');
             whatIDidPage.classList.add('opacity-100', 'pointer-events-auto');
+            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
 
             // 滚动到顶部
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -382,6 +450,30 @@
             // 触发动画
             setTimeout(() => {
                 const slideElements = document.querySelectorAll('#what-i-did-page .slide-in');
+                slideElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, index * 100);
+                });
+            }, 300);
+        }
+
+        function showThinkingArticlesPage() {
+            articlesPage.classList.add('opacity-0', 'pointer-events-none');
+            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
+            talkingPage.classList.add('opacity-0', 'pointer-events-none');
+            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
+            thinkingArticlesPage.classList.remove('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.add('opacity-100', 'pointer-events-auto');
+
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 触发动画
+            setTimeout(() => {
+                const slideElements = document.querySelectorAll('#thinking-articles-page .slide-in');
                 slideElements.forEach((el, index) => {
                     setTimeout(() => {
                         el.classList.add('active');
@@ -407,40 +499,36 @@
 
         // 新增：逐个字符出现动画
         const titleText = '一个小小的思考地方...';
-        let charIndex = 0;
 
-        function typeTitle() {
-            if (charIndex < titleText.length) {
-                const char = document.createElement('span');
-                char.textContent = titleText.charAt(charIndex);
-                char.classList.add('char');
-                homeTitle.appendChild(char);
-                charIndex++;
-                setTimeout(typeTitle, 200); // 每个字符间隔200毫秒
-            }
-        }
-
-        // 页面加载完成后开始动画
-        window.addEventListener('load', typeTitle);
-
-        // 添加事件监听
+        // 事件监听
         homeTitle.addEventListener('click', showArticlesPage);
         backButton.addEventListener('click', showHomePage);
-        talkingLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showTalkingPage();
-        });
-        whatIDidLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showWhatIDidPage();
-        });
-        
-        // 修复：让两个返回按钮都回到首页
-        backToArticles.addEventListener('click', showHomePage);
-        backToArticlesFromWhatIDid.addEventListener('click', showHomePage);
-        
+        talkingLink.addEventListener('click', showTalkingPage);
+        whatIDidLink.addEventListener('click', showWhatIDidPage);
+        backToArticles.addEventListener('click', showArticlesPage);
+        backToArticlesFromWhatIDid.addEventListener('click', showArticlesPage);
+        backToTalking.addEventListener('click', showTalkingPage);
+        thinkingArticlesLink.addEventListener('click', showThinkingArticlesPage);
         articleHeader.addEventListener('click', toggleArticle);
+
+        // 逐个字符插入标题
+        function typeTitle() {
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < titleText.length) {
+                    const charSpan = document.createElement('span');
+                    charSpan.classList.add('char');
+                    charSpan.textContent = titleText[index];
+                    homeTitle.appendChild(charSpan);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        window.addEventListener('load', typeTitle);
     </script>
 </body>
 
-</html>
+</html>    
