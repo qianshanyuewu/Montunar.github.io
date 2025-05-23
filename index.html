@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -373,7 +374,7 @@
                         <p class="text-gray-600 mb-4">
                             探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
                         </p>
-                        <a href="#" class="custom-button inline-flex items-center">
+                        <a href="#" id="tech-articles-link" class="custom-button inline-flex items-center">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -497,6 +498,77 @@
             </footer>
         </section>
 
+        <!-- 科技与未来文章页面 -->
+        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">科技与未来</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        科技与未来
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
+                    </p>
+                </div>
+
+                <!-- 文章列表 -->
+                <div class="w-full max-w-3xl space-y-8">
+                    <!-- 文章1：前沿科技研究报告 -->
+                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
+                        <div id="tech-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-semibold">前沿科技研究报告</h3>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>2025年5月23日</span>
+                                    <span class="mx-2">•</span>
+                                    <span>科技与未来</span>
+                                </div>
+                            </div>
+                            <i id="tech-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                        </div>
+                        <div id="tech-article-content" class="px-8 md:px-12 content-collapsed">
+                            <div class="mt-6">
+                                <p class="text-gray-600 mb-4">
+                                    这份研究报告详细分析了当前科技发展趋势，包括人工智能、量子计算、可再生能源等领域的最新突破，以及它们对未来社会的潜在影响。
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    通过对大量数据的分析和专家访谈，报告揭示了未来十年科技发展的可能方向，以及这些发展对经济、社会和个人生活的深远影响。
+                                </p>
+                                <div class="my-6 flex justify-center">
+                                    <a href="research_report.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                                        <i class="fa fa-file-pdf text-red-500 text-xl mr-2"></i>
+                                        <span>点击查看完整研究报告 (PDF)</span>
+                                    </a>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    报告中特别强调了人工智能在医疗、教育和环境保护等领域的应用前景，以及如何通过负责任的技术开发来确保这些进步能够造福全人类。
+                                </p>
+                                <p class="text-gray-600">
+                                    无论你是科技爱好者、学生、研究人员还是决策者，这份报告都将为你提供宝贵的见解，帮助你更好地理解和应对科技带来的挑战与机遇。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 可以添加更多文章 -->
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
         <!-- 干了啥页面 -->
         <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
@@ -554,6 +626,7 @@
         const talkingPage = document.getElementById('talking-page');
         const whatIDidPage = document.getElementById('what-i-did-page');
         const thinkingArticlesPage = document.getElementById('thinking-articles-page');
+        const techArticlesPage = document.getElementById('tech-articles-page');
         const homeTitle = document.getElementById('home-title');
         const backButton = document.getElementById('back-button');
         const talkingLink = document.getElementById('talking-link');
@@ -561,7 +634,9 @@
         const backToArticles = document.getElementById('back-to-articles');
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
         const backToTalking = document.getElementById('back-to-talking');
+        const backToTalkingFromTech = document.getElementById('back-to-talking-from-tech');
         const thinkingArticlesLink = document.getElementById('thinking-articles-link');
+        const techArticlesLink = document.getElementById('tech-articles-link');
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
 
@@ -575,9 +650,15 @@
         const thinkingArticleContent = document.getElementById('thinking-article-content');
         const thinkingToggleIcon = document.getElementById('thinking-toggle-icon');
 
+        // 科技与未来文章折叠/展开功能
+        const techArticleHeader = document.getElementById('tech-article-header');
+        const techArticleContent = document.getElementById('tech-article-content');
+        const techToggleIcon = document.getElementById('tech-toggle-icon');
+
         // 文章默认折叠
         let isArticleExpanded = false;
         let isThinkingArticleExpanded = false;
+        let isTechArticleExpanded = false;
 
         // 主题设置
         let isDarkMode = false;
@@ -612,63 +693,30 @@
         }
 
         // 切换主题
-        function toggleTheme() {
+        themeToggle.addEventListener('click', () => {
             if (isDarkMode) {
                 disableDarkMode();
             } else {
                 enableDarkMode();
             }
-        }
+        });
 
         // 页面切换函数
-        function showArticlesPage() {
+        function showPage(page) {
+            // 隐藏所有页面
             homePage.classList.add('opacity-0', 'pointer-events-none');
-            homePage.classList.remove('opacity-100', 'pointer-events-auto');
-            articlesPage.classList.remove('opacity-0', 'pointer-events-none');
-            articlesPage.classList.add('opacity-100', 'pointer-events-auto');
-            talkingPage.classList.add('opacity-0', 'pointer-events-none');
-            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
-            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
-            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showHomePage() {
             articlesPage.classList.add('opacity-0', 'pointer-events-none');
-            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
             talkingPage.classList.add('opacity-0', 'pointer-events-none');
-            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
             thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-            homePage.classList.remove('opacity-0', 'pointer-events-none');
-            homePage.classList.add('opacity-100', 'pointer-events-auto');
+            techArticlesPage.classList.add('opacity-0', 'pointer-events-none');
 
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            // 显示指定页面
+            page.classList.remove('opacity-0', 'pointer-events-none');
 
-        function showTalkingPage() {
-            articlesPage.classList.add('opacity-0', 'pointer-events-none');
-            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-            talkingPage.classList.remove('opacity-0', 'pointer-events-none');
-            talkingPage.classList.add('opacity-100', 'pointer-events-auto');
-            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
-            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // 触发动画
+            // 激活滑入动画
             setTimeout(() => {
-                const slideElements = document.querySelectorAll('#talking-page .slide-in');
+                const slideElements = page.querySelectorAll('.slide-in');
                 slideElements.forEach((el, index) => {
                     setTimeout(() => {
                         el.classList.add('active');
@@ -677,130 +725,129 @@
             }, 300);
         }
 
-        function showWhatIDidPage() {
-            articlesPage.classList.add('opacity-0', 'pointer-events-none');
-            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-            talkingPage.classList.add('opacity-0', 'pointer-events-none');
-            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
-            whatIDidPage.classList.remove('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.add('opacity-100', 'pointer-events-auto');
-            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-            thinkingArticlesPage.classList.remove('opacity-100', 'pointer-events-auto');
+        // 首页标题动画
+        function animateHomeTitle() {
+            const titleText = "一个小小的思考地方...";
+            homeTitle.innerHTML = '';
 
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // 触发动画
-            setTimeout(() => {
-                const slideElements = document.querySelectorAll('#what-i-did-page .slide-in');
-                slideElements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('active');
-                    }, index * 100);
-                });
-            }, 300);
-        }
-
-        function showThinkingArticlesPage() {
-            articlesPage.classList.add('opacity-0', 'pointer-events-none');
-            articlesPage.classList.remove('opacity-100', 'pointer-events-auto');
-            talkingPage.classList.add('opacity-0', 'pointer-events-none');
-            talkingPage.classList.remove('opacity-100', 'pointer-events-auto');
-            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-            whatIDidPage.classList.remove('opacity-100', 'pointer-events-auto');
-            thinkingArticlesPage.classList.remove('opacity-0', 'pointer-events-none');
-            thinkingArticlesPage.classList.add('opacity-100', 'pointer-events-auto');
-
-            // 滚动到顶部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // 触发动画
-            setTimeout(() => {
-                const slideElements = document.querySelectorAll('#thinking-articles-page .slide-in');
-                slideElements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('active');
-                    }, index * 100);
-                });
-            }, 300);
-        }
-
-        // 文章折叠/展开功能
-        function toggleArticle() {
-            isArticleExpanded = !isArticleExpanded;
-
-            if (isArticleExpanded) {
-                articleContent.classList.remove('content-collapsed');
-                articleContent.classList.add('content-expanded');
-                toggleIcon.classList.add('expanded');
-            } else {
-                articleContent.classList.remove('content-expanded');
-                articleContent.classList.add('content-collapsed');
-                toggleIcon.classList.remove('expanded');
-            }
-        }
-
-        // 思考与探索文章折叠/展开功能
-        function toggleThinkingArticle() {
-            isThinkingArticleExpanded = !isThinkingArticleExpanded;
-
-            if (isThinkingArticleExpanded) {
-                thinkingArticleContent.classList.remove('content-collapsed');
-                thinkingArticleContent.classList.add('content-expanded');
-                thinkingToggleIcon.classList.add('expanded');
-            } else {
-                thinkingArticleContent.classList.remove('content-expanded');
-                thinkingArticleContent.classList.add('content-collapsed');
-                thinkingToggleIcon.classList.remove('expanded');
-            }
-        }
-
-        // 逐个字符出现动画
-        const titleText = '一个小小的思考地方...';
-
-        // 逐个字符插入标题
-        function typeTitle() {
-            let index = 0;
-            const interval = setInterval(() => {
-                if (index < titleText.length) {
-                    const charSpan = document.createElement('span');
-                    charSpan.classList.add('char');
-                    charSpan.textContent = titleText[index];
-                    homeTitle.appendChild(charSpan);
-                    index++;
-                } else {
-                    clearInterval(interval);
-                }
-            }, 100);
+            titleText.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.classList.add('char');
+                span.style.animationDelay = `${index * 0.1}s`;
+                homeTitle.appendChild(span);
+            });
         }
 
         // 初始化页面
-        function initPage() {
-            // 初始化主题
-            initTheme();
-            
-            // 设置首页可见
-            homePage.classList.add('opacity-100', 'pointer-events-auto');
-            
-            // 开始标题动画
-            typeTitle();
-            
-            // 添加事件监听
-            homeTitle.addEventListener('click', showArticlesPage);
-            backButton.addEventListener('click', showHomePage);
-            talkingLink.addEventListener('click', showTalkingPage);
-            whatIDidLink.addEventListener('click', showWhatIDidPage);
-            backToArticles.addEventListener('click', showArticlesPage);
-            backToArticlesFromWhatIDid.addEventListener('click', showArticlesPage);
-            backToTalking.addEventListener('click', showTalkingPage);
-            thinkingArticlesLink.addEventListener('click', showThinkingArticlesPage);
-            articleHeader.addEventListener('click', toggleArticle);
-            thinkingArticleHeader.addEventListener('click', toggleThinkingArticle);
-            themeToggle.addEventListener('click', toggleTheme);
+        function initPages() {
+            // 显示首页
+            showPage(homePage);
+            animateHomeTitle();
+
+            // 重置滑入元素
+            document.querySelectorAll('.slide-in').forEach(el => {
+                el.classList.remove('active');
+            });
         }
 
-        // 页面加载完成后初始化
-        window.addEventListener('load', initPage);
+        // 页面导航事件
+        homeTitle.addEventListener('click', () => {
+            showPage(articlesPage);
+        });
+
+        backButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(homePage);
+        });
+
+        talkingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(talkingPage);
+        });
+
+        whatIDidLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(whatIDidPage);
+        });
+
+        backToArticles.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(articlesPage);
+        });
+
+        backToArticlesFromWhatIDid.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(articlesPage);
+        });
+
+        thinkingArticlesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(thinkingArticlesPage);
+        });
+
+        techArticlesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(techArticlesPage);
+        });
+
+        backToTalking.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(talkingPage);
+        });
+
+        backToTalkingFromTech.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage(talkingPage);
+        });
+
+        // 文章折叠/展开功能
+        articleHeader.addEventListener('click', () => {
+            if (isArticleExpanded) {
+                articleContent.classList.remove('content-expanded');
+                articleContent.classList.add('content-collapsed');
+                toggleIcon.classList.remove('expanded');
+            } else {
+                articleContent.classList.remove('content-collapsed');
+                articleContent.classList.add('content-expanded');
+                toggleIcon.classList.add('expanded');
+            }
+            isArticleExpanded = !isArticleExpanded;
+        });
+
+        // 思考与探索文章折叠/展开功能
+        thinkingArticleHeader.addEventListener('click', () => {
+            if (isThinkingArticleExpanded) {
+                thinkingArticleContent.classList.remove('content-expanded');
+                thinkingArticleContent.classList.add('content-collapsed');
+                thinkingToggleIcon.classList.remove('expanded');
+            } else {
+                thinkingArticleContent.classList.remove('content-collapsed');
+                thinkingArticleContent.classList.add('content-expanded');
+                thinkingToggleIcon.classList.add('expanded');
+            }
+            isThinkingArticleExpanded = !isThinkingArticleExpanded;
+        });
+
+        // 科技与未来文章折叠/展开功能
+        techArticleHeader.addEventListener('click', () => {
+            if (isTechArticleExpanded) {
+                techArticleContent.classList.remove('content-expanded');
+                techArticleContent.classList.add('content-collapsed');
+                techToggleIcon.classList.remove('expanded');
+            } else {
+                techArticleContent.classList.remove('content-collapsed');
+                techArticleContent.classList.add('content-expanded');
+                techToggleIcon.classList.add('expanded');
+            }
+            isTechArticleExpanded = !isTechArticleExpanded;
+        });
+
+        // 初始化
+        window.addEventListener('load', () => {
+            initTheme();
+            initPages();
+        });
     </script>
 </body>
 
