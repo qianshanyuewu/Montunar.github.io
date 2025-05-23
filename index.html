@@ -101,6 +101,7 @@
                 border-radius: 0.5rem;
                 border: 1px solid #e5e7eb;
                 box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
             }
 
             .custom-button {
@@ -108,11 +109,13 @@
                 color: white;
                 padding: 0.75rem 1.5rem;
                 border-radius: 0.25rem;
-                transition: background-color 0.3s ease;
+                transition: all 0.3s ease;
             }
 
             .custom-button:hover {
                 background-color: #333333;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
             /* 昼夜模式样式 */
@@ -165,16 +168,23 @@
 
             .dark-mode .custom-button:hover {
                 background-color: #e0e0e0;
+                box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
             }
 
             /* 图片悬停效果 */
             .img-grayscale {
                 filter: grayscale(100%);
-                transition: filter 0.3s ease;
+                transition: all 0.3s ease;
             }
 
             .img-grayscale:hover {
                 filter: grayscale(0%);
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .img-grayscale:hover {
+                box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
             }
 
             /* 昼夜切换按钮 */
@@ -188,11 +198,12 @@
                 background-color: transparent;
                 border: 1px solid rgba(0, 0, 0, 0.1);
                 cursor: pointer;
-                transition: background-color 0.3s ease;
+                transition: all 0.3s ease;
             }
 
             .theme-button:hover {
                 background-color: rgba(0, 0, 0, 0.05);
+                transform: rotate(45deg);
             }
 
             .dark-mode .theme-button {
@@ -201,6 +212,60 @@
 
             .dark-mode .theme-button:hover {
                 background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* 悬浮高亮效果 */
+            .hover-highlight {
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .hover-highlight:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .hover-highlight:hover {
+                box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+            }
+
+            /* 链接悬浮效果 */
+            .link-hover {
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .link-hover::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+            }
+
+            .link-hover:hover {
+                transform: translateY(-2px);
+            }
+
+            .link-hover:hover::after {
+                width: 100%;
+            }
+
+            /* 卡片悬浮效果增强 */
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .card-hover:hover {
+                box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
             }
         }
     </style>
@@ -219,7 +284,7 @@
         <!-- 首页 -->
         <section id="home-page" class="min-h-screen flex items-center justify-center px-4 py-12 transition-smooth bg-white">
             <div class="text-center max-w-3xl mx-auto">
-                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-playfair leading-tight cursor-pointer hover:text-secondary transition-colors duration-300">
+                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-playfair leading-tight cursor-pointer hover:text-secondary transition-colors duration-300 hover-highlight">
                     <!-- 这里的文本将在 JavaScript 中逐个插入 -->
                 </h1>
                 <div class="mt-12 opacity-70">
@@ -232,12 +297,12 @@
         <section id="articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-                <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
                     <i class="fa fa-arrow-left mr-2"></i> 回到首页
                 </a>
                 <div class="flex space-x-4">
-                    <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">慢慢谈说</a>
-                    <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">干了啥</a>
+                    <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover">慢慢谈说</a>
+                    <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover">干了啥</a>
                 </div>
             </header>
 
@@ -265,7 +330,7 @@
         <section id="talking-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-                <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
                 <div class="text-xl font-light">慢慢谈说</div>
@@ -286,7 +351,7 @@
                 <!-- 主题卡片 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
                     <!-- 卡片1：思考与探索 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.1s">
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.1s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover img-grayscale">
                         </div>
@@ -300,7 +365,7 @@
                     </div>
 
                     <!-- 卡片2：科技与未来 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.2s">
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.2s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover img-grayscale">
                         </div>
@@ -314,7 +379,7 @@
                     </div>
 
                     <!-- 卡片3：艺术与创意 -->
-                    <div class="bg-white custom-card p-6 hover-scale slide-in" style="transition-delay: 0.3s">
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.3s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover img-grayscale">
                         </div>
@@ -329,7 +394,7 @@
                 </div>
 
                 <!-- 关于作者 -->
-                <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in" style="transition-delay: 0.4s">
+                <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in hover-highlight" style="transition-delay: 0.4s">
                     <div class="flex flex-col md:flex-row items-center gap-8">
                         <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
                             <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover img-grayscale">
@@ -343,13 +408,13 @@
                                 <i class="fa fa-envelope-o mr-2"></i> 139107681@qq.com
                             </p>
                             <div class="flex justify-center md:justify-start gap-4">
-                                <a href="https://github.com/qianshanyuewu" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                <a href="https://github.com/qianshanyuewu" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
                                     <i class="fa fa-github text-xl"></i> 我的GitHub
                                 </a>
-                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
                                     <i class="fa fa-twitter text-xl"></i>
                                 </a>
-                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300">
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
                                     <i class="fa fa-linkedin text-xl"></i>
                                 </a>
                             </div>
@@ -368,7 +433,7 @@
         <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-                <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
                 <div class="text-xl font-light">思考与探索</div>
@@ -389,7 +454,7 @@
                 <!-- 文章列表 -->
                 <div class="w-full max-w-3xl space-y-8">
                     <!-- 文章1：厌蠢还是不耐烦？ -->
-                    <div class="bg-white custom-card overflow-hidden slide-in" style="transition-delay: 0.1s">
+                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
                         <div id="thinking-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
                             <div>
                                 <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
@@ -436,7 +501,7 @@
         <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-                <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
+                <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
                 <div class="text-xl font-light">干了啥</div>
@@ -455,7 +520,7 @@
                 </div>
 
                 <!-- 新增文章 - 修改为可折叠形式 -->
-                <div class="w-full max-w-3xl bg-white custom-card overflow-hidden slide-in" style="transition-delay: 0.2s">
+                <div class="w-full max-w-3xl bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.2s">
                     <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
                         <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
                         <div class="flex items-center text-sm text-gray-500">
