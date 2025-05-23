@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -388,7 +387,7 @@
                         <p class="text-gray-600 mb-4">
                             欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
                         </p>
-                        <a href="#" class="custom-button inline-flex items-center">
+                        <a href="#" id="art-articles-link" class="custom-button inline-flex items-center">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                     </div>
@@ -421,6 +420,182 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 艺术与创意文章页面 -->
+        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking-from-art" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">艺术与创意</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        艺术与创意
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
+                    </p>
+                </div>
+
+                <!-- 主题卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mb-16">
+                    <!-- 卡片1：光影一刻 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=10" alt="光影一刻" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">光影一刻</h3>
+                        <p class="text-gray-600 mb-4">
+                            捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
+                        </p>
+                        <a href="#" id="light-shadow-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 卡片2：美术鉴赏 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=11" alt="美术鉴赏" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">美术鉴赏</h3>
+                        <p class="text-gray-600 mb-4">
+                            欣赏各类美术作品，了解艺术流派与历史，感受艺术的魅力与内涵。
+                        </p>
+                        <a href="#" id="art-appreciation-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 光影一刻页面 -->
+        <section id="light-shadow-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">光影一刻</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        光影一刻
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
+                    </p>
+                </div>
+
+                <!-- 图片展示 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
+                    <!-- 图片1 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/a.jpg" alt="图片A" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+
+                    <!-- 图片2 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/b.jpg" alt="图片B" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+
+                    <!-- 图片3 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.3s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/c.jpg" alt="图片C" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+
+                    <!-- 图片4 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.4s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/d.jpg" alt="图片D" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+
+                    <!-- 图片5 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.5s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/e.jpg" alt="图片E" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+
+                    <!-- 图片6 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.6s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/f.jpg" alt="图片F" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <p class="text-gray-600 mb-4">这是个描述</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 美术鉴赏页面 -->
+        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-art-from-appreciation" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">美术鉴赏</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        美术鉴赏
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        欣赏各类美术作品，了解艺术流派与历史，感受艺术的魅力与内涵。
+                    </p>
+                </div>
+
+                <!-- 内容区域 -->
+                <div class="w-full max-w-3xl text-center">
+                    <p class="text-gray-600 text-lg">
+                        美术鉴赏内容即将上线，敬请期待...
+                    </p>
                 </div>
             </div>
 
@@ -478,7 +653,7 @@
                                 <p class="text-gray-600 mb-4">
                                     或许这两者都有一点。一方面，我确实对那些不愿意思考、不愿意学习的人感到失望；另一方面，我也意识到自己的耐心正在逐渐消失。这让我感到不安，因为我知道真正的智慧应该包含包容和理解。
                                 </p>
-                                <p class="text-gray-600 ">
+                                <p class="text-gray-600">
                                     中间这两段是ai写的，确实有给了我一点启发。我觉得这跟我的性格有关：喜欢独处。
                                     无论我做什么，你可以说为什么，有什么用？这都无关紧要，但是我不喜欢，我讨厌。
                                     我不喜欢解释，因为这跟你无关，我只想沉默，因为更多的沟通会带来更多的不解。
@@ -627,6 +802,9 @@
         const whatIDidPage = document.getElementById('what-i-did-page');
         const thinkingArticlesPage = document.getElementById('thinking-articles-page');
         const techArticlesPage = document.getElementById('tech-articles-page');
+        const artArticlesPage = document.getElementById('art-articles-page');
+        const lightShadowPage = document.getElementById('light-shadow-page');
+        const artAppreciationPage = document.getElementById('art-appreciation-page');
         const homeTitle = document.getElementById('home-title');
         const backButton = document.getElementById('back-button');
         const talkingLink = document.getElementById('talking-link');
@@ -635,8 +813,14 @@
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
         const backToTalking = document.getElementById('back-to-talking');
         const backToTalkingFromTech = document.getElementById('back-to-talking-from-tech');
+        const backToTalkingFromArt = document.getElementById('back-to-talking-from-art');
+        const backToArtFromLight = document.getElementById('back-to-art-from-light');
+        const backToArtFromAppreciation = document.getElementById('back-to-art-from-appreciation');
         const thinkingArticlesLink = document.getElementById('thinking-articles-link');
         const techArticlesLink = document.getElementById('tech-articles-link');
+        const artArticlesLink = document.getElementById('art-articles-link');
+        const lightShadowLink = document.getElementById('light-shadow-link');
+        const artAppreciationLink = document.getElementById('art-appreciation-link');
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
 
@@ -710,11 +894,17 @@
             whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
             thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
             techArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            artArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            lightShadowPage.classList.add('opacity-0', 'pointer-events-none');
+            artAppreciationPage.classList.add('opacity-0', 'pointer-events-none');
 
             // 显示指定页面
             page.classList.remove('opacity-0', 'pointer-events-none');
 
-            // 激活滑入动画
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+
+            // 激活所有slide-in元素
             setTimeout(() => {
                 const slideElements = page.querySelectorAll('.slide-in');
                 slideElements.forEach((el, index) => {
@@ -725,128 +915,160 @@
             }, 300);
         }
 
-        // 首页标题动画
         function animateHomeTitle() {
             const titleText = "一个小小的思考地方...";
             homeTitle.innerHTML = '';
 
             titleText.split('').forEach((char, index) => {
                 const span = document.createElement('span');
+                span.className = 'char';
                 span.textContent = char;
-                span.classList.add('char');
                 span.style.animationDelay = `${index * 0.1}s`;
                 homeTitle.appendChild(span);
             });
         }
 
-        // 初始化页面
-        function initPages() {
-            // 显示首页
-            showPage(homePage);
+        // 事件监听
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化主题
+            initTheme();
+
+            // 初始化首页标题动画
             animateHomeTitle();
 
-            // 重置滑入元素
-            document.querySelectorAll('.slide-in').forEach(el => {
+            // 初始化所有slide-in元素
+            const slideElements = document.querySelectorAll('.slide-in');
+            slideElements.forEach(el => {
                 el.classList.remove('active');
             });
-        }
 
-        // 页面导航事件
-        homeTitle.addEventListener('click', () => {
-            showPage(articlesPage);
-        });
+            // 主页标题点击事件
+            homeTitle.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
 
-        backButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(homePage);
-        });
+            // 返回按钮点击事件
+            backButton.addEventListener('click', () => {
+                showPage(homePage);
+            });
 
-        talkingLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(talkingPage);
-        });
+            // 慢慢谈说链接点击事件
+            talkingLink.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
 
-        whatIDidLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(whatIDidPage);
-        });
+            // 干了啥链接点击事件
+            whatIDidLink.addEventListener('click', () => {
+                showPage(whatIDidPage);
+            });
 
-        backToArticles.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(articlesPage);
-        });
+            // 返回文章页面按钮点击事件
+            backToArticles.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
 
-        backToArticlesFromWhatIDid.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(articlesPage);
-        });
+            // 从干了啥返回文章页面按钮点击事件
+            backToArticlesFromWhatIDid.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
 
-        thinkingArticlesLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(thinkingArticlesPage);
-        });
+            // 思考与探索文章链接点击事件
+            thinkingArticlesLink.addEventListener('click', () => {
+                showPage(thinkingArticlesPage);
+            });
 
-        techArticlesLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(techArticlesPage);
-        });
+            // 从思考与探索返回慢慢谈说按钮点击事件
+            backToTalking.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
 
-        backToTalking.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(talkingPage);
-        });
+            // 科技与未来文章链接点击事件
+            techArticlesLink.addEventListener('click', () => {
+                showPage(techArticlesPage);
+            });
 
-        backToTalkingFromTech.addEventListener('click', (e) => {
-            e.preventDefault();
-            showPage(talkingPage);
-        });
+            // 从科技与未来返回慢慢谈说按钮点击事件
+            backToTalkingFromTech.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
 
-        // 文章折叠/展开功能
-        articleHeader.addEventListener('click', () => {
-            if (isArticleExpanded) {
-                articleContent.classList.remove('content-expanded');
-                articleContent.classList.add('content-collapsed');
-                toggleIcon.classList.remove('expanded');
-            } else {
-                articleContent.classList.remove('content-collapsed');
-                articleContent.classList.add('content-expanded');
-                toggleIcon.classList.add('expanded');
+            // 艺术与创意文章链接点击事件
+            artArticlesLink.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 从艺术与创意返回慢慢谈说按钮点击事件
+            backToTalkingFromArt.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
+
+            // 光影一刻链接点击事件
+            lightShadowLink.addEventListener('click', () => {
+                showPage(lightShadowPage);
+            });
+
+            // 从光影一刻返回艺术与创意按钮点击事件
+            backToArtFromLight.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 美术鉴赏链接点击事件
+            artAppreciationLink.addEventListener('click', () => {
+                showPage(artAppreciationPage);
+            });
+
+            // 从美术鉴赏返回艺术与创意按钮点击事件
+            backToArtFromAppreciation.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 文章折叠/展开功能
+            if (articleHeader && articleContent && toggleIcon) {
+                articleHeader.addEventListener('click', () => {
+                    isArticleExpanded = !isArticleExpanded;
+                    if (isArticleExpanded) {
+                        articleContent.classList.remove('content-collapsed');
+                        articleContent.classList.add('content-expanded');
+                        toggleIcon.classList.add('expanded');
+                    } else {
+                        articleContent.classList.remove('content-expanded');
+                        articleContent.classList.add('content-collapsed');
+                        toggleIcon.classList.remove('expanded');
+                    }
+                });
             }
-            isArticleExpanded = !isArticleExpanded;
-        });
 
-        // 思考与探索文章折叠/展开功能
-        thinkingArticleHeader.addEventListener('click', () => {
-            if (isThinkingArticleExpanded) {
-                thinkingArticleContent.classList.remove('content-expanded');
-                thinkingArticleContent.classList.add('content-collapsed');
-                thinkingToggleIcon.classList.remove('expanded');
-            } else {
-                thinkingArticleContent.classList.remove('content-collapsed');
-                thinkingArticleContent.classList.add('content-expanded');
-                thinkingToggleIcon.classList.add('expanded');
+            // 思考与探索文章折叠/展开功能
+            if (thinkingArticleHeader && thinkingArticleContent && thinkingToggleIcon) {
+                thinkingArticleHeader.addEventListener('click', () => {
+                    isThinkingArticleExpanded = !isThinkingArticleExpanded;
+                    if (isThinkingArticleExpanded) {
+                        thinkingArticleContent.classList.remove('content-collapsed');
+                        thinkingArticleContent.classList.add('content-expanded');
+                        thinkingToggleIcon.classList.add('expanded');
+                    } else {
+                        thinkingArticleContent.classList.remove('content-expanded');
+                        thinkingArticleContent.classList.add('content-collapsed');
+                        thinkingToggleIcon.classList.remove('expanded');
+                    }
+                });
             }
-            isThinkingArticleExpanded = !isThinkingArticleExpanded;
-        });
 
-        // 科技与未来文章折叠/展开功能
-        techArticleHeader.addEventListener('click', () => {
-            if (isTechArticleExpanded) {
-                techArticleContent.classList.remove('content-expanded');
-                techArticleContent.classList.add('content-collapsed');
-                techToggleIcon.classList.remove('expanded');
-            } else {
-                techArticleContent.classList.remove('content-collapsed');
-                techArticleContent.classList.add('content-expanded');
-                techToggleIcon.classList.add('expanded');
+            // 科技与未来文章折叠/展开功能
+            if (techArticleHeader && techArticleContent && techToggleIcon) {
+                techArticleHeader.addEventListener('click', () => {
+                    isTechArticleExpanded = !isTechArticleExpanded;
+                    if (isTechArticleExpanded) {
+                        techArticleContent.classList.remove('content-collapsed');
+                        techArticleContent.classList.add('content-expanded');
+                        techToggleIcon.classList.add('expanded');
+                    } else {
+                        techArticleContent.classList.remove('content-expanded');
+                        techArticleContent.classList.add('content-collapsed');
+                        techToggleIcon.classList.remove('expanded');
+                    }
+                });
             }
-            isTechArticleExpanded = !isTechArticleExpanded;
-        });
-
-        // 初始化
-        window.addEventListener('load', () => {
-            initTheme();
-            initPages();
         });
     </script>
 </body>
