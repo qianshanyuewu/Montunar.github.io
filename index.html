@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -23,6 +24,9 @@
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
                         playfair: ['Playfair Display', serif],
+                    },
+                    maxWidth: {
+                        '8xl': '88rem',
                     },
                 }
             }
@@ -98,21 +102,44 @@
             }
 
             .custom-card {
-                border-radius: 0.5rem;
+                border-radius: 0.75rem;
                 border: 1px solid #e5e7eb;
-                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+                transition: box-shadow 0.3s ease, transform 0.3s ease;
+            }
+
+            .custom-card:hover {
+                box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12);
             }
 
             .custom-button {
                 background-color: #000000;
                 color: white;
                 padding: 0.75rem 1.5rem;
-                border-radius: 0.25rem;
-                transition: background-color 0.3s ease;
+                border-radius: 0.375rem;
+                transition: all 0.3s ease;
+                font-weight: 500;
+                letter-spacing: 0.025em;
             }
 
             .custom-button:hover {
                 background-color: #333333;
+                transform: translateY(-2px);
+            }
+            
+            .back-to-top {
+                position: fixed;
+                bottom: 80px;
+                right: 20px;
+                z-index: 99;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .back-to-top.visible {
+                opacity: 1;
+                visibility: visible;
             }
         }
     </style>
@@ -126,11 +153,13 @@
             --text-tertiary: #666666;
             --border-color: #e5e7eb;
             --card-bg: #ffffff;
-            --card-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 24px -4px rgba(0, 0, 0, 0.12);
             --button-bg: #000000;
             --button-text: #ffffff;
             --button-hover: #333333;
             --transition-speed: 0.8s;
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .dark-mode {
@@ -142,17 +171,21 @@
             --text-tertiary: #a0a0a0;
             --border-color: #333333;
             --card-bg: #1e1e1e;
-            --card-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --card-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.2);
+            --card-shadow-hover: 0 8px 24px -4px rgba(0, 0, 0, 0.3);
             --button-bg: #ffffff;
             --button-text: #000000;
             --button-hover: #e0e0e0;
             --transition-speed: 0.8s;
+            --header-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+            letter-spacing: 0.01em;
         }
 
         .bg-neutral {
@@ -199,20 +232,24 @@
             background-color: var(--card-bg);
             border-color: var(--border-color);
             box-shadow: var(--card-shadow);
-            transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed), transform 0.3s ease;
+        }
+
+        .custom-card:hover {
+            box-shadow: var(--card-shadow-hover);
         }
 
         .custom-button {
             background-color: var(--button-bg);
             color: var(--button-text);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            transition: background-color var(--transition-speed), color var(--transition-speed), transform 0.3s ease;
         }
 
         .custom-button:hover {
             background-color: var(--button-hover);
         }
 
-        /* 漩涡切换按钮样式 */
+        /* 主题切换按钮样式 */
         .theme-toggle-container {
             position: fixed;
             bottom: 20px;
@@ -240,44 +277,6 @@
             transform: scale(1.1);
         }
 
-        .swirl-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 999;
-            overflow: hidden;
-        }
-
-        .swirl {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                var(--bg-primary) 0%,
-                var(--text-primary) 25%,
-                var(--bg-primary) 50%,
-                var(--text-primary) 75%,
-                var(--bg-primary) 100%
-            );
-            opacity: 0;
-            transform: scale(0);
-            transform-origin: center;
-            transition: transform 0s, opacity 0s;
-        }
-
-        .swirl.active {
-            opacity: 1;
-            transform: scale(50);
-            transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.1s;
-        }
-
         @keyframes rotate {
             from {
                 transform: rotate(0deg);
@@ -295,13 +294,67 @@
         .theme-toggle:hover i {
             animation-play-state: running;
         }
+        
+        /* 固定导航栏样式 */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-primary);
+            z-index: 100;
+            box-shadow: var(--header-shadow);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .fixed-header.visible {
+            transform: translateY(0);
+        }
+        
+        /* 改进的标题样式 */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            letter-spacing: -0.01em;
+        }
+        
+        /* 改进的段落样式 */
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* 改进的链接样式 */
+        a {
+            transition: all 0.3s ease;
+        }
     </style>
 </head>
 
 <body class="font-inter antialiased overflow-x-hidden">
-    <!-- 漩涡动画容器 -->
-    <div class="swirl-container">
-        <div class="swirl" id="theme-swirl"></div>
+    <!-- 固定导航栏 -->
+    <header class="fixed-header py-4 px-6 md:px-8 flex justify-between items-center">
+        <a href="#" id="fixed-home-link" class="text-xl font-medium hover:text-secondary transition-colors duration-300">
+            一个小小的思考地方...
+        </a>
+        <div class="flex space-x-6">
+            <a href="#" id="fixed-talking-link" class="text-lg font-light hover:text-secondary transition-colors duration-300">慢慢谈说</a>
+            <a href="#" id="fixed-what-i-did-link" class="text-lg font-light hover:text-secondary transition-colors duration-300">干了啥</a>
+        </div>
+    </header>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="back-to-top-btn">
+        <div class="theme-toggle">
+            <i class="fas fa-arrow-up"></i>
+        </div>
     </div>
 
     <!-- 主题切换按钮 -->
@@ -328,11 +381,11 @@
         <!-- 文章页面 -->
         <section id="articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
-            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200 mb-8">
                 <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
                     <i class="fa fa-arrow-left mr-2"></i> 回到首页
                 </a>
-                <div class="flex space-x-4">
+                <div class="flex space-x-6">
                     <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">慢慢谈说</a>
                     <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300">干了啥</a>
                 </div>
@@ -361,7 +414,7 @@
         <!-- 慢慢谈说页面 -->
         <section id="talking-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
-            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200 mb-8">
                 <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
@@ -372,9 +425,10 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-6">
                         在这里，我们慢慢谈说
                     </h2>
+                    <div class="w-32 h-1 bg-primary mx-auto mb-8"></div>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                         分享生活中的点点滴滴，探讨有趣的话题，让我们的思想在这里碰撞出火花。
                     </p>
@@ -385,7 +439,7 @@
                     <!-- 卡片1：思考与探索 -->
                     <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.1s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                            <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover grayscale">
+                            <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <h3 class="text-xl font-semibold mb-3">思考与探索</h3>
                         <p class="text-gray-600 mb-4">
@@ -399,7 +453,7 @@
                     <!-- 卡片2：科技与未来 -->
                     <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.2s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                            <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover grayscale">
+                            <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <h3 class="text-xl font-semibold mb-3">科技与未来</h3>
                         <p class="text-gray-600 mb-4">
@@ -413,7 +467,7 @@
                     <!-- 卡片3：艺术与创意 -->
                     <div class="custom-card p-6 hover-scale slide-in" style="transition-delay: 0.3s">
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                            <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover grayscale">
+                            <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <h3 class="text-xl font-semibold mb-3">艺术与创意</h3>
                         <p class="text-gray-600 mb-4">
@@ -428,8 +482,8 @@
                 <!-- 关于作者 -->
                 <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in" style="transition-delay: 0.4s">
                     <div class="flex flex-col md:flex-row items-center gap-8">
-                        <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
-                            <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover grayscale">
+                        <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary">
+                            <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
                         </div>
                         <div class="text-center md:text-left">
                             <h3 class="text-2xl font-light mb-3">关于作者</h3>
@@ -464,7 +518,7 @@
         <!-- 思考与探索文章页面 -->
         <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
-            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200 mb-8">
                 <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
@@ -475,9 +529,10 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-6">
                         思考与探索
                     </h2>
+                    <div class="w-32 h-1 bg-primary mx-auto mb-8"></div>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                         探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
                     </p>
@@ -532,7 +587,7 @@
         <!-- 干了啥页面 -->
         <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
-            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200 mb-8">
                 <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
@@ -543,9 +598,10 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-6">
                         干了啥系列
                     </h2>
+                    <div class="w-32 h-1 bg-primary mx-auto mb-8"></div>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                         这里是我干了什么的记录。
                     </p>
@@ -594,6 +650,11 @@
         const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
         const backToTalking = document.getElementById('back-to-talking');
         const thinkingArticlesLink = document.getElementById('thinking-articles-link');
+        const fixedHeader = document.querySelector('.fixed-header');
+        const fixedHomeLink = document.getElementById('fixed-home-link');
+        const fixedTalkingLink = document.getElementById('fixed-talking-link');
+        const fixedWhatIDidLink = document.getElementById('fixed-what-i-did-link');
+        const backToTopBtn = document.getElementById('back-to-top-btn');
 
         // 文章折叠/展开功能
         const articleHeader = document.getElementById('article-header');
@@ -607,7 +668,6 @@
 
         // 主题切换相关元素
         const themeToggleBtn = document.getElementById('theme-toggle-btn');
-        const themeSwirl = document.getElementById('theme-swirl');
         const body = document.body;
 
         // 文章默认折叠
@@ -622,6 +682,31 @@
             body.classList.add('dark-mode');
             updateThemeToggleIcon();
         }
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', function() {
+            // 显示/隐藏固定导航栏
+            if (window.scrollY > 100) {
+                fixedHeader.classList.add('visible');
+            } else {
+                fixedHeader.classList.remove('visible');
+            }
+            
+            // 显示/隐藏返回顶部按钮
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // 返回顶部功能
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
         // 页面切换函数
         function showArticlesPage() {
@@ -760,29 +845,19 @@
 
         // 主题切换功能
         function toggleTheme() {
-            // 触发漩涡动画
-            themeSwirl.classList.add('active');
+            // 直接切换主题，无需动画
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
             
-            // 延迟切换主题，等待动画完成
-            setTimeout(() => {
-                isDarkMode = !isDarkMode;
-                if (isDarkMode) {
-                    body.classList.add('dark-mode');
-                } else {
-                    body.classList.remove('dark-mode');
-                }
-                
-                // 保存用户偏好
-                localStorage.setItem('darkMode', isDarkMode);
-                
-                // 更新按钮图标
-                updateThemeToggleIcon();
-                
-                // 重置漩涡动画
-                setTimeout(() => {
-                    themeSwirl.classList.remove('active');
-                }, 100);
-            }, 500);
+            // 保存用户偏好
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            // 更新按钮图标
+            updateThemeToggleIcon();
         }
 
         // 更新主题切换按钮图标
@@ -810,6 +885,9 @@
         articleHeader.addEventListener('click', toggleArticle);
         thinkingArticleHeader.addEventListener('click', toggleThinkingArticle);
         themeToggleBtn.addEventListener('click', toggleTheme);
+        fixedHomeLink.addEventListener('click', showHomePage);
+        fixedTalkingLink.addEventListener('click', showTalkingPage);
+        fixedWhatIDidLink.addEventListener('click', showWhatIDidPage);
 
         // 逐个字符插入标题
         function typeTitle() {
@@ -831,6 +909,17 @@
         window.addEventListener('load', () => {
             typeTitle();
             updateThemeToggleIcon();
+            
+            // 检测系统主题偏好
+            if (localStorage.getItem('darkMode') === null) {
+                const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (prefersDarkMode) {
+                    isDarkMode = true;
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'true');
+                    updateThemeToggleIcon();
+                }
+            }
         });
     </script>
 </body>
