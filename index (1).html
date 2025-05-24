@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个小小的思考地方...</title>
+    <!-- 添加图标引用 -->
+    <link rel="shortcut icon" href="/Montunar.github.io/favicon.ico" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#333333',
+                        neutral: '#f9f9f9',
+                        'neutral-dark': '#e0e0e0',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        playfair: ['Playfair Display', serif],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+
+            .transition-smooth {
+                transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+
+            .slide-in {
+                transform: translateY(20px);
+                opacity: 0;
+                transition: transform 0.6s ease, opacity 0.6s ease;
+            }
+
+            .slide-in.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .content-collapsed {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .content-expanded {
+                max-height: 2000px;
+                transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 1;
+                padding-top: 1rem;
+                padding-bottom: 2rem;
+            }
+
+            .toggle-icon {
+                transition: transform 0.3s ease;
+            }
+
+            .toggle-icon.expanded {
+                transform: rotate(180deg);
+            }
+
+            .char {
+                opacity: 0;
+                animation: fadeIn 0.3s forwards;
+            }
+
+            @keyframes fadeIn {
+                to {
+                    opacity: 1;
+                }
+            }
+
+            .custom-card {
+                border-radius: 0.5rem;
+                border: 1px solid #e5e7eb;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: all 0.3s ease;
+            }
+
+            .custom-button {
+                background-color: #000000;
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.25rem;
+                transition: all 0.3s ease;
+            }
+
+            .custom-button:hover {
+                background-color: #333333;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            /* 昼夜模式样式 */
+            .dark-mode {
+                background-color: #121212;
+                color: #f9f9f9;
+            }
+
+            .dark-mode .bg-white {
+                background-color: #1e1e1e;
+            }
+
+            .dark-mode .bg-neutral {
+                background-color: #121212;
+            }
+
+            .dark-mode .text-primary {
+                color: #ffffff;
+            }
+
+            .dark-mode .text-gray-600 {
+                color: #d1d1d1;
+            }
+
+            .dark-mode .text-gray-500 {
+                color: #a0a0a0;
+            }
+
+            .dark-mode .border-gray-200 {
+                border-color: #333333;
+            }
+
+            .dark-mode .custom-card {
+                border-color: #333333;
+                background-color: #1e1e1e;
+            }
+
+            .dark-mode .bg-gray-50 {
+                background-color: #1e1e1e;
+            }
+
+            .dark-mode .bg-gray-100 {
+                background-color: #2a2a2a;
+            }
+
+            .dark-mode .custom-button {
+                background-color: #ffffff;
+                color: #000000;
+            }
+
+            .dark-mode .custom-button:hover {
+                background-color: #e0e0e0;
+                box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            }
+
+            /* 图片悬停效果 */
+            .img-grayscale {
+                filter: grayscale(100%);
+                transition: all 0.3s ease;
+            }
+
+            .img-grayscale:hover {
+                filter: grayscale(0%);
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .img-grayscale:hover {
+                box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+            }
+
+            /* 昼夜切换按钮 */
+            .theme-button {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: transparent;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .theme-button:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+                transform: rotate(45deg);
+            }
+
+            .dark-mode .theme-button {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .dark-mode .theme-button:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* 悬浮高亮效果 */
+            .hover-highlight {
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .hover-highlight:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .hover-highlight:hover {
+                box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+            }
+
+            /* 链接悬浮效果 */
+            .link-hover {
+                position: relative;
+                transition: all 0.3s ease;
+            }
+
+            .link-hover::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: -2px;
+                left: 0;
+                background-color: currentColor;
+                transition: width 0.3s ease;
+            }
+
+            .link-hover:hover {
+                transform: translateY(-2px);
+            }
+
+            .link-hover:hover::after {
+                width: 100%;
+            }
+
+            /* 卡片悬浮效果增强 */
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode .card-hover:hover {
+                box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden">
+    <!-- 页面容器 -->
+    <div id="app-container" class="min-h-screen flex flex-col">
+        <!-- 主题切换按钮 -->
+        <div class="fixed top-4 right-4 z-50 flex items-center">
+            <button id="theme-toggle" class="theme-button">
+                <i id="theme-icon" class="fa fa-sun"></i>
+            </button>
+        </div>
+
+        <!-- 首页 -->
+        <section id="home-page" class="min-h-screen flex items-center justify-center px-4 py-12 transition-smooth bg-white">
+            <div class="text-center max-w-3xl mx-auto">
+                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-playfair leading-tight cursor-pointer hover:text-secondary transition-colors duration-300">
+                    <!-- 这里的文本将在 JavaScript 中逐个插入 -->
+                </h1>
+                <div class="mt-12 opacity-70">
+                    <i class="fa fa-chevron-down text-xl animate-bounce"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章页面 -->
+        <section id="articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 回到首页
+                </a>
+                <div class="flex space-x-4">
+                    <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover">慢慢谈说</a>
+                    <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover">干了啥</a>
+                </div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 中央内容 -->
+                <div class="w-full text-center py-16">
+                    <h3 class="text-[clamp(1.5rem,4vw,3rem)] font-playfair mb-8">
+                        等待被书写的故事
+                    </h3>
+                    <div class="w-24 h-px bg-primary mx-auto mb-12"></div>
+                    <p class="text-lg max-w-2xl mx-auto text-gray-600">
+                        空白的页面，等待思想的流淌。这里将是未来思考的记录，灵感的栖息地。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 慢慢谈说页面 -->
+        <section id="talking-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">慢慢谈说</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        在这里，我们慢慢谈说
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        分享生活中的点点滴滴，探讨有趣的话题，让我们的思想在这里碰撞出火花。
+                    </p>
+                </div>
+
+                <!-- 主题卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
+                    <!-- 卡片1：思考与探索 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=1" alt="思考与探索" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">思考与探索</h3>
+                        <p class="text-gray-600 mb-4">
+                            探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
+                        </p>
+                        <a href="#" id="thinking-articles-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 卡片2：科技与未来 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=2" alt="科技与未来" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">科技与未来</h3>
+                        <p class="text-gray-600 mb-4">
+                            探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
+                        </p>
+                        <a href="#" id="tech-articles-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 卡片3：艺术与创意 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.3s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=3" alt="艺术与创意" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">艺术与创意</h3>
+                        <p class="text-gray-600 mb-4">
+                            欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
+                        </p>
+                        <a href="#" id="art-articles-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 关于作者 -->
+                <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in hover-highlight" style="transition-delay: 0.4s">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-2xl font-light mb-3">关于作者</h3>
+                            <p class="text-gray-600 mb-2">
+                                一个喜欢思考的人，想要记录生活中的点滴感悟和思考。
+                            </p>
+                            <p class="text-gray-600 mb-4 flex items-center justify-center md:justify-start">
+                                <i class="fa fa-envelope-o mr-2"></i> 139107681@qq.com
+                            </p>
+                            <div class="flex justify-center md:justify-start gap-4">
+                                <a href="https://github.com/qianshanyuewu" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
+                                    <i class="fa fa-github text-xl"></i> 我的GitHub
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
+                                    <i class="fa fa-twitter text-xl"></i>
+                                </a>
+                                <a href="#" class="text-gray-500 hover:text-primary transition-colors duration-300 link-hover">
+                                    <i class="fa fa-linkedin text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 艺术与创意文章页面 -->
+        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking-from-art" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">艺术与创意</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        艺术与创意
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
+                    </p>
+                </div>
+
+                <!-- 主题卡片 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mb-16">
+                    <!-- 卡片1：光影一刻 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=10" alt="光影一刻" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">光影一刻</h3>
+                        <p class="text-gray-600 mb-4">
+                            捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
+                        </p>
+                        <a href="#" id="light-shadow-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- 卡片2：美术鉴赏 -->
+                    <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="https://picsum.photos/600/400?random=11" alt="美术鉴赏" class="w-full h-full object-cover img-grayscale">
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">美术鉴赏</h3>
+                        <p class="text-gray-600 mb-4">
+                            欣赏各类美术作品，了解艺术流派与历史，感受艺术的魅力与内涵。
+                        </p>
+                        <a href="#" id="art-appreciation-link" class="custom-button inline-flex items-center">
+                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+      <!-- 光影一刻页面 -->
+<section id="light-shadow-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+    <!-- 导航栏 -->
+    <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+        <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+            <i class="fa fa-arrow-left mr-2"></i> 返回
+        </a>
+        <div class="text-xl font-light">光影一刻</div>
+    </header>
+
+    <!-- 主内容区 -->
+    <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+        <!-- 页面标题 -->
+        <div class="w-full text-center mb-16 slide-in">
+            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                光影一刻
+            </h2>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
+            </p>
+        </div>
+
+        <!-- 图片展示 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
+            <!-- 图片1 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.1s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/a.jpg" alt="图片A" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">蓝天中飘浮着形态蓬松的白云，色调清新明快。</p>
+            </div>
+
+            <!-- 图片2 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.2s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/b.jpg" alt="图片B" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">水边生长着棕绿相间的芦苇，水面泛起波纹，尽显自然野趣。</p>
+            </div>
+
+            <!-- 图片3 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.3s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/c.jpg" alt="图片C" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">草地上木栅栏旁，阳光洒落，枯叶与绿草相映，氛围静谧。</p>
+            </div>
+
+            <!-- 图片4 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.4s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/d.jpg" alt="图片D" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">湖泊畔石块静卧，远处城市建筑与绿树错落，展现城市中的自然景观。</p>
+            </div>
+
+            <!-- 图片5 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.5s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/e.jpg" alt="图片E" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">湖边紫色鸢尾花绽放，背景湖水波光粼粼，隐约可见黑天鹅身影，充满生机。</p>
+            </div>
+
+            <!-- 图片6 -->
+            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.6s">
+                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                    <img src="/Montunar.github.io/images/f.jpg" alt="图片F" class="w-full h-full object-cover">
+                </div>
+                <p class="text-gray-600 mb-4">henu经管楼的胶片感，木质桌椅整齐排列，大窗透进自然光线，窗外树木与室内暖调相融，静谧温馨。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+        <p>© 2025 一个小小的思考地方...</p>
+    </footer>
+</section>
+
+        <!-- 美术鉴赏页面 -->
+        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-art-from-appreciation" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">美术鉴赏</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        美术鉴赏
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        欣赏各类美术作品，了解艺术流派与历史，感受艺术的魅力与内涵。
+                    </p>
+                </div>
+
+                <!-- 内容区域 -->
+                <div class="w-full max-w-3xl text-center">
+                    <p class="text-gray-600 text-lg">
+                        美术鉴赏内容即将上线，敬请期待...
+                    </p>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 思考与探索文章页面 -->
+        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">思考与探索</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        思考与探索
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
+                    </p>
+                </div>
+
+                <!-- 文章列表 -->
+                <div class="w-full max-w-3xl space-y-8">
+                    <!-- 文章1：想与写 -->
+                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
+                        <div id="thinking-article-header-2" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-semibold">想与写</h3>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>2025年5月24日</span>
+                                    <span class="mx-2">•</span>
+                                    <span>思考与探索</span>
+                                </div>
+                            </div>
+                            <i id="thinking-toggle-icon-2" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                        </div>
+                        <div id="thinking-article-content-2" class="px-8 md:px-12 content-collapsed">
+                            <div class="mt-6">
+                                <p class="text-gray-600 mb-4">
+                                    仅靠"想"时，思维往往是模糊、碎片化的，停留在表面。而写作是将抽象思维转化为具象文字的过程，需要清晰的逻辑、完整的结构和具体的表达。这一过程迫使我们梳理思路，填补逻辑漏洞，把"想当然"的内容转化为可验证、可追溯的文字，从而让思考从"浅尝辄止"走向"深入剖析"。例如：
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    - 构思文章时，最初的想法可能只是一个主题（如"环保的重要性"），但动笔写作时，需细化为"现状分析→问题根源→解决方案→案例佐证"等层次，每个部分都要深入思考，才能形成完整论述。
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    - 解决数学题时，"想思路"可能只是大致框架，而"写步骤"则要求每一步的推导都严谨，倒逼自己检查逻辑是否通顺，深化对知识点的理解。
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    心理学研究表明，"书写记忆"比"大脑记忆"更深刻。动笔写作时，视觉（看文字）、动觉（手部书写）、听觉（默读文字）多感官参与，强化了神经突触的连接，使思考内容更易被记住和调用。同时，文字的"持久性"（可反复阅读、修改）让我们能在不同时间点回顾思考，每次审视都可能带来新的洞察（如日记中对某件事的复盘，隔月再看时，会有更深入的理解）。
+                                </p>
+                                <p class="text-gray-600">
+                                    "动笔写"是将思维"显化"并"锤炼"的工具。它通过具象化、反馈、多感官强化等机制，迫使思考从混沌走向清晰，从表面走向本质。正如哲学家维特根斯坦所说："语言的边界即世界的边界"——当我们用文字拓展思维的表达边界时，思考的深度和广度也随之拓展。因此，这句话本质上是在强调：写作（外化思维）是深化思考的必经之路，只有通过"写"，才能让"想"真正落地、生根、发芽。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 文章2：厌蠢还是不耐烦？ -->
+                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.2s">
+                        <div id="thinking-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>2025年5月23日</span>
+                                    <span class="mx-2">•</span>
+                                    <span>思考与探索</span>
+                                </div>
+                            </div>
+                            <i id="thinking-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                        </div>
+                        <div id="thinking-article-content" class="px-8 md:px-12 content-collapsed">
+                            <div class="mt-6">
+                                <p class="text-gray-600 mb-4">
+                                    今天是25.5.23日，PLC课听不懂，但是我整节课在思考这件事。我是有厌蠢症，还是说单纯的浮躁，不耐烦？
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    最近发现自己在面对一些似乎缺乏基本常识或学习能力的人时，会产生一种难以抑制的烦躁情绪。这种情绪让我开始反思自己：我是真的患有"厌蠢症"，还是只是因为自己变得越来越没有耐心？
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    或许这两者都有一点。一方面，我确实对那些不愿意思考、不愿意学习的人感到失望；另一方面，我也意识到自己的耐心正在逐渐消失。这让我感到不安，因为我知道真正的智慧应该包含包容和理解。
+                                </p>
+                                <p class="text-gray-600">
+                                    中间这两段是ai写的，确实有给了我一点启发。我觉得这跟我的性格有关：喜欢独处。
+                                    无论我做什么，你可以说为什么，有什么用？这都无关紧要，但是我不喜欢，我讨厌。
+                                    我不喜欢解释，因为这跟你无关，我只想沉默，因为更多的沟通会带来更多的不解。
+                                    可能，就是单纯的不想说罢了？
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 可以添加更多文章 -->
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 科技与未来文章页面 -->
+        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">科技与未来</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        科技与未来
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
+                    </p>
+                </div>
+
+                <!-- 文章列表 -->
+                <div class="w-full max-w-3xl space-y-8">
+                    <!-- 文章1：前沿科技研究报告 -->
+                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
+                        <div id="tech-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <h3 class="text-2xl font-semibold">前沿科技研究报告</h3>
+                                <div class="flex items-center mt-4 text-sm text-gray-500">
+                                    <span>2025年5月23日</span>
+                                    <span class="mx-2">•</span>
+                                    <span>科技与未来</span>
+                                </div>
+                            </div>
+                            <i id="tech-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                        </div>
+                        <div id="tech-article-content" class="px-8 md:px-12 content-collapsed">
+                            <div class="mt-6">
+                                <p class="text-gray-600 mb-4">
+                                    这份研究报告详细分析了当前科技发展趋势，包括人工智能、量子计算、可再生能源等领域的最新突破，以及它们对未来社会的潜在影响。
+                                </p>
+                                <p class="text-gray-600 mb-4">
+                                    通过对大量数据的分析和专家访谈，报告揭示了未来十年科技发展的可能方向，以及这些发展对经济、社会和个人生活的深远影响。
+                                </p>
+                                <div class="my-6 flex justify-center">
+                                    <a href="research_report.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+                                        <i class="fa fa-file-pdf text-red-500 text-xl mr-2"></i>
+                                        <span>点击查看完整研究报告 (PDF)</span>
+                                    </a>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    报告中特别强调了人工智能在医疗、教育和环境保护等领域的应用前景，以及如何通过负责任的技术开发来确保这些进步能够造福全人类。
+                                </p>
+                                <p class="text-gray-600">
+                                    无论你是科技爱好者、学生、研究人员还是决策者，这份报告都将为你提供宝贵的见解，帮助你更好地理解和应对科技带来的挑战与机遇。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 可以添加更多文章 -->
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 干了啥页面 -->
+        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">干了啥</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        干了啥系列
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        这里是我干了什么的记录。
+                    </p>
+                </div>
+
+                <!-- 新增文章 - 修改为可折叠形式 -->
+                <div class="w-full max-w-3xl bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.2s">
+                    <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
+                        <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <span>2025年5月22日</span>
+                            <span class="mx-2">•</span>
+                            <span>干了啥</span>
+                        </div>
+                        <i id="toggle-icon" class="fa fa-chevron-down toggle-icon text-gray-500"></i>
+                    </div>
+                    <div id="article-content" class="px-8 md:px-12 content-collapsed">
+                        <p class="text-gray-600 mb-4">不言而喻，这天我创建了属于我自己的网站。</p>
+                        <p class="text-gray-600 mb-4">希望我能在考研的路途中，继续完善这个网站，终身学习！</p>
+                        <p class="text-gray-600 mb-4">看看明天要干什么？</p>
+                        <p class="text-gray-600 mb-4">嗯...早八的PLC课，持续到9点40，其次是IOT的实验课，从10点到12点。</p>
+                        <p class="text-gray-600">就先这样！</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const homePage = document.getElementById('home-page');
+        const articlesPage = document.getElementById('articles-page');
+        const talkingPage = document.getElementById('talking-page');
+        const whatIDidPage = document.getElementById('what-i-did-page');
+        const thinkingArticlesPage = document.getElementById('thinking-articles-page');
+        const techArticlesPage = document.getElementById('tech-articles-page');
+        const artArticlesPage = document.getElementById('art-articles-page');
+        const lightShadowPage = document.getElementById('light-shadow-page');
+        const artAppreciationPage = document.getElementById('art-appreciation-page');
+        const homeTitle = document.getElementById('home-title');
+        const backButton = document.getElementById('back-button');
+        const talkingLink = document.getElementById('talking-link');
+        const whatIDidLink = document.getElementById('what-i-did-link');
+        const backToArticles = document.getElementById('back-to-articles');
+        const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
+        const backToTalking = document.getElementById('back-to-talking');
+        const backToTalkingFromTech = document.getElementById('back-to-talking-from-tech');
+        const backToTalkingFromArt = document.getElementById('back-to-talking-from-art');
+        const backToArtFromLight = document.getElementById('back-to-art-from-light');
+        const backToArtFromAppreciation = document.getElementById('back-to-art-from-appreciation');
+        const thinkingArticlesLink = document.getElementById('thinking-articles-link');
+        const techArticlesLink = document.getElementById('tech-articles-link');
+        const artArticlesLink = document.getElementById('art-articles-link');
+        const lightShadowLink = document.getElementById('light-shadow-link');
+        const artAppreciationLink = document.getElementById('art-appreciation-link');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // 文章折叠/展开功能
+        const articleHeader = document.getElementById('article-header');
+        const articleContent = document.getElementById('article-content');
+        const toggleIcon = document.getElementById('toggle-icon');
+
+        // 思考与探索文章折叠/展开功能
+        const thinkingArticleHeader = document.getElementById('thinking-article-header');
+        const thinkingArticleContent = document.getElementById('thinking-article-content');
+        const thinkingToggleIcon = document.getElementById('thinking-toggle-icon');
+        
+        // 思考与探索文章2（想与写）折叠/展开功能
+        const thinkingArticleHeader2 = document.getElementById('thinking-article-header-2');
+        const thinkingArticleContent2 = document.getElementById('thinking-article-content-2');
+        const thinkingToggleIcon2 = document.getElementById('thinking-toggle-icon-2');
+
+        // 科技与未来文章折叠/展开功能
+        const techArticleHeader = document.getElementById('tech-article-header');
+        const techArticleContent = document.getElementById('tech-article-content');
+        const techToggleIcon = document.getElementById('tech-toggle-icon');
+
+        // 文章默认折叠
+        let isArticleExpanded = false;
+        let isThinkingArticleExpanded = false;
+        let isThinkingArticle2Expanded = false;
+        let isTechArticleExpanded = false;
+
+        // 主题设置
+        let isDarkMode = false;
+
+        // 初始化主题
+        function initTheme() {
+            // 检查本地存储中的主题设置
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                enableDarkMode();
+            } else {
+                disableDarkMode();
+            }
+        }
+
+        // 启用暗色模式
+        function enableDarkMode() {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+            isDarkMode = true;
+            localStorage.setItem('theme', 'dark');
+        }
+
+        // 禁用暗色模式
+        function disableDarkMode() {
+            document.body.classList.remove('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+            isDarkMode = false;
+            localStorage.setItem('theme', 'light');
+        }
+
+        // 切换主题
+        themeToggle.addEventListener('click', () => {
+            if (isDarkMode) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        // 页面切换函数
+        function showPage(page) {
+            // 隐藏所有页面
+            homePage.classList.add('opacity-0', 'pointer-events-none');
+            articlesPage.classList.add('opacity-0', 'pointer-events-none');
+            talkingPage.classList.add('opacity-0', 'pointer-events-none');
+            whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
+            thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            techArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            artArticlesPage.classList.add('opacity-0', 'pointer-events-none');
+            lightShadowPage.classList.add('opacity-0', 'pointer-events-none');
+            artAppreciationPage.classList.add('opacity-0', 'pointer-events-none');
+
+            // 显示指定页面
+            page.classList.remove('opacity-0', 'pointer-events-none');
+
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+
+            // 激活所有slide-in元素
+            setTimeout(() => {
+                const slideElements = page.querySelectorAll('.slide-in');
+                slideElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, index * 100);
+                });
+            }, 300);
+        }
+
+        function animateHomeTitle() {
+            const titleText = "一个小小的思考地方...";
+            homeTitle.innerHTML = '';
+
+            titleText.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = char;
+                span.style.animationDelay = `${index * 0.1}s`;
+                homeTitle.appendChild(span);
+            });
+        }
+
+        // 事件监听
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化主题
+            initTheme();
+
+            // 初始化首页标题动画
+            animateHomeTitle();
+
+            // 初始化所有slide-in元素
+            const slideElements = document.querySelectorAll('.slide-in');
+            slideElements.forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // 主页标题点击事件
+            homeTitle.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
+
+            // 返回按钮点击事件
+            backButton.addEventListener('click', () => {
+                showPage(homePage);
+            });
+
+            // 慢慢谈说链接点击事件
+            talkingLink.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
+
+            // 干了啥链接点击事件
+            whatIDidLink.addEventListener('click', () => {
+                showPage(whatIDidPage);
+            });
+
+            // 返回文章页面按钮点击事件
+            backToArticles.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
+
+            // 从干了啥返回文章页面按钮点击事件
+            backToArticlesFromWhatIDid.addEventListener('click', () => {
+                showPage(articlesPage);
+            });
+
+            // 思考与探索文章链接点击事件
+            thinkingArticlesLink.addEventListener('click', () => {
+                showPage(thinkingArticlesPage);
+            });
+
+            // 从思考与探索返回慢慢谈说按钮点击事件
+            backToTalking.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
+
+            // 科技与未来文章链接点击事件
+            techArticlesLink.addEventListener('click', () => {
+                showPage(techArticlesPage);
+            });
+
+            // 从科技与未来返回慢慢谈说按钮点击事件
+            backToTalkingFromTech.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
+
+            // 艺术与创意文章链接点击事件
+            artArticlesLink.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 从艺术与创意返回慢慢谈说按钮点击事件
+            backToTalkingFromArt.addEventListener('click', () => {
+                showPage(talkingPage);
+            });
+
+            // 光影一刻链接点击事件
+            lightShadowLink.addEventListener('click', () => {
+                showPage(lightShadowPage);
+            });
+
+            // 从光影一刻返回艺术与创意按钮点击事件
+            backToArtFromLight.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 美术鉴赏链接点击事件
+            artAppreciationLink.addEventListener('click', () => {
+                showPage(artAppreciationPage);
+            });
+
+            // 从美术鉴赏返回艺术与创意按钮点击事件
+            backToArtFromAppreciation.addEventListener('click', () => {
+                showPage(artArticlesPage);
+            });
+
+            // 文章折叠/展开功能
+            if (articleHeader && articleContent && toggleIcon) {
+                articleHeader.addEventListener('click', () => {
+                    isArticleExpanded = !isArticleExpanded;
+                    if (isArticleExpanded) {
+                        articleContent.classList.remove('content-collapsed');
+                        articleContent.classList.add('content-expanded');
+                        toggleIcon.classList.add('expanded');
+                    } else {
+                        articleContent.classList.remove('content-expanded');
+                        articleContent.classList.add('content-collapsed');
+                        toggleIcon.classList.remove('expanded');
+                    }
+                });
+            }
+
+            // 思考与探索文章折叠/展开功能
+            if (thinkingArticleHeader && thinkingArticleContent && thinkingToggleIcon) {
+                thinkingArticleHeader.addEventListener('click', () => {
+                    isThinkingArticleExpanded = !isThinkingArticleExpanded;
+                    if (isThinkingArticleExpanded) {
+                        thinkingArticleContent.classList.remove('content-collapsed');
+                        thinkingArticleContent.classList.add('content-expanded');
+                        thinkingToggleIcon.classList.add('expanded');
+                    } else {
+                        thinkingArticleContent.classList.remove('content-expanded');
+                        thinkingArticleContent.classList.add('content-collapsed');
+                        thinkingToggleIcon.classList.remove('expanded');
+                    }
+                });
+            }
+            
+            // 思考与探索文章2（想与写）折叠/展开功能
+            if (thinkingArticleHeader2 && thinkingArticleContent2 && thinkingToggleIcon2) {
+                thinkingArticleHeader2.addEventListener('click', () => {
+                    isThinkingArticle2Expanded = !isThinkingArticle2Expanded;
+                    if (isThinkingArticle2Expanded) {
+                        thinkingArticleContent2.classList.remove('content-collapsed');
+                        thinkingArticleContent2.classList.add('content-expanded');
+                        thinkingToggleIcon2.classList.add('expanded');
+                    } else {
+                        thinkingArticleContent2.classList.remove('content-expanded');
+                        thinkingArticleContent2.classList.add('content-collapsed');
+                        thinkingToggleIcon2.classList.remove('expanded');
+                    }
+                });
+            }
+
+            // 科技与未来文章折叠/展开功能
+            if (techArticleHeader && techArticleContent && techToggleIcon) {
+                techArticleHeader.addEventListener('click', () => {
+                    isTechArticleExpanded = !isTechArticleExpanded;
+                    if (isTechArticleExpanded) {
+                        techArticleContent.classList.remove('content-collapsed');
+                        techArticleContent.classList.add('content-expanded');
+                        techToggleIcon.classList.add('expanded');
+                    } else {
+                        techArticleContent.classList.remove('content-expanded');
+                        techArticleContent.classList.add('content-collapsed');
+                        techToggleIcon.classList.remove('expanded');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
