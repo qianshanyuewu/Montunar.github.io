@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -269,6 +268,10 @@
             .dark-mode .card-hover:hover {
                 box-shadow: 0 15px 30px rgba(255, 255, 255, 0.05);
             }
+
+            .hide-canvas {
+                display: none !important;
+            }
         }
     </style>
     <style>
@@ -281,6 +284,25 @@
           z-index: -10; /* Ensure it's well behind other content */
           background-color: #eee; /* Animation's original background, consider theme adaptability */
           display: block;
+        }
+        /* 保证首页section高度和背景色 */
+        #home-page {
+          min-height: 100vh;
+          height: 100vh;
+          box-sizing: border-box;
+          background-color: #fff;
+        }
+        .dark-mode #home-page {
+          background-color: #121212 !important;
+        }
+        .dark-mode #canvas {
+          background-color: #121212 !important;
+        }
+        .dark-mode footer {
+          border-top: none !important;
+        }
+        #home-page + footer {
+          display: none !important;
         }
     </style>
 </head>
@@ -337,7 +359,6 @@
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
             </footer>
         </section>
 
@@ -440,7 +461,39 @@
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
+            </footer>
+        </section>
+
+        <!-- 科技与未来文章页面 -->
+        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">科技与未来</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        科技与未来
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
+                    </p>
+                </div>
+
+                <!-- 文章列表 -->
+                <div id="dynamic-tech-articles-list" class="w-full max-w-3xl space-y-8">
+                    <!-- “科技与未来”系列的文章将动态加载到这里 -->
+                </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
             </footer>
         </section>
 
@@ -455,7 +508,7 @@
             </header>
 
             <!-- 主内容区 -->
-            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+            <div class="flex-grow flex flex-col items-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
                     <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
@@ -466,7 +519,7 @@
                     </p>
                 </div>
 
-                <!-- 主题卡片 -->
+                <!-- 主题卡片 (保持不变，用于导航) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mb-16">
                     <!-- 卡片1：光影一刻 -->
                     <div class="bg-white custom-card p-6 slide-in card-hover" style="transition-delay: 0.1s">
@@ -496,93 +549,95 @@
                         </a>
                     </div>
                 </div>
+                 <!-- 文章列表容器 (新添加) -->
+                <div id="dynamic-art-creativity-articles-list" class="w-full max-w-3xl space-y-8 mt-12">
+                    <!-- “艺术与创意”系列的文章将动态加载到这里 -->
+                </div>
             </div>
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
             </footer>
         </section>
 
-      <!-- 光影一刻页面 -->
-<section id="light-shadow-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
-    <!-- 导航栏 -->
-    <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-        <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
-            <i class="fa fa-arrow-left mr-2"></i> 返回
-        </a>
-        <div class="text-xl font-light">光影一刻</div>
-    </header>
+        <!-- 光影一刻页面 -->
+        <section id="light-shadow-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">光影一刻</div>
+            </header>
 
-    <!-- 主内容区 -->
-    <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
-        <!-- 页面标题 -->
-        <div class="w-full text-center mb-16 slide-in">
-            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
-                光影一刻
-            </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
-            </p>
-        </div>
-
-        <!-- 图片展示 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
-            <!-- 图片1 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.1s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/a.jpg" alt="图片A" class="w-full h-full object-cover">
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        光影一刻
+                    </h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
+                    </p>
                 </div>
-                <p class="text-gray-600 mb-4">蓝天中飘浮着形态蓬松的白云，色调清新明快。</p>
+
+                <!-- 图片展示 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-5xl mb-16">
+                    <!-- 图片1 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.1s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/a.jpg" alt="图片A" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">蓝天中飘浮着形态蓬松的白云，色调清新明快。</p>
+                    </div>
+
+                    <!-- 图片2 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.2s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/b.jpg" alt="图片B" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">水边生长着棕绿相间的芦苇，水面泛起波纹，尽显自然野趣。</p>
+                    </div>
+
+                    <!-- 图片3 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.3s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/c.jpg" alt="图片C" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">草地上木栅栏旁，阳光洒落，枯叶与绿草相映，氛围静谧。</p>
+                    </div>
+
+                    <!-- 图片4 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.4s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/d.jpg" alt="图片D" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">湖泊畔石块静卧，远处城市建筑与绿树错落，展现城市中的自然景观。</p>
+                    </div>
+
+                    <!-- 图片5 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.5s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/e.jpg" alt="图片E" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">湖边紫色鸢尾花绽放，背景湖水波光粼粼，隐约可见黑天鹅身影，充满生机。</p>
+                    </div>
+
+                    <!-- 图片6 -->
+                    <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.6s">
+                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
+                            <img src="/Montunar.github.io/images/f.jpg" alt="图片F" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-gray-600 mb-4">henu经管楼的胶片感，木质桌椅整齐排列，大窗透进自然光线，窗外树木与室内暖调相融，静谧温馨。</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- 图片2 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.2s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/b.jpg" alt="图片B" class="w-full h-full object-cover">
-                </div>
-                <p class="text-gray-600 mb-4">水边生长着棕绿相间的芦苇，水面泛起波纹，尽显自然野趣。</p>
-            </div>
-
-            <!-- 图片3 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.3s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/c.jpg" alt="图片C" class="w-full h-full object-cover">
-                </div>
-                <p class="text-gray-600 mb-4">草地上木栅栏旁，阳光洒落，枯叶与绿草相映，氛围静谧。</p>
-            </div>
-
-            <!-- 图片4 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.4s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/d.jpg" alt="图片D" class="w-full h-full object-cover">
-                </div>
-                <p class="text-gray-600 mb-4">湖泊畔石块静卧，远处城市建筑与绿树错落，展现城市中的自然景观。</p>
-            </div>
-
-            <!-- 图片5 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.5s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/e.jpg" alt="图片E" class="w-full h-full object-cover">
-                </div>
-                <p class="text-gray-600 mb-4">湖边紫色鸢尾花绽放，背景湖水波光粼粼，隐约可见黑天鹅身影，充满生机。</p>
-            </div>
-
-            <!-- 图片6 -->
-            <div class="bg-white custom-card p-6 slide-in hover-highlight" style="transition-delay: 0.6s">
-                <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                    <img src="/Montunar.github.io/images/f.jpg" alt="图片F" class="w-full h-full object-cover">
-                </div>
-                <p class="text-gray-600 mb-4">henu经管楼的胶片感，木质桌椅整齐排列，大窗透进自然光线，窗外树木与室内暖调相融，静谧温馨。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-        <p>© 2025 一个小小的思考地方...</p>
-    </footer>
-</section>
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+            </footer>
+        </section>
 
         <!-- 美术鉴赏页面 -->
         <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
@@ -616,7 +671,6 @@
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
             </footer>
         </section>
 
@@ -644,151 +698,13 @@
 
                 <!-- 文章列表 -->
                 <div class="w-full max-w-3xl space-y-8">
-                    <!-- 文章1：想与写 -->
-                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
-                        <div id="thinking-article-header-2" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
-                            <div>
-                                <h3 class="text-2xl font-semibold">想与写</h3>
-                                <div class="flex items-center mt-4 text-sm text-gray-500">
-                                    <span>2025年5月24日</span>
-                                    <span class="mx-2">•</span>
-                                    <span>思考与探索</span>
-                                </div>
-                            </div>
-                            <i id="thinking-toggle-icon-2" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
-                        </div>
-                        <div id="thinking-article-content-2" class="px-8 md:px-12 content-collapsed">
-                            <div class="mt-6">
-                                <p class="text-gray-600 mb-4">
-                                    仅靠"想"时，思维往往是模糊、碎片化的，停留在表面。而写作是将抽象思维转化为具象文字的过程，需要清晰的逻辑、完整的结构和具体的表达。这一过程迫使我们梳理思路，填补逻辑漏洞，把"想当然"的内容转化为可验证、可追溯的文字，从而让思考从"浅尝辄止"走向"深入剖析"。例如：
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    - 构思文章时，最初的想法可能只是一个主题（如"环保的重要性"），但动笔写作时，需细化为"现状分析→问题根源→解决方案→案例佐证"等层次，每个部分都要深入思考，才能形成完整论述。
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    - 解决数学题时，"想思路"可能只是大致框架，而"写步骤"则要求每一步的推导都严谨，倒逼自己检查逻辑是否通顺，深化对知识点的理解。
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    心理学研究表明，"书写记忆"比"大脑记忆"更深刻。动笔写作时，视觉（看文字）、动觉（手部书写）、听觉（默读文字）多感官参与，强化了神经突触的连接，使思考内容更易被记住和调用。同时，文字的"持久性"（可反复阅读、修改）让我们能在不同时间点回顾思考，每次审视都可能带来新的洞察（如日记中对某件事的复盘，隔月再看时，会有更深入的理解）。
-                                </p>
-                                <p class="text-gray-600">
-                                    "动笔写"是将思维"显化"并"锤炼"的工具。它通过具象化、反馈、多感官强化等机制，迫使思考从混沌走向清晰，从表面走向本质。正如哲学家维特根斯坦所说："语言的边界即世界的边界"——当我们用文字拓展思维的表达边界时，思考的深度和广度也随之拓展。因此，这句话本质上是在强调：写作（外化思维）是深化思考的必经之路，只有通过"写"，才能让"想"真正落地、生根、发芽。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 文章2：厌蠢还是不耐烦？ -->
-                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.2s">
-                        <div id="thinking-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
-                            <div>
-                                <h3 class="text-2xl font-semibold">厌蠢还是不耐烦？</h3>
-                                <div class="flex items-center mt-4 text-sm text-gray-500">
-                                    <span>2025年5月23日</span>
-                                    <span class="mx-2">•</span>
-                                    <span>思考与探索</span>
-                                </div>
-                            </div>
-                            <i id="thinking-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
-                        </div>
-                        <div id="thinking-article-content" class="px-8 md:px-12 content-collapsed">
-                            <div class="mt-6">
-                                <p class="text-gray-600 mb-4">
-                                    今天是25.5.23日，PLC课听不懂，但是我整节课在思考这件事。我是有厌蠢症，还是说单纯的浮躁，不耐烦？
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    最近发现自己在面对一些似乎缺乏基本常识或学习能力的人时，会产生一种难以抑制的烦躁情绪。这种情绪让我开始反思自己：我是真的患有"厌蠢症"，还是只是因为自己变得越来越没有耐心？
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    或许这两者都有一点。一方面，我确实对那些不愿意思考、不愿意学习的人感到失望；另一方面，我也意识到自己的耐心正在逐渐消失。这让我感到不安，因为我知道真正的智慧应该包含包容和理解。
-                                </p>
-                                <p class="text-gray-600">
-                                    中间这两段是ai写的，确实有给了我一点启发。我觉得这跟我的性格有关：喜欢独处。
-                                    无论我做什么，你可以说为什么，有什么用？这都无关紧要，但是我不喜欢，我讨厌。
-                                    我不喜欢解释，因为这跟你无关，我只想沉默，因为更多的沟通会带来更多的不解。
-                                    可能，就是单纯的不想说罢了？
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="dynamic-articles-list"></div>
                     <!-- 可以添加更多文章 -->
                 </div>
             </div>
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
-            </footer>
-        </section>
-
-        <!-- 科技与未来文章页面 -->
-        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
-            <!-- 导航栏 -->
-            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
-                <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
-                    <i class="fa fa-arrow-left mr-2"></i> 返回
-                </a>
-                <div class="text-xl font-light">科技与未来</div>
-            </header>
-
-            <!-- 主内容区 -->
-            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
-                <!-- 页面标题 -->
-                <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
-                        科技与未来
-                    </h2>
-                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
-                    </p>
-                </div>
-
-                <!-- 文章列表 -->
-                <div class="w-full max-w-3xl space-y-8">
-                    <!-- 文章1：前沿科技研究报告 -->
-                    <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
-                        <div id="tech-article-header" class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between">
-                            <div>
-                                <h3 class="text-2xl font-semibold">前沿科技研究报告</h3>
-                                <div class="flex items-center mt-4 text-sm text-gray-500">
-                                    <span>2025年5月23日</span>
-                                    <span class="mx-2">•</span>
-                                    <span>科技与未来</span>
-                                </div>
-                            </div>
-                            <i id="tech-toggle-icon" class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
-                        </div>
-                        <div id="tech-article-content" class="px-8 md:px-12 content-collapsed">
-                            <div class="mt-6">
-                                <p class="text-gray-600 mb-4">
-                                    这份研究报告详细分析了当前科技发展趋势，包括人工智能、量子计算、可再生能源等领域的最新突破，以及它们对未来社会的潜在影响。
-                                </p>
-                                <p class="text-gray-600 mb-4">
-                                    通过对大量数据的分析和专家访谈，报告揭示了未来十年科技发展的可能方向，以及这些发展对经济、社会和个人生活的深远影响。
-                                </p>
-                                <div class="my-6 flex justify-center">
-                                    <a href="research_report.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
-                                        <i class="fa fa-file-pdf text-red-500 text-xl mr-2"></i>
-                                        <span>点击查看完整研究报告 (PDF)</span>
-                                    </a>
-                                </div>
-                                <p class="text-gray-600 mb-4">
-                                    报告中特别强调了人工智能在医疗、教育和环境保护等领域的应用前景，以及如何通过负责任的技术开发来确保这些进步能够造福全人类。
-                                </p>
-                                <p class="text-gray-600">
-                                    无论你是科技爱好者、学生、研究人员还是决策者，这份报告都将为你提供宝贵的见解，帮助你更好地理解和应对科技带来的挑战与机遇。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 可以添加更多文章 -->
-                </div>
-            </div>
-
-            <!-- 页脚 -->
-            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
             </footer>
         </section>
 
@@ -814,36 +730,134 @@
                     </p>
                 </div>
 
-                <!-- 新增文章 - 修改为可折叠形式 -->
-                <div class="w-full max-w-3xl bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.2s">
-                    <div id="article-header" class="p-8 md:p-12 cursor-pointer flex justify-between items-center">
-                        <h3 class="text-2xl font-semibold">5.22日值得庆祝的一天</h3>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span>2025年5月22日</span>
-                            <span class="mx-2">•</span>
-                            <span>干了啥</span>
-                        </div>
-                        <i id="toggle-icon" class="fa fa-chevron-down toggle-icon text-gray-500"></i>
-                    </div>
-                    <div id="article-content" class="px-8 md:px-12 content-collapsed">
-                        <p class="text-gray-600 mb-4">不言而喻，这天我创建了属于我自己的网站。</p>
-                        <p class="text-gray-600 mb-4">希望我能在考研的路途中，继续完善这个网站，终身学习！</p>
-                        <p class="text-gray-600 mb-4">看看明天要干什么？</p>
-                        <p class="text-gray-600 mb-4">嗯...早八的PLC课，持续到9点40，其次是IOT的实验课，从10点到12点。</p>
-                        <p class="text-gray-600">就先这样！</p>
-                    </div>
+                <!-- 文章容器 -->
+                <div id="dynamic-whatidid-articles-list" class="w-full max-w-3xl space-y-8">
+                    <!-- "干了啥"系列的文章将动态加载到这里 -->
                 </div>
             </div>
 
             <!-- 页脚 -->
             <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
-                <p>© 2025 一个小小的思考地方...</p>
             </footer>
         </section>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/background-animation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(homePage); // 确保初始时canvas隐藏
+        });
+
+        async function loadArticles() {
+            const listContainer = document.getElementById('dynamic-articles-list');
+            if (!listContainer) return;
+            try {
+                const res = await fetch('articles/articles.json');
+                const articles = await res.json();
+                renderArticles(articles, listContainer, 'thinking', '思考与探索');
+            } catch (e) {
+                listContainer.innerHTML = '<p>无法加载“思考与探索”文章列表。</p>';
+                console.error("Error loading thinking articles:", e);
+            }
+        }
+
+        async function loadWhatIDidArticles() {
+            const listContainer = document.getElementById('dynamic-whatidid-articles-list');
+            if (!listContainer) return;
+            try {
+                const res = await fetch('articles/whatidid-articles.json');
+                const articles = await res.json();
+                renderArticles(articles, listContainer, 'whatidid', '干了啥');
+            } catch (e) {
+                listContainer.innerHTML = '<p>无法加载"干了啥"系列文章。</p>';
+                console.error("Error loading whatidid articles:", e);
+            }
+        }
+
+        async function loadTechArticles() {
+            const listContainer = document.getElementById('dynamic-tech-articles-list');
+            if (!listContainer) return;
+            try {
+                const res = await fetch('articles/tech-articles.json');
+                const articles = await res.json();
+                renderArticles(articles, listContainer, 'tech', '科技与未来');
+            } catch (e) {
+                listContainer.innerHTML = '<p>无法加载"科技与未来"文章列表。</p>';
+                console.error("Error loading tech articles:", e);
+            }
+        }
+
+        async function loadArtCreativityArticles() {
+            const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
+            if (!listContainer) return;
+            try {
+                const res = await fetch('articles/art-creativity-articles.json');
+                const articles = await res.json();
+                if (articles.length === 0) {
+                    listContainer.innerHTML = '<p class="text-gray-600 text-lg">此栏目暂无文章，敬请期待更多内容。</p>';
+                    return;
+                }
+                renderArticles(articles, listContainer, 'art-creativity', '艺术与创意');
+            } catch (e) {
+                listContainer.innerHTML = '<p>无法加载"艺术与创意"文章列表。</p>';
+                console.error("Error loading art & creativity articles:", e);
+            }
+        }
+
+        function renderArticles(articles, container, typePrefix, defaultCategory) {
+            let html = '';
+            for (const article of articles) {
+                const category = article.category || defaultCategory;
+                html += `
+                <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
+                    <div class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
+                        <div>
+                            <h3 class="text-2xl font-semibold">${article.title}</h3>
+                            <div class="flex items-center mt-4 text-sm text-gray-500">
+                                <span>${article.date}</span>
+                                <span class="mx-2">•</span>
+                                <span>${category}</span>
+                            </div>
+                        </div>
+                        <i class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                    </div>
+                    <div id="content-${typePrefix}-${article.filename.replace(/[^a-zA-Z0-9]/g, '')}" class="px-8 md:px-12 content-collapsed" style="margin-top:1rem;"></div>
+                </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        window.toggleArticleContent = async function(filename, typePrefix) {
+            const contentId = `content-${typePrefix}-${filename.replace(/[^a-zA-Z0-9]/g, '')}`;
+            const contentDiv = document.getElementById(contentId);
+            if (!contentDiv) return;
+            const articleCard = contentDiv.closest('.custom-card');
+            const icon = articleCard ? articleCard.querySelector('.toggle-icon') : null;
+
+            if (contentDiv.classList.contains('content-collapsed')) {
+                if (contentDiv.children.length === 0) {
+                    try {
+                        const res = await fetch('articles/' + filename);
+                        const md = await res.text();
+                        contentDiv.innerHTML = marked.parse(md);
+                    } catch (e) {
+                        contentDiv.innerHTML = '<p>加载失败</p>';
+                        console.error("Error fetching article content:", e);
+                    }
+                }
+                contentDiv.classList.remove('content-collapsed');
+                contentDiv.classList.add('content-expanded');
+                if(icon) icon.classList.add('expanded');
+            } else {
+                contentDiv.classList.remove('content-expanded');
+                contentDiv.classList.add('content-collapsed');
+                if(icon) icon.classList.remove('expanded');
+            }
+        }
+    </script>
 </body>
 
 </html>
