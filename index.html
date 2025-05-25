@@ -304,10 +304,17 @@
         #home-page + footer {
           display: none !important;
         }
+        /* New body background styles */
+        body {
+            background-color: #eee;
+        }
+        .dark-mode body {
+            background-color: #121212 !important;
+        }
     </style>
 </head>
 
-<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden overflow-y-auto">
+<body class="font-inter text-primary antialiased overflow-x-hidden overflow-y-auto">
     <canvas id="canvas"></canvas>
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
@@ -331,7 +338,7 @@
         </section>
 
         <!-- 文章页面 -->
-        <section id="articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -363,7 +370,7 @@
         </section>
 
         <!-- 慢慢谈说页面 -->
-        <section id="talking-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="talking-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -465,7 +472,7 @@
         </section>
 
         <!-- 科技与未来文章页面 -->
-        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -498,7 +505,7 @@
         </section>
 
         <!-- 艺术与创意文章页面 -->
-        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking-from-art" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -561,7 +568,7 @@
         </section>
 
         <!-- 光影一刻页面 -->
-        <section id="light-shadow-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="light-shadow-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -640,7 +647,7 @@
         </section>
 
         <!-- 美术鉴赏页面 -->
-        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-art-from-appreciation" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -675,7 +682,7 @@
         </section>
 
         <!-- 思考与探索文章页面 -->
-        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -709,7 +716,7 @@
         </section>
 
         <!-- 干了啥页面 -->
-        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -755,7 +762,7 @@
             if (!listContainer) return;
 
             // 1. 设置加载提示
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
 
             // 2. 将数据获取和渲染操作放入 setTimeout 回调，确保提示有时间渲染
             setTimeout(async () => {
@@ -773,8 +780,7 @@
         async function loadWhatIDidArticles() {
             const listContainer = document.getElementById('dynamic-whatidid-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
-            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/whatidid-articles.json');
                 const articles = await res.json();
@@ -788,8 +794,7 @@
         async function loadTechArticles() {
             const listContainer = document.getElementById('dynamic-tech-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
-            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/tech-articles.json');
                 const articles = await res.json();
@@ -803,15 +808,10 @@
         async function loadArtCreativityArticles() {
             const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
-            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/art-creativity-articles.json');
                 const articles = await res.json();
-                if (articles.length === 0) {
-                    listContainer.innerHTML = '<p class="text-gray-600 text-lg">此栏目暂无文章，敬请期待更多内容。</p>';
-                    return;
-                }
                 renderArticles(articles, listContainer, 'art-creativity', '艺术与创意');
             } catch (e) {
                 listContainer.innerHTML = '<p>无法加载"艺术与创意"文章列表。</p>';
@@ -820,6 +820,11 @@
         }
 
         function renderArticles(articles, container, typePrefix, defaultCategory) {
+            if (!articles || articles.length === 0) {
+                container.innerHTML = `<p class="text-gray-600 text-lg">此栏目暂无文章，敬请期待更多内容。</p>`;
+                return;
+            }
+
             let html = '';
             for (const article of articles) {
                 const category = article.category || defaultCategory;
