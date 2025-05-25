@@ -755,7 +755,7 @@
             if (!listContainer) return;
 
             // 1. 设置加载提示
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
 
             // 2. 将数据获取和渲染操作放入 setTimeout 回调，确保提示有时间渲染
             setTimeout(async () => {
@@ -773,7 +773,7 @@
         async function loadWhatIDidArticles() {
             const listContainer = document.getElementById('dynamic-whatidid-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
             await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/whatidid-articles.json');
@@ -788,7 +788,7 @@
         async function loadTechArticles() {
             const listContainer = document.getElementById('dynamic-tech-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
             await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/tech-articles.json');
@@ -803,7 +803,7 @@
         async function loadArtCreativityArticles() {
             const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
             if (!listContainer) return;
-            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...可尝试刷新页面...</p>';
             await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/art-creativity-articles.json');
