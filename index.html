@@ -7,7 +7,7 @@
     <title>一个小小的思考地方...</title>
     <meta name="description" content="一个记录个人思考、生活点滴、科技探索和艺术创意的空间。在这里慢慢谈说，分享对世界的观察与感悟。">
     <!-- 添加图标引用 -->
-    <link rel="shortcut icon" href="/Montunar.github.io/favicon.ico" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -753,6 +753,7 @@
         async function loadArticles() {
             const listContainer = document.getElementById('dynamic-articles-list');
             if (!listContainer) return;
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/articles.json');
                 const articles = await res.json();
@@ -766,6 +767,7 @@
         async function loadWhatIDidArticles() {
             const listContainer = document.getElementById('dynamic-whatidid-articles-list');
             if (!listContainer) return;
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/whatidid-articles.json');
                 const articles = await res.json();
@@ -779,6 +781,7 @@
         async function loadTechArticles() {
             const listContainer = document.getElementById('dynamic-tech-articles-list');
             if (!listContainer) return;
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/tech-articles.json');
                 const articles = await res.json();
@@ -792,6 +795,7 @@
         async function loadArtCreativityArticles() {
             const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
             if (!listContainer) return;
+            listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
             try {
                 const res = await fetch('articles/art-creativity-articles.json');
                 const articles = await res.json();
