@@ -141,6 +141,9 @@ function Init() {
   Draw();
 };
 
+// Expose Init to global scope
+window.initCanvasAnimation = Init;
+
 // Initial call to Init, can be slightly delayed to ensure canvas is ready and theme is set.
 setTimeout(function() {
   Init();
