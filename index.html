@@ -754,6 +754,7 @@
             const listContainer = document.getElementById('dynamic-articles-list');
             if (!listContainer) return;
             listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/articles.json');
                 const articles = await res.json();
@@ -768,6 +769,7 @@
             const listContainer = document.getElementById('dynamic-whatidid-articles-list');
             if (!listContainer) return;
             listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/whatidid-articles.json');
                 const articles = await res.json();
@@ -782,6 +784,7 @@
             const listContainer = document.getElementById('dynamic-tech-articles-list');
             if (!listContainer) return;
             listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/tech-articles.json');
                 const articles = await res.json();
@@ -796,6 +799,7 @@
             const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
             if (!listContainer) return;
             listContainer.innerHTML = '<p class="text-gray-600 text-lg">正在加载文章列表，请稍候...</p>';
+            await new Promise(resolve => setTimeout(resolve, 50)); // 添加短暂延迟确保提示信息渲染
             try {
                 const res = await fetch('articles/art-creativity-articles.json');
                 const articles = await res.json();
