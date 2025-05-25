@@ -285,7 +285,7 @@
     </style>
 </head>
 
-<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden">
+<body class="font-inter bg-neutral text-primary antialiased overflow-x-hidden overflow-y-auto">
     <canvas id="canvas"></canvas>
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
@@ -297,7 +297,7 @@
         </div>
 
         <!-- 首页 -->
-        <section id="home-page" class="min-h-screen flex items-center justify-center px-4 py-12 transition-smooth bg-white">
+        <section id="home-page" class="h-screen flex items-center justify-center px-4 transition-smooth bg-white">
             <div class="text-center max-w-3xl mx-auto">
                 <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-playfair leading-tight cursor-pointer hover:text-secondary transition-colors duration-300">
                     <!-- 这里的文本将在 JavaScript 中逐个插入 -->
@@ -309,7 +309,7 @@
         </section>
 
         <!-- 文章页面 -->
-        <section id="articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-button" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -342,7 +342,7 @@
         </section>
 
         <!-- 慢慢谈说页面 -->
-        <section id="talking-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="talking-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-articles" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -445,7 +445,7 @@
         </section>
 
         <!-- 艺术与创意文章页面 -->
-        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="art-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking-from-art" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -505,7 +505,7 @@
         </section>
 
       <!-- 光影一刻页面 -->
-<section id="light-shadow-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+<section id="light-shadow-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
     <!-- 导航栏 -->
     <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
         <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -585,7 +585,7 @@
 </section>
 
         <!-- 美术鉴赏页面 -->
-        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="art-appreciation-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-art-from-appreciation" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -621,7 +621,7 @@
         </section>
 
         <!-- 思考与探索文章页面 -->
-        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="thinking-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -722,7 +722,7 @@
         </section>
 
         <!-- 科技与未来文章页面 -->
-        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="tech-articles-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-talking-from-tech" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
@@ -793,7 +793,7 @@
         </section>
 
         <!-- 干了啥页面 -->
-        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 py-12 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
+        <section id="what-i-did-page" class="min-h-screen flex flex-col px-4 transition-smooth opacity-0 pointer-events-none absolute top-0 left-0 w-full bg-neutral">
             <!-- 导航栏 -->
             <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
                 <a href="#" id="back-to-articles-from-what-i-did" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
