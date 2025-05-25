@@ -23,7 +23,7 @@
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
-                        playfair: ['Playfair Display', serif],
+                        playfair: ['Playfair Display', 'serif'],
                     },
                 }
             }
@@ -488,7 +488,7 @@
 
                 <!-- 文章列表 -->
                 <div id="dynamic-tech-articles-list" class="w-full max-w-3xl space-y-8">
-                    <!-- “科技与未来”系列的文章将动态加载到这里 -->
+                    <!-- "科技与未来"系列的文章将动态加载到这里 -->
                 </div>
             </div>
 
@@ -551,7 +551,7 @@
                 </div>
                  <!-- 文章列表容器 (新添加) -->
                 <div id="dynamic-art-creativity-articles-list" class="w-full max-w-3xl space-y-8 mt-12">
-                    <!-- “艺术与创意”系列的文章将动态加载到这里 -->
+                    <!-- "艺术与创意"系列的文章将动态加载到这里 -->
                 </div>
             </div>
 
@@ -758,7 +758,7 @@
                 const articles = await res.json();
                 renderArticles(articles, listContainer, 'thinking', '思考与探索');
             } catch (e) {
-                listContainer.innerHTML = '<p>无法加载“思考与探索”文章列表。</p>';
+                listContainer.innerHTML = '<p>无法加载"思考与探索"文章列表。</p>';
                 console.error("Error loading thinking articles:", e);
             }
         }
