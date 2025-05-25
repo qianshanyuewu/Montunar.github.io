@@ -130,6 +130,9 @@ function showPage(page) {
         canvas.classList.add('hide-canvas');
     } else {
         canvas.classList.remove('hide-canvas');
+        if (window.initCanvasAnimation) {
+            window.initCanvasAnimation(); // Re-initialize animation
+        }
     }
 
     // 滚动到顶部
