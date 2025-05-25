@@ -28,9 +28,9 @@ const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 
 // 文章折叠/展开功能
-const articleHeader = document.getElementById('article-header');
-const articleContent = document.getElementById('article-content');
-const toggleIcon = document.getElementById('toggle-icon');
+// const articleHeader = document.getElementById('article-header'); // 已被移除
+// const articleContent = document.getElementById('article-content'); // 已被移除
+// const toggleIcon = document.getElementById('toggle-icon'); // 已被移除
 
 // 思考与探索文章折叠/展开功能
 const thinkingArticleHeader = document.getElementById('thinking-article-header');
@@ -43,15 +43,15 @@ const thinkingArticleContent2 = document.getElementById('thinking-article-conten
 const thinkingToggleIcon2 = document.getElementById('thinking-toggle-icon-2');
 
 // 科技与未来文章折叠/展开功能
-const techArticleHeader = document.getElementById('tech-article-header');
-const techArticleContent = document.getElementById('tech-article-content');
-const techToggleIcon = document.getElementById('tech-toggle-icon');
+// const techArticleHeader = document.getElementById('tech-article-header'); // 已被移除
+// const techArticleContent = document.getElementById('tech-article-content'); // 已被移除
+// const techToggleIcon = document.getElementById('tech-toggle-icon'); // 已被移除
 
 // 文章默认折叠
-let isArticleExpanded = false;
+// let isArticleExpanded = false; // 不再需要，由新的toggleArticleContent处理
 let isThinkingArticleExpanded = false;
 let isThinkingArticle2Expanded = false;
-let isTechArticleExpanded = false;
+// let isTechArticleExpanded = false; // 不再需要
 
 // 主题设置
 let isDarkMode = false;
@@ -124,6 +124,14 @@ function showPage(page) {
     // 显示指定页面
     page.classList.remove('opacity-0', 'pointer-events-none');
 
+    // 控制canvas显示/隐藏
+    const canvas = document.getElementById('canvas');
+    if (page === homePage) {
+        canvas.classList.add('hide-canvas');
+    } else {
+        canvas.classList.remove('hide-canvas');
+    }
+
     // 滚动到顶部
     window.scrollTo(0, 0);
 
@@ -136,6 +144,25 @@ function showPage(page) {
             }, index * 100);
         });
     }, 300);
+
+    // 根据页面类型加载对应的文章
+    if (page === thinkingArticlesPage) {
+        if (typeof loadArticles === 'function') {
+            loadArticles();
+        }
+    } else if (page === whatIDidPage) {
+        if (typeof loadWhatIDidArticles === 'function') {
+            loadWhatIDidArticles();
+        }
+    } else if (page === techArticlesPage) {
+        if (typeof loadTechArticles === 'function') {
+            loadTechArticles();
+        }
+    } else if (page === artArticlesPage) {
+        if (typeof loadArtCreativityArticles === 'function') {
+            loadArtCreativityArticles();
+        }
+    }
 }
 
 function animateHomeTitle() {
@@ -245,22 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(artArticlesPage);
     });
 
-    // 文章折叠/展开功能
-    if (articleHeader && articleContent && toggleIcon) {
-        articleHeader.addEventListener('click', () => {
-            isArticleExpanded = !isArticleExpanded;
-            if (isArticleExpanded) {
-                articleContent.classList.remove('content-collapsed');
-                articleContent.classList.add('content-expanded');
-                toggleIcon.classList.add('expanded');
-            } else {
-                articleContent.classList.remove('content-expanded');
-                articleContent.classList.add('content-collapsed');
-                toggleIcon.classList.remove('expanded');
-            }
-        });
-    }
-
     // 思考与探索文章折叠/展开功能
     if (thinkingArticleHeader && thinkingArticleContent && thinkingToggleIcon) {
         thinkingArticleHeader.addEventListener('click', () => {
@@ -293,8 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 科技与未来文章折叠/展开功能
-    if (techArticleHeader && techArticleContent && techToggleIcon) {
+    // 科技与未来文章折叠/展开功能 (旧的，将被移除或注释)
+    /* if (techArticleHeader && techArticleContent && techToggleIcon) {
         techArticleHeader.addEventListener('click', () => {
             isTechArticleExpanded = !isTechArticleExpanded;
             if (isTechArticleExpanded) {
@@ -307,5 +318,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 techToggleIcon.classList.remove('expanded');
             }
         });
-    }
+    } */
 }); 
