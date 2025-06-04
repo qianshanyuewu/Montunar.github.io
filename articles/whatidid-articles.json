@@ -1,8 +1,8 @@
 [
   {
-    "title": "5.22日值得庆祝的一天",
-    "date": "2025-05-22",
-    "filename": "20250522-whatidid-celebration.md",
+    "title": "网站添加音乐播放按钮",
+    "date": "2025-06-04",
+    "filename": "20250604-whatidid-music.md",
     "category": "干了啥"
   },
   {
@@ -10,5 +10,11 @@
     "date": "2025-05-25",
     "filename": "whatidid_update_log_20250525.md",
     "category": "干了啥"
-  }
+  },
+  {
+    "title": "5.22日值得庆祝的一天",
+    "date": "2025-05-22",
+    "filename": "20250522-whatidid-celebration.md",
+    "category": "干了啥"
+  },
 ] 
