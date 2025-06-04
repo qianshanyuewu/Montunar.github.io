@@ -181,10 +181,47 @@ function animateHomeTitle() {
     });
 }
 
+// 音乐播放控制
+const musicToggle = document.getElementById('music-toggle');
+const musicIcon = document.getElementById('music-icon');
+const backgroundMusic = document.getElementById('background-music');
+let isMusicPlaying = false;
+
+// 初始化音乐（默认静音）
+function initMusic() {
+    if (backgroundMusic) {
+        backgroundMusic.volume = 0.5;
+        backgroundMusic.muted = true;
+    }
+}
+
+// 音乐播放/暂停切换
+function toggleMusic() {
+    if (!backgroundMusic) return;
+    
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        musicIcon.classList.remove('fa-pause');
+        musicIcon.classList.add('fa-music');
+        isMusicPlaying = false;
+    } else {
+        backgroundMusic.muted = false;
+        backgroundMusic.play().catch(e => {
+            console.error("音乐播放失败:", e);
+        });
+        musicIcon.classList.remove('fa-music');
+        musicIcon.classList.add('fa-pause');
+        isMusicPlaying = true;
+    }
+}
+
 // 事件监听
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化主题
     initTheme();
+    
+    // 初始化音乐
+    initMusic();
 
     // 初始化首页标题动画
     animateHomeTitle();
@@ -194,6 +231,11 @@ document.addEventListener('DOMContentLoaded', () => {
     slideElements.forEach(el => {
         el.classList.remove('active');
     });
+    
+    // 音乐按钮点击事件
+    if (musicToggle) {
+        musicToggle.addEventListener('click', toggleMusic);
+    }
 
     // 主页标题点击事件
     homeTitle.addEventListener('click', () => {
