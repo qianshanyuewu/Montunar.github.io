@@ -119,7 +119,7 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
-            /* 优化的文章卡片样式 - 删除预览文本，更改右上角显示 */
+            /* 增强的文章卡片样式 */
             .article-card {
                 position: relative;
                 background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
@@ -176,7 +176,7 @@
                 display: flex;
                 align-items: center;
                 gap: 0.75rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
                 font-size: 0.875rem;
                 color: #6b7280;
             }
@@ -201,6 +201,21 @@
             .article-card:hover .article-category {
                 background-color: #e5e7eb;
                 color: #374151;
+            }
+
+            .article-preview {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                color: #6b7280;
+                margin-bottom: 1.5rem;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.3s ease;
+            }
+
+            .article-card:hover .article-preview {
+                opacity: 1;
+                transform: translateY(0);
             }
 
             .article-actions {
@@ -267,55 +282,23 @@
                 transform: rotate(180deg) translateY(2px);
             }
 
-            /* 新的右上角装饰元素 - 替换原来的圆圈 */
+            /* 装饰性元素 */
             .article-decoration {
                 position: absolute;
-                top: 1.5rem;
-                right: 1.5rem;
-                width: 8px;
-                height: 8px;
-                background: linear-gradient(45deg, #000000, #333333);
+                top: 1rem;
+                right: 1rem;
+                width: 60px;
+                height: 60px;
                 border-radius: 50%;
-                opacity: 0.3;
+                background: radial-gradient(circle, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%);
+                opacity: 0;
                 transition: all 0.4s ease;
                 z-index: 1;
             }
 
-            .article-decoration::before {
-                content: '';
-                position: absolute;
-                top: -6px;
-                right: -6px;
-                width: 4px;
-                height: 4px;
-                background: linear-gradient(45deg, #666666, #999999);
-                border-radius: 50%;
-                transition: all 0.4s ease;
-            }
-
-            .article-decoration::after {
-                content: '';
-                position: absolute;
-                top: 6px;
-                right: 6px;
-                width: 3px;
-                height: 3px;
-                background: linear-gradient(45deg, #999999, #cccccc);
-                border-radius: 50%;
-                transition: all 0.4s ease;
-            }
-
             .article-card:hover .article-decoration {
-                opacity: 0.8;
-                transform: scale(1.5) rotate(45deg);
-            }
-
-            .article-card:hover .article-decoration::before {
-                transform: scale(1.2) rotate(-45deg);
-            }
-
-            .article-card:hover .article-decoration::after {
-                transform: scale(1.3) rotate(90deg);
+                opacity: 1;
+                transform: scale(1.2);
             }
 
             /* 昼夜模式样式 */
@@ -390,6 +373,10 @@
                 color: #f3f4f6;
             }
 
+            .dark-mode .article-preview {
+                color: #9ca3af;
+            }
+
             .dark-mode .read-more-btn {
                 color: #d1d5db;
             }
@@ -409,15 +396,7 @@
             }
 
             .dark-mode .article-decoration {
-                background: linear-gradient(45deg, #ffffff, #e5e7eb);
-            }
-
-            .dark-mode .article-decoration::before {
-                background: linear-gradient(45deg, #d1d5db, #9ca3af);
-            }
-
-            .dark-mode .article-decoration::after {
-                background: linear-gradient(45deg, #9ca3af, #6b7280);
+                background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 100%);
             }
 
             .dark-mode .bg-gray-50 {
@@ -537,6 +516,15 @@
 
             .hide-canvas {
                 display: none !important;
+            }
+
+            /* 文章预览文本样式 */
+            .article-preview-text {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     </style>
@@ -1142,6 +1130,24 @@
             }
         }
 
+        // 获取文章预览文本的函数
+        function getArticlePreview(article) {
+            // 如果文章有描述，使用描述
+            if (article.description) {
+                return article.description;
+            }
+            
+            // 否则根据分类生成默认预览
+            const categoryPreviews = {
+                '思考与探索': '探索生活中的深层思考，分享对世界的独特见解和哲学思辨...',
+                '科技与未来': '探讨前沿科技趋势，分析技术发展对社会的影响...',
+                '艺术与创意': '欣赏艺术之美，分享创作灵感和审美体验...',
+                '干了啥': '记录生活中的点点滴滴，分享个人经历和感悟...'
+            };
+            
+            return categoryPreviews[article.category] || '点击展开阅读完整内容...';
+        }
+
         // 获取文章图标的函数
         function getArticleIcon(category) {
             const categoryIcons = {
@@ -1163,6 +1169,7 @@
             let html = '';
             for (const article of articles) {
                 const category = article.category || defaultCategory;
+                const preview = getArticlePreview(article);
                 const icon = getArticleIcon(category);
                 
                 html += `
@@ -1188,8 +1195,12 @@
                             </div>
                         </div>
                         
+                        <div class="article-preview article-preview-text">
+                            ${preview}
+                        </div>
+                        
                         <div class="article-actions">
-                            <a href="#" class="read-more-btn" onclick="event.stopPropagation(); toggleArticleContent('${article.filename}', '${typePrefix}');">
+                            <a href="#" class="read-more-btn" onclick="event.stopPropagation();">
                                 <span>阅读全文</span>
                                 <i class="fa fa-arrow-right"></i>
                             </a>
