@@ -767,59 +767,112 @@
             showPage(homePage); // 确保初始时canvas隐藏
         });
 
+        // 添加重试机制的fetch函数
+        async function fetchWithRetry(url, maxRetries = 3, delay = 1000) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    console.warn(`Fetch attempt ${i + 1} failed for ${url}:`, error);
+                    if (i === maxRetries - 1) {
+                        throw error;
+                    }
+                    // 等待后重试
+                    await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+                }
+            }
+        }
+
+        // 显示加载指示器
+        function showLoadingIndicator(container, message = '正在加载...') {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-16">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4"></div>
+                    <p class="text-gray-600">${message}</p>
+                </div>
+            `;
+        }
+
+        // 显示错误信息
+        function showErrorMessage(container, message = '加载失败，请刷新页面重试') {
+            container.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-16">
+                    <i class="fa fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+                    <p class="text-gray-600 mb-4">${message}</p>
+                    <button onclick="location.reload()" class="custom-button">
+                        <i class="fa fa-refresh mr-2"></i>刷新页面
+                    </button>
+                </div>
+            `;
+        }
+
+        // 改进的文章加载函数 - 移除setTimeout包装，添加重试机制
         async function loadArticles() {
             const listContainer = document.getElementById('dynamic-articles-list');
             if (!listContainer) return;
 
-            // 2. 将数据获取和渲染操作放入 setTimeout 回调
-            setTimeout(async () => {
-                try {
-                    const res = await fetch('articles/articles.json');
-                    const articles = await res.json();
-                    renderArticles(articles, listContainer, 'thinking', '思考与探索');
-                } catch (e) {
-                    listContainer.innerHTML = '<p>无法加载"思考与探索"文章列表。</p>';
-                    console.error("Error loading thinking articles:", e);
-                }
-            }, 0); // 0ms 延迟，推迟到下一个事件循环
+            // 显示加载指示器
+            showLoadingIndicator(listContainer, '正在加载思考与探索文章...');
+
+            try {
+                const res = await fetchWithRetry('articles/articles.json');
+                const articles = await res.json();
+                renderArticles(articles, listContainer, 'thinking', '思考与探索');
+            } catch (e) {
+                console.error("Error loading thinking articles:", e);
+                showErrorMessage(listContainer, '无法加载"思考与探索"文章列表，请检查网络连接后重试。');
+            }
         }
 
         async function loadWhatIDidArticles() {
             const listContainer = document.getElementById('dynamic-whatidid-articles-list');
             if (!listContainer) return;
+
+            showLoadingIndicator(listContainer, '正在加载干了啥系列文章...');
+
             try {
-                const res = await fetch('articles/whatidid-articles.json');
+                const res = await fetchWithRetry('articles/whatidid-articles.json');
                 const articles = await res.json();
                 renderArticles(articles, listContainer, 'whatidid', '干了啥');
             } catch (e) {
-                listContainer.innerHTML = '<p>无法加载"干了啥"系列文章。</p>';
                 console.error("Error loading whatidid articles:", e);
+                showErrorMessage(listContainer, '无法加载"干了啥"系列文章，请检查网络连接后重试。');
             }
         }
 
         async function loadTechArticles() {
             const listContainer = document.getElementById('dynamic-tech-articles-list');
             if (!listContainer) return;
+
+            showLoadingIndicator(listContainer, '正在加载科技与未来文章...');
+
             try {
-                const res = await fetch('articles/tech-articles.json');
+                const res = await fetchWithRetry('articles/tech-articles.json');
                 const articles = await res.json();
                 renderArticles(articles, listContainer, 'tech', '科技与未来');
             } catch (e) {
-                listContainer.innerHTML = '<p>无法加载"科技与未来"文章列表。</p>';
                 console.error("Error loading tech articles:", e);
+                showErrorMessage(listContainer, '无法加载"科技与未来"文章列表，请检查网络连接后重试。');
             }
         }
 
         async function loadArtCreativityArticles() {
             const listContainer = document.getElementById('dynamic-art-creativity-articles-list');
             if (!listContainer) return;
+
+            showLoadingIndicator(listContainer, '正在加载艺术与创意文章...');
+
             try {
-                const res = await fetch('articles/art-creativity-articles.json');
+                const res = await fetchWithRetry('articles/art-creativity-articles.json');
                 const articles = await res.json();
                 renderArticles(articles, listContainer, 'art-creativity', '艺术与创意');
             } catch (e) {
-                listContainer.innerHTML = '<p>无法加载"艺术与创意"文章列表。</p>';
                 console.error("Error loading art & creativity articles:", e);
+                showErrorMessage(listContainer, '无法加载"艺术与创意"文章列表，请检查网络连接后重试。');
             }
         }
 
@@ -850,24 +903,53 @@
                 `;
             }
             container.innerHTML = html;
+
+            // 激活slide-in动画
+            setTimeout(() => {
+                const slideElements = container.querySelectorAll('.slide-in');
+                slideElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('active');
+                    }, index * 100);
+                });
+            }, 100);
         }
 
+        // 改进的文章内容切换函数，添加重试机制
         window.toggleArticleContent = async function(filename, typePrefix) {
             const contentId = `content-${typePrefix}-${filename.replace(/[^a-zA-Z0-9]/g, '')}`;
             const contentDiv = document.getElementById(contentId);
             if (!contentDiv) return;
+            
             const articleCard = contentDiv.closest('.custom-card');
             const icon = articleCard ? articleCard.querySelector('.toggle-icon') : null;
 
             if (contentDiv.classList.contains('content-collapsed')) {
                 if (contentDiv.children.length === 0) {
+                    // 显示加载指示器
+                    contentDiv.innerHTML = `
+                        <div class="flex items-center justify-center py-8">
+                            <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3"></div>
+                            <span class="text-gray-600">正在加载文章内容...</span>
+                        </div>
+                    `;
+                    
                     try {
-                        const res = await fetch('articles/' + filename);
+                        const res = await fetchWithRetry('articles/' + filename);
                         const md = await res.text();
                         contentDiv.innerHTML = marked.parse(md);
                     } catch (e) {
-                        contentDiv.innerHTML = '<p>加载失败</p>';
                         console.error("Error fetching article content:", e);
+                        contentDiv.innerHTML = `
+                            <div class="flex flex-col items-center justify-center py-8">
+                                <i class="fa fa-exclamation-triangle text-2xl text-red-500 mb-3"></i>
+                                <p class="text-gray-600 mb-3">文章内容加载失败</p>
+                                <button onclick="toggleArticleContent('${filename}', '${typePrefix}')" class="text-sm bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition-colors">
+                                    <i class="fa fa-refresh mr-2"></i>重试
+                                </button>
+                            </div>
+                        `;
+                        return; // 加载失败时不展开
                     }
                 }
                 contentDiv.classList.remove('content-collapsed');
@@ -883,3 +965,4 @@
 </body>
 
 </html>
+
