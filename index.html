@@ -119,6 +119,188 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
+            /* 增强的文章卡片样式 */
+            .article-card {
+                position: relative;
+                background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+                border: 1px solid #e5e7eb;
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            }
+
+            .article-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+                border-color: #d1d5db;
+            }
+
+            .article-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #000000, #333333, #666666);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .article-card:hover::before {
+                opacity: 1;
+            }
+
+            .article-card-content {
+                position: relative;
+                padding: 2rem;
+                z-index: 2;
+            }
+
+            .article-title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+                color: #111827;
+                transition: color 0.3s ease;
+            }
+
+            .article-card:hover .article-title {
+                color: #000000;
+            }
+
+            .article-meta {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+                font-size: 0.875rem;
+                color: #6b7280;
+            }
+
+            .article-date {
+                display: flex;
+                align-items: center;
+                gap: 0.375rem;
+            }
+
+            .article-category {
+                display: flex;
+                align-items: center;
+                gap: 0.375rem;
+                padding: 0.25rem 0.75rem;
+                background-color: #f3f4f6;
+                border-radius: 20px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+
+            .article-card:hover .article-category {
+                background-color: #e5e7eb;
+                color: #374151;
+            }
+
+            .article-preview {
+                font-size: 0.95rem;
+                line-height: 1.6;
+                color: #6b7280;
+                margin-bottom: 1.5rem;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.3s ease;
+            }
+
+            .article-card:hover .article-preview {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .article-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .read-more-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: #374151;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            .article-card:hover .read-more-btn {
+                opacity: 1;
+                transform: translateX(0);
+                color: #000000;
+            }
+
+            .read-more-btn:hover {
+                gap: 0.75rem;
+            }
+
+            .article-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.125rem;
+                color: #6b7280;
+                transition: all 0.3s ease;
+                opacity: 0.7;
+            }
+
+            .article-card:hover .article-icon {
+                background: linear-gradient(135deg, #000000, #333333);
+                color: white;
+                opacity: 1;
+                transform: rotate(5deg) scale(1.1);
+            }
+
+            .toggle-icon-enhanced {
+                transition: all 0.3s ease;
+                color: #9ca3af;
+            }
+
+            .article-card:hover .toggle-icon-enhanced {
+                color: #374151;
+                transform: translateY(-2px);
+            }
+
+            .toggle-icon-enhanced.expanded {
+                transform: rotate(180deg) translateY(2px);
+            }
+
+            /* 装饰性元素 */
+            .article-decoration {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%);
+                opacity: 0;
+                transition: all 0.4s ease;
+                z-index: 1;
+            }
+
+            .article-card:hover .article-decoration {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+
             /* 昼夜模式样式 */
             .dark-mode {
                 background-color: #121212;
@@ -152,6 +334,69 @@
             .dark-mode .custom-card {
                 border-color: #333333;
                 background-color: #1e1e1e;
+            }
+
+            .dark-mode .article-card {
+                background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+                border-color: #374151;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .dark-mode .article-card:hover {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                border-color: #4b5563;
+            }
+
+            .dark-mode .article-card::before {
+                background: linear-gradient(90deg, #ffffff, #e5e7eb, #9ca3af);
+            }
+
+            .dark-mode .article-title {
+                color: #f9fafb;
+            }
+
+            .dark-mode .article-card:hover .article-title {
+                color: #ffffff;
+            }
+
+            .dark-mode .article-meta {
+                color: #9ca3af;
+            }
+
+            .dark-mode .article-category {
+                background-color: #374151;
+                color: #d1d5db;
+            }
+
+            .dark-mode .article-card:hover .article-category {
+                background-color: #4b5563;
+                color: #f3f4f6;
+            }
+
+            .dark-mode .article-preview {
+                color: #9ca3af;
+            }
+
+            .dark-mode .read-more-btn {
+                color: #d1d5db;
+            }
+
+            .dark-mode .article-card:hover .read-more-btn {
+                color: #ffffff;
+            }
+
+            .dark-mode .article-icon {
+                background: linear-gradient(135deg, #374151, #4b5563);
+                color: #9ca3af;
+            }
+
+            .dark-mode .article-card:hover .article-icon {
+                background: linear-gradient(135deg, #ffffff, #e5e7eb);
+                color: #1f2937;
+            }
+
+            .dark-mode .article-decoration {
+                background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.05) 100%);
             }
 
             .dark-mode .bg-gray-50 {
@@ -271,6 +516,15 @@
 
             .hide-canvas {
                 display: none !important;
+            }
+
+            /* 文章预览文本样式 */
+            .article-preview-text {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     </style>
@@ -504,7 +758,7 @@
                 </div>
 
                 <!-- 文章列表 -->
-                <div id="dynamic-tech-articles-list" class="w-full max-w-3xl space-y-8">
+                <div id="dynamic-tech-articles-list" class="w-full max-w-4xl space-y-6">
                     <!-- "科技与未来"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -567,7 +821,7 @@
                     </div>
                 </div>
                  <!-- 文章列表容器 (新添加) -->
-                <div id="dynamic-art-creativity-articles-list" class="w-full max-w-3xl space-y-8 mt-12">
+                <div id="dynamic-art-creativity-articles-list" class="w-full max-w-4xl space-y-6 mt-12">
                     <!-- "艺术与创意"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -714,7 +968,7 @@
                 </div>
 
                 <!-- 文章列表 -->
-                <div class="w-full max-w-3xl space-y-8">
+                <div class="w-full max-w-4xl space-y-6">
                     <div id="dynamic-articles-list"></div>
                     <!-- 可以添加更多文章 -->
                 </div>
@@ -748,7 +1002,7 @@
                 </div>
 
                 <!-- 文章容器 -->
-                <div id="dynamic-whatidid-articles-list" class="w-full max-w-3xl space-y-8">
+                <div id="dynamic-whatidid-articles-list" class="w-full max-w-4xl space-y-6">
                     <!-- "干了啥"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -876,6 +1130,36 @@
             }
         }
 
+        // 获取文章预览文本的函数
+        function getArticlePreview(article) {
+            // 如果文章有描述，使用描述
+            if (article.description) {
+                return article.description;
+            }
+            
+            // 否则根据分类生成默认预览
+            const categoryPreviews = {
+                '思考与探索': '探索生活中的深层思考，分享对世界的独特见解和哲学思辨...',
+                '科技与未来': '探讨前沿科技趋势，分析技术发展对社会的影响...',
+                '艺术与创意': '欣赏艺术之美，分享创作灵感和审美体验...',
+                '干了啥': '记录生活中的点点滴滴，分享个人经历和感悟...'
+            };
+            
+            return categoryPreviews[article.category] || '点击展开阅读完整内容...';
+        }
+
+        // 获取文章图标的函数
+        function getArticleIcon(category) {
+            const categoryIcons = {
+                '思考与探索': 'fa-lightbulb-o',
+                '科技与未来': 'fa-rocket',
+                '艺术与创意': 'fa-paint-brush',
+                '干了啥': 'fa-calendar-o'
+            };
+            
+            return categoryIcons[category] || 'fa-file-text-o';
+        }
+
         function renderArticles(articles, container, typePrefix, defaultCategory) {
             if (!articles || articles.length === 0) {
                 container.innerHTML = `<p class="text-gray-600 text-lg">此栏目暂无文章，敬请期待更多内容。</p>`;
@@ -885,20 +1169,45 @@
             let html = '';
             for (const article of articles) {
                 const category = article.category || defaultCategory;
+                const preview = getArticlePreview(article);
+                const icon = getArticleIcon(category);
+                
                 html += `
-                <div class="bg-white custom-card overflow-hidden slide-in hover-highlight" style="transition-delay: 0.1s">
-                    <div class="p-8 md:p-12 cursor-pointer flex flex-col md:flex-row md:items-center justify-between" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
-                        <div>
-                            <h3 class="text-2xl font-semibold">${article.title}</h3>
-                            <div class="flex items-center mt-4 text-sm text-gray-500">
-                                <span>${article.date}</span>
-                                <span class="mx-2">•</span>
-                                <span>${category}</span>
+                <div class="article-card slide-in" style="transition-delay: 0.1s" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
+                    <div class="article-decoration"></div>
+                    <div class="article-card-content">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex-1">
+                                <h3 class="article-title">${article.title}</h3>
+                                <div class="article-meta">
+                                    <div class="article-date">
+                                        <i class="fa fa-calendar-o"></i>
+                                        <span>${article.date}</span>
+                                    </div>
+                                    <div class="article-category">
+                                        <i class="fa ${icon}"></i>
+                                        <span>${category}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="article-icon">
+                                <i class="fa ${icon}"></i>
                             </div>
                         </div>
-                        <i class="fa fa-chevron-down toggle-icon mt-4 md:mt-0 text-gray-500"></i>
+                        
+                        <div class="article-preview article-preview-text">
+                            ${preview}
+                        </div>
+                        
+                        <div class="article-actions">
+                            <a href="#" class="read-more-btn" onclick="event.stopPropagation();">
+                                <span>阅读全文</span>
+                                <i class="fa fa-arrow-right"></i>
+                            </a>
+                            <i class="fa fa-chevron-down toggle-icon-enhanced"></i>
+                        </div>
                     </div>
-                    <div id="content-${typePrefix}-${article.filename.replace(/[^a-zA-Z0-9]/g, '')}" class="px-8 md:px-12 content-collapsed" style="margin-top:1rem;"></div>
+                    <div id="content-${typePrefix}-${article.filename.replace(/[^a-zA-Z0-9]/g, '')}" class="px-8 pb-8 content-collapsed"></div>
                 </div>
                 `;
             }
@@ -910,7 +1219,7 @@
                 slideElements.forEach((el, index) => {
                     setTimeout(() => {
                         el.classList.add('active');
-                    }, index * 100);
+                    }, index * 150);
                 });
             }, 100);
         }
@@ -921,8 +1230,8 @@
             const contentDiv = document.getElementById(contentId);
             if (!contentDiv) return;
             
-            const articleCard = contentDiv.closest('.custom-card');
-            const icon = articleCard ? articleCard.querySelector('.toggle-icon') : null;
+            const articleCard = contentDiv.closest('.article-card');
+            const icon = articleCard ? articleCard.querySelector('.toggle-icon-enhanced') : null;
 
             if (contentDiv.classList.contains('content-collapsed')) {
                 if (contentDiv.children.length === 0) {
@@ -937,7 +1246,7 @@
                     try {
                         const res = await fetchWithRetry('articles/' + filename);
                         const md = await res.text();
-                        contentDiv.innerHTML = marked.parse(md);
+                        contentDiv.innerHTML = `<div class="prose prose-gray max-w-none">${marked.parse(md)}</div>`;
                     } catch (e) {
                         console.error("Error fetching article content:", e);
                         contentDiv.innerHTML = `
