@@ -56,6 +56,65 @@ let isThinkingArticle2Expanded = false;
 // 主题设置
 let isDarkMode = false;
 
+// 添加加载状态管理
+const loadingStates = {
+    thinking: false,
+    whatidid: false,
+    tech: false,
+    artCreativity: false
+};
+
+// 添加缓存机制
+const articleCache = {
+    thinking: null,
+    whatidid: null,
+    tech: null,
+    artCreativity: null
+};
+
+// 添加重试机制的fetch函数
+async function fetchWithRetry(url, maxRetries = 3, delay = 1000) {
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response;
+        } catch (error) {
+            console.warn(`Fetch attempt ${i + 1} failed for ${url}:`, error);
+            if (i === maxRetries - 1) {
+                throw error;
+            }
+            // 等待后重试
+            await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+        }
+    }
+}
+
+// 显示加载指示器
+function showLoadingIndicator(container, message = '正在加载...') {
+    container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-16">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4"></div>
+            <p class="text-gray-600">${message}</p>
+        </div>
+    `;
+}
+
+// 显示错误信息
+function showErrorMessage(container, message = '加载失败，请刷新页面重试') {
+    container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-16">
+            <i class="fa fa-exclamation-triangle text-4xl text-red-500 mb-4"></i>
+            <p class="text-gray-600 mb-4">${message}</p>
+            <button onclick="location.reload()" class="custom-button">
+                <i class="fa fa-refresh mr-2"></i>刷新页面
+            </button>
+        </div>
+    `;
+}
+
 // 初始化主题
 function initTheme() {
     // 检查本地存储中的主题设置
@@ -108,8 +167,8 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-// 页面切换函数
-function showPage(page) {
+// 页面切换函数 - 改进版本
+async function showPage(page) {
     // 隐藏所有页面
     homePage.classList.add('opacity-0', 'pointer-events-none');
     articlesPage.classList.add('opacity-0', 'pointer-events-none');
@@ -138,6 +197,21 @@ function showPage(page) {
     // 滚动到顶部
     window.scrollTo(0, 0);
 
+    // 预加载文章内容 - 改进的加载策略
+    try {
+        if (page === thinkingArticlesPage) {
+            await loadArticlesWithCache('thinking', loadArticles);
+        } else if (page === whatIDidPage) {
+            await loadArticlesWithCache('whatidid', loadWhatIDidArticles);
+        } else if (page === techArticlesPage) {
+            await loadArticlesWithCache('tech', loadTechArticles);
+        } else if (page === artArticlesPage) {
+            await loadArticlesWithCache('artCreativity', loadArtCreativityArticles);
+        }
+    } catch (error) {
+        console.error('Error loading articles:', error);
+    }
+
     // 激活所有slide-in元素
     setTimeout(() => {
         const slideElements = page.querySelectorAll('.slide-in');
@@ -147,24 +221,26 @@ function showPage(page) {
             }, index * 100);
         });
     }, 300);
+}
 
-    // 根据页面类型加载对应的文章
-    if (page === thinkingArticlesPage) {
-        if (typeof loadArticles === 'function') {
-            loadArticles();
-        }
-    } else if (page === whatIDidPage) {
-        if (typeof loadWhatIDidArticles === 'function') {
-            loadWhatIDidArticles();
-        }
-    } else if (page === techArticlesPage) {
-        if (typeof loadTechArticles === 'function') {
-            loadTechArticles();
-        }
-    } else if (page === artArticlesPage) {
-        if (typeof loadArtCreativityArticles === 'function') {
-            loadArtCreativityArticles();
-        }
+// 带缓存的文章加载函数
+async function loadArticlesWithCache(cacheKey, loadFunction) {
+    // 如果正在加载，避免重复请求
+    if (loadingStates[cacheKey]) {
+        return;
+    }
+
+    // 如果已有缓存，直接使用
+    if (articleCache[cacheKey]) {
+        return;
+    }
+
+    loadingStates[cacheKey] = true;
+    try {
+        await loadFunction();
+        articleCache[cacheKey] = true; // 标记已加载
+    } finally {
+        loadingStates[cacheKey] = false;
     }
 }
 
@@ -365,3 +441,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } */
 }); 
+
