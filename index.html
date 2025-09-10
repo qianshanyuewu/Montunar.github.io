@@ -282,6 +282,49 @@
                 transform: rotate(180deg) translateY(2px);
             }
 
+            /* 置顶文章样式 */
+            .pinned-article {
+                border: 2px solid #4b5563;
+                box-shadow: 0 4px 12px rgba(75, 85, 99, 0.15);
+            }
+
+            .pinned-article::before {
+                background: linear-gradient(90deg, #4b5563, #374151);
+                opacity: 1;
+            }
+
+            .pinned-title {
+                color: #1f2937;
+                font-weight: 700;
+            }
+
+            .pinned-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.25rem;
+                background: linear-gradient(90deg, #4b5563, #374151);
+                color: white;
+                font-size: 0.75rem;
+                font-weight: 600;
+                padding: 0.25rem 0.75rem;
+                border-radius: 12px;
+                margin-left: 0.75rem;
+                box-shadow: 0 2px 4px rgba(75, 85, 99, 0.3);
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(75, 85, 99, 0.4);
+                }
+                70% {
+                    box-shadow: 0 0 0 6px rgba(75, 85, 99, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(75, 85, 99, 0);
+                }
+            }
+
             /* 装饰性元素 */
             .article-decoration {
                 position: absolute;
@@ -1185,19 +1228,30 @@
                 return;
             }
 
+            // 分离置顶文章和普通文章
+            const pinnedArticles = articles.filter(article => article.pinned);
+            const normalArticles = articles.filter(article => !article.pinned);
+            
+            // 将置顶文章放在前面
+            const sortedArticles = [...pinnedArticles, ...normalArticles];
+
             let html = '';
-            for (const article of articles) {
+            for (const article of sortedArticles) {
                 const category = article.category || defaultCategory;
                 const preview = getArticlePreview(article);
                 const icon = getArticleIcon(category);
+                const isPinned = article.pinned;
                 
                 html += `
-                <div class="article-card slide-in" style="transition-delay: 0.1s" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
+                <div class="article-card slide-in ${isPinned ? 'pinned-article' : ''}" style="transition-delay: 0.1s" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
                     <div class="article-decoration"></div>
                     <div class="article-card-content">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex-1">
-                                <h3 class="article-title">${article.title}</h3>
+                                <div class="flex items-center mb-2">
+                                    <h3 class="article-title ${isPinned ? 'pinned-title' : ''}">${article.title}</h3>
+                                    ${isPinned ? '<span class="pinned-badge"><i class="fa fa-thumb-tack"></i> 置顶</span>' : ''}
+                                </div>
                                 <div class="article-meta">
                                     <div class="article-date">
                                         <i class="fa fa-calendar-o"></i>
