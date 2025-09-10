@@ -61,7 +61,8 @@ const loadingStates = {
     thinking: false,
     whatidid: false,
     tech: false,
-    artCreativity: false
+    artCreativity: false,
+    kaoyan100: false
 };
 
 // 添加缓存机制
@@ -69,7 +70,8 @@ const articleCache = {
     thinking: null,
     whatidid: null,
     tech: null,
-    artCreativity: null
+    artCreativity: null,
+    kaoyan100: null
 };
 
 // 添加重试机制的fetch函数
@@ -88,6 +90,63 @@ async function fetchWithRetry(url, maxRetries = 3, delay = 1000) {
             }
             // 等待后重试
             await new Promise(resolve => setTimeout(resolve, delay * Math.pow(2, i)));
+        }
+    }
+}
+
+// 考研100天记录文章加载函数
+async function loadKaoYan100Articles() {
+    const listContainer = document.getElementById('dynamic-kaoyan100-articles-list');
+    if (!listContainer) return;
+
+    showLoadingIndicator(listContainer, '正在加载考研100天记录...');
+
+    try {
+        const res = await fetchWithRetry('articles/kaoyan100-articles.json');
+        const articles = await res.json();
+        renderArticles(articles, listContainer, 'kaoyan100', '考研100天记录');
+    } catch (e) {
+        console.error("Error loading kaoyan100 articles:", e);
+        showErrorMessage(listContainer, '无法加载"考研100天记录"文章列表，请检查网络连接后重试。');
+    }
+}
+
+// 干了啥栏目分类筛选功能
+window.filterWhatIDidCategory = function(category) {
+    const allBtn = document.getElementById('btn-all-whatidid');
+    const kaoyanBtn = document.getElementById('btn-kaoyan100');
+    const allArticlesContainer = document.getElementById('dynamic-whatidid-articles-list');
+    const kaoyanArticlesContainer = document.getElementById('dynamic-kaoyan100-articles-list');
+
+    // 更新按钮状态
+    if (category === 'all') {
+        allBtn.classList.add('active', 'bg-black', 'text-white');
+        allBtn.classList.remove('bg-gray-200', 'text-gray-700');
+        kaoyanBtn.classList.remove('active', 'bg-black', 'text-white');
+        kaoyanBtn.classList.add('bg-gray-200', 'text-gray-700');
+        
+        // 显示全部文章，隐藏考研文章
+        allArticlesContainer.classList.remove('hidden');
+        kaoyanArticlesContainer.classList.add('hidden');
+        
+        // 加载全部文章（如果未加载）
+        if (!articleCache.whatidid) {
+            loadWhatIDidArticles();
+        }
+    } else if (category === 'kaoyan100') {
+        kaoyanBtn.classList.add('active', 'bg-black', 'text-white');
+        kaoyanBtn.classList.remove('bg-gray-200', 'text-gray-700');
+        allBtn.classList.remove('active', 'bg-black', 'text-white');
+        allBtn.classList.add('bg-gray-200', 'text-gray-700');
+        
+        // 显示考研文章，隐藏全部文章
+        allArticlesContainer.classList.add('hidden');
+        kaoyanArticlesContainer.classList.remove('hidden');
+        
+        // 加载考研文章（如果未加载）
+        if (!articleCache.kaoyan100) {
+            loadKaoYan100Articles();
+            articleCache.kaoyan100 = true;
         }
     }
 }
@@ -441,4 +500,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } */
 }); 
+
+
+// 考研100天记录文章加载函数
+async function loadKaoYan100Articles() {
+    const listContainer = document.getElementById('dynamic-kaoyan100-articles-list');
+    if (!listContainer) return;
+
+    showLoadingIndicator(listContainer, '正在加载考研100天记录...');
+
+    try {
+        const res = await fetchWithRetry('articles/kaoyan100-articles.json');
+        const articles = await res.json();
+        renderArticles(articles, listContainer, 'kaoyan100', '考研100天记录');
+    } catch (e) {
+        console.error("Error loading kaoyan100 articles:", e);
+        showErrorMessage(listContainer, '无法加载"考研100天记录"文章列表，请检查网络连接后重试。');
+    }
+}
+
+// 干了啥栏目分类筛选功能
+window.filterWhatIDidCategory = function(category) {
+    const allBtn = document.getElementById('btn-all-whatidid');
+    const kaoyanBtn = document.getElementById('btn-kaoyan100');
+    const allArticlesContainer = document.getElementById('dynamic-whatidid-articles-list');
+    const kaoyanArticlesContainer = document.getElementById('dynamic-kaoyan100-articles-list');
+
+    // 更新按钮状态
+    if (category === 'all') {
+        allBtn.classList.add('active', 'bg-black', 'text-white');
+        allBtn.classList.remove('bg-gray-200', 'text-gray-700');
+        kaoyanBtn.classList.remove('active', 'bg-black', 'text-white');
+        kaoyanBtn.classList.add('bg-gray-200', 'text-gray-700');
+        
+        // 显示全部文章，隐藏考研文章
+        allArticlesContainer.classList.remove('hidden');
+        kaoyanArticlesContainer.classList.add('hidden');
+        
+        // 加载全部文章（如果未加载）
+        if (!articleCache.whatidid) {
+            loadWhatIDidArticles();
+        }
+    } else if (category === 'kaoyan100') {
+        kaoyanBtn.classList.add('active', 'bg-black', 'text-white');
+        kaoyanBtn.classList.remove('bg-gray-200', 'text-gray-700');
+        allBtn.classList.remove('active', 'bg-black', 'text-white');
+        allBtn.classList.add('bg-gray-200', 'text-gray-700');
+        
+        // 显示考研文章，隐藏全部文章
+        allArticlesContainer.classList.add('hidden');
+        kaoyanArticlesContainer.classList.remove('hidden');
+        
+        // 加载考研文章（如果未加载）
+        if (!articleCache.kaoyan100) {
+            loadKaoYan100Articles();
+            articleCache.kaoyan100 = true;
+        }
+    }
+}
 
