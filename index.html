@@ -990,20 +990,37 @@
             </header>
 
             <!-- 主内容区 -->
-            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+            <div class="flex-grow flex flex-col items-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
-                <div class="w-full text-center mb-16 slide-in">
+                <div class="w-full text-center mb-8 slide-in">
                     <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
                         干了啥系列
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        这里是我干了什么的记录。
+                        这里是我干了什么的记录，包含日常更新和专项记录。
                     </p>
+                </div>
+
+                <!-- 子栏目导航 -->
+                <div class="w-full max-w-4xl mb-8">
+                    <div class="flex flex-wrap justify-center gap-4 mb-8">
+                        <button id="btn-all-whatidid" class="px-6 py-3 bg-black text-white rounded-lg transition-colors duration-300 hover:bg-gray-800 active" onclick="filterWhatIDidCategory('all')">
+                            全部记录
+                        </button>
+                        <button id="btn-kaoyan100" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300 hover:bg-gray-300" onclick="filterWhatIDidCategory('kaoyan100')">
+                            考研100天记录
+                        </button>
+                    </div>
                 </div>
 
                 <!-- 文章容器 -->
                 <div id="dynamic-whatidid-articles-list" class="w-full max-w-4xl space-y-6">
                     <!-- "干了啥"系列的文章将动态加载到这里 -->
+                </div>
+                
+                <!-- 考研100天记录文章容器 -->
+                <div id="dynamic-kaoyan100-articles-list" class="w-full max-w-4xl space-y-6 hidden">
+                    <!-- "考研100天记录"系列的文章将动态加载到这里 -->
                 </div>
             </div>
 
@@ -1142,7 +1159,8 @@
                 '思考与探索': '探索生活中的深层思考，分享对世界的独特见解和哲学思辨...',
                 '科技与未来': '探讨前沿科技趋势，分析技术发展对社会的影响...',
                 '艺术与创意': '欣赏艺术之美，分享创作灵感和审美体验...',
-                '干了啥': '记录生活中的点点滴滴，分享个人经历和感悟...'
+                '干了啥': '记录生活中的点点滴滴，分享个人经历和感悟...',
+                '考研100天记录': '记录考研冲刺阶段的每一天，分享备考心得和学习感悟...'
             };
             
             return categoryPreviews[article.category] || '点击展开阅读完整内容...';
@@ -1154,7 +1172,8 @@
                 '思考与探索': 'fa-lightbulb-o',
                 '科技与未来': 'fa-rocket',
                 '艺术与创意': 'fa-paint-brush',
-                '干了啥': 'fa-calendar-o'
+                '干了啥': 'fa-calendar-o',
+                '考研100天记录': 'fa-graduation-cap'
             };
             
             return categoryIcons[category] || 'fa-file-text-o';
