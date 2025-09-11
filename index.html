@@ -1076,6 +1076,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/background-animation.js"></script>
+    <script src="js/article-features.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             showPage(homePage); // 确保初始时canvas隐藏
@@ -1273,7 +1274,7 @@
                         </div>
                         
                         <div class="article-actions">
-                            <a href="#" class="read-more-btn" onclick="event.stopPropagation();">
+                            <a href="#" class="read-more-btn" onclick="event.preventDefault(); event.stopPropagation();">
                                 <span>阅读全文</span>
                                 <i class="fa fa-arrow-right"></i>
                             </a>
