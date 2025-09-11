@@ -56,12 +56,35 @@ function initReadingProgressIndicator() {
 // 更新阅读进度
 function updateReadingProgress() {
     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
+    
+    // 获取实际内容高度，考虑当前展开的文章
+    let actualContentHeight = document.documentElement.scrollHeight;
+    const expandedArticles = document.querySelectorAll('.content-expanded');
+    
+    // 如果有展开的文章，计算实际内容高度
+    if (expandedArticles.length > 0) {
+        // 获取最后一个展开的文章的底部位置
+        let lastArticleBottom = 0;
+        expandedArticles.forEach(article => {
+            const articleBottom = article.offsetTop + article.offsetHeight;
+            if (articleBottom > lastArticleBottom) {
+                lastArticleBottom = articleBottom;
+            }
+        });
+        
+        // 使用实际内容底部位置或视口高度中较大的值
+        actualContentHeight = Math.max(lastArticleBottom, document.documentElement.clientHeight);
+    }
+    
+    const height = actualContentHeight - document.documentElement.clientHeight;
+    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+    
+    // 限制最大进度为100%
+    const finalScrolled = Math.min(scrolled, 100);
     
     const progressIndicator = document.querySelector('.reading-progress-indicator');
     if (progressIndicator) {
-        progressIndicator.style.width = scrolled + '%';
+        progressIndicator.style.width = finalScrolled + '%';
     }
 }
 
