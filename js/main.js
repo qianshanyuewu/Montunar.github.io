@@ -226,21 +226,26 @@ themeToggle.addEventListener('click', () => {
     }
 });
 
-// 页面切换函数 - 改进版本
+// 页面切换函数 - 改进版本，增加平滑过渡效果
 async function showPage(page) {
-    // 隐藏所有页面
-    homePage.classList.add('opacity-0', 'pointer-events-none');
-    articlesPage.classList.add('opacity-0', 'pointer-events-none');
-    talkingPage.classList.add('opacity-0', 'pointer-events-none');
-    whatIDidPage.classList.add('opacity-0', 'pointer-events-none');
-    thinkingArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-    techArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-    artArticlesPage.classList.add('opacity-0', 'pointer-events-none');
-    lightShadowPage.classList.add('opacity-0', 'pointer-events-none');
-    artAppreciationPage.classList.add('opacity-0', 'pointer-events-none');
+    // 获取所有页面元素
+    const allPages = [homePage, articlesPage, talkingPage, whatIDidPage, 
+                      thinkingArticlesPage, techArticlesPage, artArticlesPage, 
+                      lightShadowPage, artAppreciationPage];
+    
+    // 隐藏所有页面，使用平滑过渡
+    allPages.forEach(p => {
+        if (p && p !== page) {
+            p.classList.remove('page-visible');
+            p.classList.add('page-hidden');
+        }
+    });
 
-    // 显示指定页面
-    page.classList.remove('opacity-0', 'pointer-events-none');
+    // 显示指定页面，使用平滑过渡
+    setTimeout(() => {
+        page.classList.remove('page-hidden');
+        page.classList.add('page-visible');
+    }, 50);
 
     // 控制canvas显示/隐藏
     const canvas = document.getElementById('canvas');
@@ -253,8 +258,19 @@ async function showPage(page) {
         }
     }
 
-    // 滚动到顶部
-    window.scrollTo(0, 0);
+    // 控制齿轮按钮显示/隐藏
+    const multiFunctionContainer = document.querySelector('.multi-function-container');
+    if (page === homePage) {
+        multiFunctionContainer.style.display = 'none';
+    } else {
+        multiFunctionContainer.style.display = 'flex';
+    }
+
+    // 平滑滚动到顶部
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 
     // 预加载文章内容 - 改进的加载策略
     try {
@@ -271,15 +287,15 @@ async function showPage(page) {
         console.error('Error loading articles:', error);
     }
 
-    // 激活所有slide-in元素
+    // 激活所有slide-in元素，使用更流畅的动画
     setTimeout(() => {
         const slideElements = page.querySelectorAll('.slide-in');
         slideElements.forEach((el, index) => {
             setTimeout(() => {
                 el.classList.add('active');
-            }, index * 100);
+            }, index * 80); // 减少延迟时间，使动画更流畅
         });
-    }, 300);
+    }, 200); // 减少初始延迟
 }
 
 // 带缓存的文章加载函数
@@ -322,6 +338,17 @@ const musicIcon = document.getElementById('music-icon');
 const backgroundMusic = document.getElementById('background-music');
 let isMusicPlaying = false;
 
+// 集成功能按钮控制
+const multiFunctionToggle = document.getElementById('multi-function-toggle');
+const multiFunctionIcon = document.getElementById('multi-function-icon');
+const multiFunctionContainer = document.querySelector('.multi-function-container');
+let isMultiFunctionActive = false;
+
+// 动画切换控制
+const animationToggle = document.getElementById('animation-toggle');
+const animationIcon = document.getElementById('animation-icon');
+let animationMode = 'fade'; // 默认淡入淡出模式，可选值：'fade', 'slideUp'
+
 // 初始化音乐（默认静音）
 function initMusic() {
     if (backgroundMusic) {
@@ -350,6 +377,157 @@ function toggleMusic() {
     }
 }
 
+// 集成功能按钮切换
+function toggleMultiFunction() {
+    isMultiFunctionActive = !isMultiFunctionActive;
+    
+    if (isMultiFunctionActive) {
+        multiFunctionContainer.classList.add('active');
+    } else {
+        multiFunctionContainer.classList.remove('active');
+    }
+    
+    // 旋转图标
+    if (multiFunctionIcon) {
+        multiFunctionIcon.style.transform = isMultiFunctionActive ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+}
+
+// 字体调整功能
+function toggleFontControls() {
+    const fontControls = document.querySelector('.font-size-options');
+    if (fontControls) {
+        fontControls.classList.toggle('visible');
+    }
+}
+
+// 调整字体大小
+function adjustFontSize(change) {
+    // 获取当前字体大小或默认值
+    let currentFontSize = parseInt(localStorage.getItem('articleFontSize')) || 100;
+    
+    // 如果是重置，直接设置为100%
+    if (change === 0) {
+        currentFontSize = 100;
+    } else {
+        // 否则根据变化量调整
+        currentFontSize += change;
+        // 限制字体大小范围
+        currentFontSize = Math.max(80, Math.min(150, currentFontSize));
+    }
+    
+    // 保存到本地存储
+    localStorage.setItem('articleFontSize', currentFontSize);
+    
+    // 应用字体大小到所有展开的文章
+    const expandedContents = document.querySelectorAll('.content-expanded .prose');
+    expandedContents.forEach(content => {
+        content.style.fontSize = currentFontSize + '%';
+    });
+    
+    // 如果没有展开的文章，显示提示信息
+    if (expandedContents.length === 0) {
+        showFontAdjustmentTip();
+    }
+}
+
+// 显示字体调整提示信息
+function showFontAdjustmentTip() {
+    // 创建提示元素
+    const tipElement = document.createElement('div');
+    tipElement.className = 'font-adjustment-tip';
+    tipElement.textContent = '请先展开一篇文章以调整字体大小';
+    
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .font-adjustment-tip {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .font-adjustment-tip.show {
+            opacity: 1;
+        }
+        
+        .dark-mode .font-adjustment-tip {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // 添加到页面
+    document.body.appendChild(tipElement);
+    
+    // 显示提示
+    setTimeout(() => {
+        tipElement.classList.add('show');
+    }, 10);
+    
+    // 3秒后隐藏并移除提示
+    setTimeout(() => {
+        tipElement.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(tipElement);
+            document.head.removeChild(style);
+        }, 300);
+    }, 3000);
+}
+
+// 动画切换功能
+function toggleAnimation() {
+    // 切换动画模式
+    if (animationMode === 'fade') {
+        animationMode = 'slideUp';
+        animationIcon.classList.remove('fa-magic');
+        animationIcon.classList.add('fa-arrow-up');
+    } else {
+        animationMode = 'fade';
+        animationIcon.classList.remove('fa-arrow-up');
+        animationIcon.classList.add('fa-magic');
+    }
+    
+    // 应用动画模式
+    applyAnimationMode();
+    
+    // 保存动画设置到本地存储
+    localStorage.setItem('animationMode', animationMode);
+}
+
+// 应用动画模式
+function applyAnimationMode() {
+    // 移除所有动画模式类
+    document.body.classList.remove('animation-mode-fade', 'animation-mode-slideUp');
+    
+    // 添加当前动画模式类
+    document.body.classList.add(`animation-mode-${animationMode}`);
+    
+    // 重新激活所有slide-in元素以应用新的动画效果
+    const slideElements = document.querySelectorAll('.slide-in');
+    slideElements.forEach(el => {
+        el.classList.remove('active');
+    });
+    
+    setTimeout(() => {
+        slideElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.classList.add('active');
+            }, index * 80);
+        });
+    }, 100);
+}
+
 // 事件监听
 document.addEventListener('DOMContentLoaded', () => {
     // 初始化主题
@@ -357,6 +535,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 初始化音乐
     initMusic();
+    
+    // 初始化动画设置
+    const savedAnimationMode = localStorage.getItem('animationMode');
+    if (savedAnimationMode) {
+        animationMode = savedAnimationMode;
+        if (animationMode === 'slideUp') {
+            animationIcon.classList.remove('fa-magic');
+            animationIcon.classList.add('fa-arrow-up');
+        }
+    }
+    // 应用初始动画模式
+    applyAnimationMode();
 
     // 初始化首页标题动画
     animateHomeTitle();
@@ -367,9 +557,52 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.remove('active');
     });
     
+    // 初始隐藏齿轮按钮（首页不显示）
+    const multiFunctionContainer = document.querySelector('.multi-function-container');
+    multiFunctionContainer.style.display = 'none';
+    
     // 音乐按钮点击事件
     if (musicToggle) {
         musicToggle.addEventListener('click', toggleMusic);
+    }
+    
+    // 集成功能按钮点击事件
+    if (multiFunctionToggle) {
+        multiFunctionToggle.addEventListener('click', toggleMultiFunction);
+    }
+
+    // 动画切换按钮点击事件
+    if (animationToggle) {
+        animationToggle.addEventListener('click', toggleAnimation);
+    }
+
+    // 字体调整按钮点击事件
+    const fontToggle = document.getElementById('font-toggle');
+    if (fontToggle) {
+        fontToggle.addEventListener('click', toggleFontControls);
+    }
+
+    // 字体大小调整按钮点击事件
+    const fontDecrease = document.getElementById('font-decrease');
+    const fontReset = document.getElementById('font-reset');
+    const fontIncrease = document.getElementById('font-increase');
+    
+    if (fontDecrease) {
+        fontDecrease.addEventListener('click', function() {
+            adjustFontSize(-10);
+        });
+    }
+    
+    if (fontReset) {
+        fontReset.addEventListener('click', function() {
+            adjustFontSize(0); // 0表示重置
+        });
+    }
+    
+    if (fontIncrease) {
+        fontIncrease.addEventListener('click', function() {
+            adjustFontSize(10);
+        });
     }
 
     // 主页标题点击事件
@@ -460,10 +693,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 thinkingArticleContent.classList.remove('content-collapsed');
                 thinkingArticleContent.classList.add('content-expanded');
                 thinkingToggleIcon.classList.add('expanded');
+                
+                // 应用保存的字体大小
+                const savedFontSize = localStorage.getItem('articleFontSize');
+                if (savedFontSize) {
+                    thinkingArticleContent.style.fontSize = savedFontSize + '%';
+                }
             } else {
                 thinkingArticleContent.classList.remove('content-expanded');
                 thinkingArticleContent.classList.add('content-collapsed');
                 thinkingToggleIcon.classList.remove('expanded');
+                
+                // 折叠文章时滚动到文章标题位置
+                const titlePosition = thinkingArticleHeader.getBoundingClientRect().top + window.pageYOffset;
+                const offset = 20; // 20px的偏移量
+                
+                // 平滑滚动到标题位置
+                window.scrollTo({
+                    top: titlePosition - offset,
+                    behavior: 'smooth'
+                });
             }
         });
     }
@@ -476,10 +725,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 thinkingArticleContent2.classList.remove('content-collapsed');
                 thinkingArticleContent2.classList.add('content-expanded');
                 thinkingToggleIcon2.classList.add('expanded');
+                
+                // 应用保存的字体大小
+                const savedFontSize = localStorage.getItem('articleFontSize');
+                if (savedFontSize) {
+                    thinkingArticleContent2.style.fontSize = savedFontSize + '%';
+                }
             } else {
                 thinkingArticleContent2.classList.remove('content-expanded');
                 thinkingArticleContent2.classList.add('content-collapsed');
                 thinkingToggleIcon2.classList.remove('expanded');
+                
+                // 折叠文章时滚动到文章标题位置
+                const titlePosition = thinkingArticleHeader2.getBoundingClientRect().top + window.pageYOffset;
+                const offset = 20; // 20px的偏移量
+                
+                // 平滑滚动到标题位置
+                window.scrollTo({
+                    top: titlePosition - offset,
+                    behavior: 'smooth'
+                });
             }
         });
     }
