@@ -110,6 +110,36 @@ function Draw() {
   }
 }
 
+// 优化性能：减少重绘次数
+let lastTime = 0;
+const fps = 30; // 限制帧率为30fps
+const interval = 1000 / fps;
+
+function OptimizedDraw(timestamp) {
+  requestId = window.requestAnimationFrame(OptimizedDraw);
+  
+  // 限制帧率
+  if (timestamp - lastTime < interval) {
+    return;
+  }
+  lastTime = timestamp;
+  
+  ctx.clearRect(0, 0, cw, ch);
+
+  for (var i = 0; i < linesRy.length; i++) {
+    var l = linesRy[i];
+    l.draw();
+    l.update();
+  }
+  for (var i = 0; i < linesRy.length; i++) {
+    var l = linesRy[i];
+    for (var j = i + 1; j < linesRy.length; j++) {
+      var l1 = linesRy[j]
+      Intersect2lines(l, l1);
+    }
+  }
+}
+
 function Init() {
   linesRy.length = 0;
   for (var i = 0; i < linesNum; i++) {
@@ -138,7 +168,8 @@ function Init() {
     window.setAnimationTheme(false);
   }
 
-  Draw();
+  // 使用优化的绘制函数
+  OptimizedDraw(0);
 };
 
 // Expose Init to global scope
@@ -177,4 +208,4 @@ function markPoint(p) {
 
 function randomIntFromInterval(mn, mx) {
   return ~~(Math.random() * (mx - mn + 1) + mn);
-} 
+}
