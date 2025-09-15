@@ -3,6 +3,7 @@ const homePage = document.getElementById('home-page');
 const articlesPage = document.getElementById('articles-page');
 const talkingPage = document.getElementById('talking-page');
 const whatIDidPage = document.getElementById('what-i-did-page');
+const aboutPage = document.getElementById('about-page');
 const thinkingArticlesPage = document.getElementById('thinking-articles-page');
 const techArticlesPage = document.getElementById('tech-articles-page');
 const artArticlesPage = document.getElementById('art-articles-page');
@@ -12,8 +13,10 @@ const homeTitle = document.getElementById('home-title');
 const backButton = document.getElementById('back-button');
 const talkingLink = document.getElementById('talking-link');
 const whatIDidLink = document.getElementById('what-i-did-link');
+const aboutLink = document.getElementById('about-link');
 const backToArticles = document.getElementById('back-to-articles');
 const backToArticlesFromWhatIDid = document.getElementById('back-to-articles-from-what-i-did');
+const backToArticlesFromAbout = document.getElementById('back-to-articles-from-about');
 const backToTalking = document.getElementById('back-to-talking');
 const backToTalkingFromTech = document.getElementById('back-to-talking-from-tech');
 const backToTalkingFromArt = document.getElementById('back-to-talking-from-art');
@@ -229,7 +232,7 @@ themeToggle.addEventListener('click', () => {
 // 页面切换函数 - 改进版本，增加平滑过渡效果
 async function showPage(page) {
     // 获取所有页面元素
-    const allPages = [homePage, articlesPage, talkingPage, whatIDidPage, 
+    const allPages = [homePage, articlesPage, talkingPage, whatIDidPage, aboutPage, 
                       thinkingArticlesPage, techArticlesPage, artArticlesPage, 
                       lightShadowPage, artAppreciationPage];
     
@@ -625,6 +628,11 @@ document.addEventListener('DOMContentLoaded', () => {
         showPage(whatIDidPage);
     });
 
+    // 关于链接点击事件
+    aboutLink.addEventListener('click', () => {
+        showPage(aboutPage);
+    });
+
     // 返回文章页面按钮点击事件
     backToArticles.addEventListener('click', () => {
         showPage(articlesPage);
@@ -632,6 +640,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 从干了啥返回文章页面按钮点击事件
     backToArticlesFromWhatIDid.addEventListener('click', () => {
+        showPage(articlesPage);
+    });
+
+    // 从关于返回文章页面按钮点击事件
+    backToArticlesFromAbout.addEventListener('click', () => {
         showPage(articlesPage);
     });
 
