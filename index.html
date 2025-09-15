@@ -891,6 +891,7 @@
                 <div class="flex space-x-4">
                     <a href="#" id="talking-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover interactive-element">慢慢谈说</a>
                     <a href="#" id="what-i-did-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover interactive-element">干了啥</a>
+                    <a href="#" id="about-link" class="text-xl font-light hover:text-secondary transition-colors duration-300 link-hover interactive-element">关于</a>
                 </div>
             </header>
 
@@ -899,12 +900,9 @@
                 <!-- 中央内容 -->
                 <div class="w-full text-center py-16">
                     <h3 class="text-[clamp(1.5rem,4vw,3rem)] font-playfair mb-8">
-                        等待被书写的故事
+                        千里之行，始于足下
                     </h3>
                     <div class="w-24 h-px bg-primary mx-auto mb-12"></div>
-                    <p class="text-lg max-w-2xl mx-auto text-gray-600">
-                        空白的页面，等待思想的流淌。这里将是未来思考的记录，灵感的栖息地。
-                    </p>
                 </div>
             </div>
 
@@ -928,11 +926,8 @@
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
                     <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
-                        在这里，我们慢慢谈说
+                        碎碎念
                     </h2>
-                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        分享生活中的点点滴滴，探讨有趣的话题，让我们的思想在这里碰撞出火花。
-                    </p>
                 </div>
 
                 <!-- 主题卡片 -->
@@ -944,7 +939,6 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-3">思考与探索</h3>
                         <p class="text-gray-600 mb-4">
-                            探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
                         </p>
                         <a href="#" id="thinking-articles-link" class="custom-button inline-flex items-center scale-subtle">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
@@ -958,7 +952,6 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-3">科技与未来</h3>
                         <p class="text-gray-600 mb-4">
-                            探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
                         </p>
                         <a href="#" id="tech-articles-link" class="custom-button inline-flex items-center scale-subtle">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
@@ -972,16 +965,40 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-3">艺术与创意</h3>
                         <p class="text-gray-600 mb-4">
-                            欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
                         </p>
                         <a href="#" id="art-articles-link" class="custom-button inline-flex items-center scale-subtle">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
+            </div>
+
+            <!-- 页脚 -->
+            <footer class="w-full py-8 mt-12 text-center text-sm text-gray-500 border-t border-gray-200">
+            </footer>
+        </section>
+
+        <!-- 关于页面 -->
+        <section id="about-page" class="min-h-screen flex flex-col px-4 transition-smooth-slow opacity-0 pointer-events-none absolute top-0 left-0 w-full page-transition page-hidden">
+            <!-- 导航栏 -->
+            <header class="w-full py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-200">
+                <a href="#" id="back-to-articles-from-about" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover interactive-element">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回
+                </a>
+                <div class="text-xl font-light">关于</div>
+            </header>
+
+            <!-- 主内容区 -->
+            <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
+                <!-- 页面标题 -->
+                <div class="w-full text-center mb-16 slide-in">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                        关于
+                    </h2>
+                </div>
 
                 <!-- 关于作者 -->
-                <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in hover-highlight" style="transition-delay: 0.4s">
+                <div class="w-full max-w-3xl bg-gray-50 rounded-lg p-8 md:p-12 slide-in hover-highlight" style="transition-delay: 0.1s">
                     <div class="flex flex-col md:flex-row items-center gap-8">
                         <div class="w-32 h-32 rounded-full overflow-hidden flex-shrink-0">
                             <img src="https://picsum.photos/200/200?random=20" alt="作者头像" class="w-full h-full object-cover img-grayscale">
@@ -1033,7 +1050,6 @@
                         科技与未来
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        探讨前沿科技趋势，人工智能发展，以及它们将如何改变我们的未来。
                     </p>
                 </div>
 
@@ -1066,7 +1082,6 @@
                         艺术与创意
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        欣赏艺术作品，分享创作灵感，探讨不同艺术形式背后的故事。
                     </p>
                 </div>
 
@@ -1077,29 +1092,13 @@
                         <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
                             <img src="https://picsum.photos/600/400?random=10" alt="光影一刻" class="w-full h-full object-cover img-grayscale">
                         </div>
-                        <h3 class="text-xl font-semibold mb-3">光影一刻</h3>
+                        <h3 class="text-xl font-semibold mb-3">光影一刻（摄影）</h3>
                         <p class="text-gray-600 mb-4">
-                            捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
                         </p>
                         <a href="#" id="light-shadow-link" class="custom-button inline-flex items-center scale-subtle">
                             阅读更多 <i class="fa fa-arrow-right ml-2"></i>
                         </a>
                     </div>
-
-                    <!-- 卡片2：美术鉴赏 -->
-                    <div class="bg-white custom-card p-6 slide-in card-hover card-enhanced" style="transition-delay: 0.2s">
-                        <div class="h-48 bg-gray-100 rounded-lg mb-6 overflow-hidden">
-                            <img src="https://picsum.photos/600/400?random=11" alt="美术鉴赏" class="w-full h-full object-cover img-grayscale">
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">美术鉴赏</h3>
-                        <p class="text-gray-600 mb-4">
-                            欣赏各类美术作品，了解艺术流派与历史，感受艺术的魅力与内涵。
-                        </p>
-                        <a href="#" id="art-appreciation-link" class="custom-button inline-flex items-center scale-subtle">
-                            阅读更多 <i class="fa fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
                  <!-- 文章列表容器 (新添加) -->
                 <div id="dynamic-art-creativity-articles-list" class="w-full max-w-4xl space-y-4 mt-12">
                     <!-- "艺术与创意"系列的文章将动态加载到这里 -->
@@ -1118,7 +1117,7 @@
                 <a href="#" id="back-to-art-from-light" class="text-xl font-medium hover:text-secondary transition-colors duration-300 flex items-center link-hover">
                     <i class="fa fa-arrow-left mr-2"></i> 返回
                 </a>
-                <div class="text-xl font-light">光影一刻</div>
+                <div class="text-xl font-light">光影一刻（摄影）</div>
             </header>
 
             <!-- 主内容区 -->
@@ -1126,10 +1125,9 @@
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
                     <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
-                        光影一刻
+                        光影一刻（摄影）
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        捕捉光与影的瞬间，记录美丽的画面，分享摄影的艺术与技巧。
                     </p>
                 </div>
 
@@ -1243,7 +1241,6 @@
                         思考与探索
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                        探索生活中的哲学问题，思考人生的意义与价值，分享你的独特见解。
                     </p>
                 </div>
 
@@ -1285,7 +1282,7 @@
                 <div class="w-full max-w-4xl mb-8">
                     <div class="flex flex-wrap justify-center gap-4 mb-8">
                         <button id="btn-all-whatidid" class="px-6 py-3 bg-black text-white rounded-lg transition-colors duration-300 hover:bg-gray-800 active scale-subtle" onclick="filterWhatIDidCategory('all')">
-                            全部记录
+                            更新记录
                         </button>
                         <button id="btn-kaoyan100" class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg transition-colors duration-300 hover:bg-gray-300 scale-subtle" onclick="filterWhatIDidCategory('kaoyan100')">
                             考研100天记录
@@ -1462,7 +1459,7 @@
 
         function renderArticles(articles, container, typePrefix, defaultCategory) {
             if (!articles || articles.length === 0) {
-                container.innerHTML = `<p class="text-gray-600 text-lg">此栏目暂无文章，敬请期待更多内容。</p>`;
+                container.innerHTML = ``;
                 return;
             }
 
