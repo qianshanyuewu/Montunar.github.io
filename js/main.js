@@ -96,64 +96,6 @@ async function fetchWithRetry(url, maxRetries = 3, delay = 1000) {
         }
     }
 }
-
-// 考研100天记录文章加载函数
-async function loadKaoYan100Articles() {
-    const listContainer = document.getElementById('dynamic-kaoyan100-articles-list');
-    if (!listContainer) return;
-
-    showLoadingIndicator(listContainer, '正在加载考研100天记录...');
-
-    try {
-        const res = await fetchWithRetry('articles/kaoyan100-articles.json');
-        const articles = await res.json();
-        renderArticles(articles, listContainer, 'kaoyan100', '考研100天记录');
-    } catch (e) {
-        console.error("Error loading kaoyan100 articles:", e);
-        showErrorMessage(listContainer, '无法加载"考研100天记录"文章列表，请检查网络连接后重试。');
-    }
-}
-
-// 干了啥栏目分类筛选功能
-window.filterWhatIDidCategory = function(category) {
-    const allBtn = document.getElementById('btn-all-whatidid');
-    const kaoyanBtn = document.getElementById('btn-kaoyan100');
-    const allArticlesContainer = document.getElementById('dynamic-whatidid-articles-list');
-    const kaoyanArticlesContainer = document.getElementById('dynamic-kaoyan100-articles-list');
-
-    // 更新按钮状态
-    if (category === 'all') {
-        allBtn.classList.add('active', 'bg-black', 'text-white');
-        allBtn.classList.remove('bg-gray-200', 'text-gray-700');
-        kaoyanBtn.classList.remove('active', 'bg-black', 'text-white');
-        kaoyanBtn.classList.add('bg-gray-200', 'text-gray-700');
-        
-        // 显示全部文章，隐藏考研文章
-        allArticlesContainer.classList.remove('hidden');
-        kaoyanArticlesContainer.classList.add('hidden');
-        
-        // 加载全部文章（如果未加载）
-        if (!articleCache.whatidid) {
-            loadWhatIDidArticles();
-        }
-    } else if (category === 'kaoyan100') {
-        kaoyanBtn.classList.add('active', 'bg-black', 'text-white');
-        kaoyanBtn.classList.remove('bg-gray-200', 'text-gray-700');
-        allBtn.classList.remove('active', 'bg-black', 'text-white');
-        allBtn.classList.add('bg-gray-200', 'text-gray-700');
-        
-        // 显示考研文章，隐藏全部文章
-        allArticlesContainer.classList.add('hidden');
-        kaoyanArticlesContainer.classList.remove('hidden');
-        
-        // 加载考研文章（如果未加载）
-        if (!articleCache.kaoyan100) {
-            loadKaoYan100Articles();
-            articleCache.kaoyan100 = true;
-        }
-    }
-}
-
 // 显示加载指示器
 function showLoadingIndicator(container, message = '正在加载...') {
     container.innerHTML = `
@@ -261,12 +203,18 @@ async function showPage(page) {
         }
     }
 
-    // 控制齿轮按钮显示/隐藏
+    // 控制齿轮按钮、搜索按钮和返回顶部按钮显示/隐藏
     const multiFunctionContainer = document.querySelector('.multi-function-container');
+    const searchToggle = document.getElementById('search-toggle');
+    const backToTopBtn = document.getElementById('back-to-top');
     if (page === homePage) {
         multiFunctionContainer.style.display = 'none';
+        searchToggle.style.display = 'none';
+        backToTopBtn.style.display = 'none';
     } else {
         multiFunctionContainer.style.display = 'flex';
+        searchToggle.style.display = 'flex';
+        backToTopBtn.style.display = 'flex';
     }
 
     // 平滑滚动到顶部
@@ -560,9 +508,13 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.remove('active');
     });
     
-    // 初始隐藏齿轮按钮（首页不显示）
+    // 初始隐藏齿轮按钮、搜索按钮和返回顶部按钮（首页不显示）
     const multiFunctionContainer = document.querySelector('.multi-function-container');
+    const searchToggle = document.getElementById('search-toggle');
+    const backToTopBtn = document.getElementById('back-to-top');
     multiFunctionContainer.style.display = 'none';
+    searchToggle.style.display = 'none';
+    backToTopBtn.style.display = 'none';
     
     // 音乐按钮点击事件
     if (musicToggle) {
@@ -609,96 +561,134 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 主页标题点击事件
-    homeTitle.addEventListener('click', () => {
-        showPage(articlesPage);
-    });
+    if (homeTitle) {
+        homeTitle.addEventListener('click', () => {
+            showPage(articlesPage);
+        });
+    }
 
     // 返回按钮点击事件
-    backButton.addEventListener('click', () => {
-        showPage(homePage);
-    });
+    if (backButton) {
+        backButton.addEventListener('click', () => {
+            showPage(homePage);
+        });
+    }
 
     // 慢慢谈说链接点击事件
-    talkingLink.addEventListener('click', () => {
-        showPage(talkingPage);
-    });
+    if (talkingLink) {
+        talkingLink.addEventListener('click', () => {
+            showPage(talkingPage);
+        });
+    }
 
     // 干了啥链接点击事件
-    whatIDidLink.addEventListener('click', () => {
-        showPage(whatIDidPage);
-    });
+    if (whatIDidLink) {
+        whatIDidLink.addEventListener('click', () => {
+            showPage(whatIDidPage);
+        });
+    }
 
     // 关于链接点击事件
-    aboutLink.addEventListener('click', () => {
-        showPage(aboutPage);
-    });
+    if (aboutLink) {
+        aboutLink.addEventListener('click', () => {
+            showPage(aboutPage);
+        });
+    }
 
     // 返回文章页面按钮点击事件
-    backToArticles.addEventListener('click', () => {
-        showPage(articlesPage);
-    });
+    if (backToArticles) {
+        backToArticles.addEventListener('click', () => {
+            showPage(articlesPage);
+        });
+    }
 
     // 从干了啥返回文章页面按钮点击事件
-    backToArticlesFromWhatIDid.addEventListener('click', () => {
-        showPage(articlesPage);
-    });
+    if (backToArticlesFromWhatIDid) {
+        backToArticlesFromWhatIDid.addEventListener('click', () => {
+            showPage(articlesPage);
+        });
+    }
 
     // 从关于返回文章页面按钮点击事件
-    backToArticlesFromAbout.addEventListener('click', () => {
-        showPage(articlesPage);
-    });
+    if (backToArticlesFromAbout) {
+        backToArticlesFromAbout.addEventListener('click', () => {
+            showPage(articlesPage);
+        });
+    }
 
     // 思考与探索文章链接点击事件
-    thinkingArticlesLink.addEventListener('click', () => {
-        showPage(thinkingArticlesPage);
-    });
+    if (thinkingArticlesLink) {
+        thinkingArticlesLink.addEventListener('click', () => {
+            showPage(thinkingArticlesPage);
+        });
+    }
 
     // 从思考与探索返回慢慢谈说按钮点击事件
-    backToTalking.addEventListener('click', () => {
-        showPage(talkingPage);
-    });
+    if (backToTalking) {
+        backToTalking.addEventListener('click', () => {
+            showPage(talkingPage);
+        });
+    }
 
     // 科技与未来文章链接点击事件
-    techArticlesLink.addEventListener('click', () => {
-        showPage(techArticlesPage);
-    });
+    if (techArticlesLink) {
+        techArticlesLink.addEventListener('click', () => {
+            showPage(techArticlesPage);
+        });
+    }
 
     // 从科技与未来返回慢慢谈说按钮点击事件
-    backToTalkingFromTech.addEventListener('click', () => {
-        showPage(talkingPage);
-    });
+    if (backToTalkingFromTech) {
+        backToTalkingFromTech.addEventListener('click', () => {
+            showPage(talkingPage);
+        });
+    }
 
     // 艺术与创意文章链接点击事件
-    artArticlesLink.addEventListener('click', () => {
-        showPage(artArticlesPage);
-    });
+    if (artArticlesLink) {
+        artArticlesLink.addEventListener('click', () => {
+            showPage(artArticlesPage);
+        });
+    }
 
     // 从艺术与创意返回慢慢谈说按钮点击事件
-    backToTalkingFromArt.addEventListener('click', () => {
-        showPage(talkingPage);
-    });
+    if (backToTalkingFromArt) {
+        backToTalkingFromArt.addEventListener('click', () => {
+            showPage(talkingPage);
+        });
+    }
 
     // 光影一刻链接点击事件
-    lightShadowLink.addEventListener('click', () => {
-        showPage(lightShadowPage);
-    });
+    if (lightShadowLink) {
+        lightShadowLink.addEventListener('click', () => {
+            showPage(lightShadowPage);
+        });
+    }
 
     // 从光影一刻返回艺术与创意按钮点击事件
-    backToArtFromLight.addEventListener('click', () => {
-        showPage(artArticlesPage);
-    });
+    if (backToArtFromLight) {
+        backToArtFromLight.addEventListener('click', () => {
+            showPage(artArticlesPage);
+        });
+    }
 
     // 美术鉴赏链接点击事件
-    artAppreciationLink.addEventListener('click', () => {
-        showPage(artAppreciationPage);
-    });
+    if (artAppreciationLink) {
+        artAppreciationLink.addEventListener('click', () => {
+            showPage(artAppreciationPage);
+        });
+    }
 
     // 从美术鉴赏返回艺术与创意按钮点击事件
-    backToArtFromAppreciation.addEventListener('click', () => {
-        showPage(artArticlesPage);
-    });
+    if (backToArtFromAppreciation) {
+        backToArtFromAppreciation.addEventListener('click', () => {
+            showPage(artArticlesPage);
+        });
+    }
 
     // 思考与探索文章折叠/展开功能
+    // 注意：这些旧的折叠功能已被新的toggleArticleContent函数替代
+    // 保留这些代码是为了向后兼容，如果HTML中存在这些元素的话
     if (thinkingArticleHeader && thinkingArticleContent && thinkingToggleIcon) {
         thinkingArticleHeader.addEventListener('click', () => {
             isThinkingArticleExpanded = !isThinkingArticleExpanded;
@@ -762,7 +752,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 科技与未来文章折叠/展开功能 (旧的，将被移除或注释)
+    // 科技与未来文章折叠/展开功能 (旧的，已被移除)
     /* if (techArticleHeader && techArticleContent && techToggleIcon) {
         techArticleHeader.addEventListener('click', () => {
             isTechArticleExpanded = !isTechArticleExpanded;
