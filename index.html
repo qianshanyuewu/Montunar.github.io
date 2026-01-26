@@ -101,44 +101,141 @@
                 }
             }
 
+            /* 现代化卡片设计 - 方案1 */
             .custom-card {
-                border-radius: 0.5rem;
+                border-radius: 1rem;
                 border: 1px solid #e5e7eb;
-                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
-                transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+                transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+            }
+            
+            .custom-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-color: #d1d5db;
+            }
+            
+            /* 卡片图片容器 */
+            .custom-card .h-48 {
+                border-radius: 0.75rem;
+                overflow: hidden;
+                position: relative;
+                transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+            
+            .custom-card:hover .h-48 {
+                transform: scale(1.05);
+                border-radius: 0.5rem;
+            }
+            
+            /* 图片悬停效果 */
+            .custom-card img {
+                transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                filter: grayscale(100%);
+            }
+            
+            .custom-card:hover img {
+                filter: grayscale(0%);
+            }
+            
+            /* 卡片内容区域 */
+            .custom-card h3 {
+                transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                position: relative;
+                display: inline-block;
+            }
+            
+            .custom-card:hover h3 {
+                color: #000000;
+            }
+            
+            .custom-card:hover h3::after {
+                content: '';
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: linear-gradient(90deg, #000000, #333333);
+                animation: slideIn 0.5s ease;
+            }
+            
+            @keyframes slideIn {
+                from {
+                    width: 0;
+                }
+                to {
+                    width: 100%;
+                }
             }
 
+            /* 现代化按钮设计 */
             .custom-button {
                 background-color: #000000;
                 color: white;
                 padding: 0.75rem 1.5rem;
-                border-radius: 0.25rem;
-                transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+                border-radius: 50px;
+                transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                position: relative;
+                overflow: hidden;
+                border: none;
+                font-weight: 500;
+                letter-spacing: 0.5px;
             }
 
             .custom-button:hover {
                 background-color: #333333;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            }
+            
+            .custom-button::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+            
+            .custom-button:hover::after {
+                width: 300px;
+                height: 300px;
+            }
+            
+            /* 按钮文本保持在最上层 */
+            .custom-button span, .custom-button i {
+                position: relative;
+                z-index: 2;
             }
 
             /* 优化后的文章卡片样式 - 更简洁轻盈 */
             .article-card {
                 position: relative;
                 background: #ffffff;
-                border: 1px solid #e5e7eb;
-                border-radius: 8px;
+                border: 1px solid #f3f4f6;
+                border-radius: 12px;
                 overflow: hidden;
-                transition: all 0.3s ease;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
                 cursor: pointer;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
                 will-change: transform, box-shadow;
+                max-width: 100%;
+                margin-bottom: 1rem;
             }
 
             .article-card:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-                border-color: #d1d5db;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+                border-color: #e5e7eb;
             }
 
             .article-card::before {
@@ -147,14 +244,14 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                height: 3px;
+                height: 2px;
                 background: linear-gradient(90deg, #000000, #333333);
                 opacity: 0;
-                transition: opacity 0.3s ease;
+                transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .article-card:hover::before {
-                opacity: 1;
+                opacity: 0.6;
             }
 
             .article-card-content {
@@ -164,12 +261,12 @@
             }
 
             .article-title {
-                font-size: 1.25rem;
+                font-size: 1.125rem;
                 font-weight: 600;
-                line-height: 1.4;
-                margin-bottom: 0.5rem;
-                color: #111827;
-                transition: color 0.3s ease;
+                line-height: 1.5;
+                margin-bottom: 0.625rem;
+                color: #1f2937;
+                transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .article-card:hover .article-title {
@@ -179,42 +276,44 @@
             .article-meta {
                 display: flex;
                 align-items: center;
-                gap: 0.75rem;
-                margin-bottom: 0.75rem;
+                gap: 0.875rem;
+                margin-bottom: 0.875rem;
                 font-size: 0.8125rem;
-                color: #6b7280;
+                color: #9ca3af;
             }
 
             .article-date {
                 display: flex;
                 align-items: center;
-                gap: 0.25rem;
+                gap: 0.375rem;
             }
 
             .article-category {
                 display: flex;
                 align-items: center;
-                gap: 0.25rem;
-                padding: 0.125rem 0.5rem;
-                background-color: #f3f4f6;
-                border-radius: 16px;
+                gap: 0.375rem;
+                padding: 0.25rem 0.625rem;
+                background-color: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-radius: 9999px;
                 font-size: 0.75rem;
                 font-weight: 500;
-                transition: all 0.3s ease;
+                transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .article-card:hover .article-category {
-                background-color: #e5e7eb;
-                color: #374151;
+                background-color: #f3f4f6;
+                border-color: #d1d5db;
+                color: #4b5563;
             }
 
             .article-preview {
                 font-size: 0.875rem;
-                line-height: 1.5;
-                color: #6b7280;
-                margin-bottom: 1rem;
-                opacity: 0.7;
-                transition: opacity 0.3s ease;
+                line-height: 1.6;
+                color: #9ca3af;
+                margin-bottom: 0.75rem;
+                opacity: 0.8;
+                transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .article-card:hover .article-preview {
@@ -223,29 +322,9 @@
 
             .article-actions {
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
                 align-items: center;
-            }
-
-            .read-more-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.375rem;
-                font-size: 0.8125rem;
-                font-weight: 500;
-                color: #4b5563;
-                text-decoration: none;
-                transition: all 0.3s ease;
-                opacity: 0.8;
-            }
-
-            .article-card:hover .read-more-btn {
-                opacity: 1;
-                color: #000000;
-            }
-
-            .read-more-btn:hover {
-                gap: 0.5rem;
+                flex-shrink: 0;
             }
 
             .article-icon {
@@ -270,16 +349,62 @@
             }
 
             .toggle-icon-enhanced {
-                transition: all 0.3s ease;
-                color: #9ca3af;
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                color: #6b7280;
+                border: 1.5px solid rgba(0, 0, 0, 0.08);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .toggle-icon-enhanced::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+                transition: left 0.5s ease;
+            }
+
+            .toggle-icon-enhanced:hover::before {
+                left: 100%;
             }
 
             .article-card:hover .toggle-icon-enhanced {
-                color: #374151;
+                background: linear-gradient(135deg, #000000 0%, #333333 100%);
+                color: #ffffff;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                border-color: transparent;
+            }
+
+            .toggle-icon-enhanced:hover {
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
             }
 
             .toggle-icon-enhanced.expanded {
                 transform: rotate(180deg);
+                background: linear-gradient(135deg, #000000 0%, #333333 100%);
+                color: #ffffff;
+                border-color: transparent;
+            }
+
+            .article-card:hover .toggle-icon-enhanced.expanded {
+                transform: translateY(-2px) rotate(180deg);
+            }
+
+            .toggle-icon-enhanced.expanded:hover {
+                transform: translateY(-3px) rotate(180deg) scale(1.05);
             }
 
             /* 置顶文章样式 */
@@ -394,13 +519,25 @@
                 transition: opacity 0.3s ease;
             }
 
-            .dark-mode .read-more-btn {
-                color: #9ca3af;
-                transition: all 0.3s ease;
+            .dark-mode .article-actions {
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            .dark-mode .article-card:hover .read-more-btn {
-                color: #ffffff;
+            .dark-mode .toggle-icon-enhanced {
+                background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+                color: #f3f4f6;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .dark-mode .article-card:hover .toggle-icon-enhanced {
+                background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+                color: #1f2937;
+                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+            }
+
+            .dark-mode .toggle-icon-enhanced.expanded {
+                background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+                color: #1f2937;
             }
 
             .dark-mode .article-icon {
@@ -476,6 +613,17 @@
 
             .dark-mode .theme-button:hover {
                 background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* 返回顶部按钮 */
+            #back-to-top {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            #back-to-top.hidden {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(20px);
             }
 
             /* 悬浮高亮效果 */
@@ -825,6 +973,128 @@
             transform: translateY(0);
             pointer-events: auto;
         }
+        
+        /* 搜索模态框样式 */
+        #search-modal.visible {
+            opacity: 1;
+        }
+        
+        #search-modal.visible .search-modal-content {
+            transform: scale(1);
+        }
+        
+        #search-results::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        #search-results::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        #search-results::-webkit-scrollbar-thumb {
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+        
+        #search-results::-webkit-scrollbar-thumb:hover {
+            background: #d1d5db;
+        }
+        
+        #search-results .search-result-item {
+            padding: 0.875rem;
+            border-bottom: 1px solid #f3f4f6;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border-radius: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        #search-results .search-result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        #search-results .search-result-item:hover {
+            background-color: #f9fafb;
+            transform: translateX(2px);
+        }
+        
+        #search-results .search-result-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 0.375rem;
+            color: #1f2937;
+            font-weight: 500;
+        }
+        
+        #search-results .search-result-item p {
+            font-size: 0.8125rem;
+            color: #9ca3af;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        #search-results .search-result-item .category-tag {
+            display: inline-block;
+            padding: 0.125rem 0.5rem;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            border-radius: 9999px;
+            font-size: 0.6875rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        #search-results .no-results {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #9ca3af;
+        }
+        
+        #search-results .no-results i {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.4;
+        }
+        
+        .dark-mode #search-modal .search-modal-content {
+            background-color: rgba(31, 41, 55, 0.95);
+            border-color: rgba(55, 65, 81, 0.5);
+        }
+        
+        .dark-mode #search-modal .search-modal-content h3 {
+            color: #f9fafb;
+        }
+        
+        .dark-mode #search-modal input {
+            background-color: rgba(55, 65, 81, 0.5);
+            border-color: rgba(75, 85, 99, 0.5);
+            color: #f9fafb;
+        }
+        
+        .dark-mode #search-modal input::placeholder {
+            color: #6b7280;
+        }
+        
+        .dark-mode #search-modal .search-result-item {
+            border-color: rgba(55, 65, 81, 0.5);
+        }
+        
+        .dark-mode #search-modal .search-result-item:hover {
+            background-color: rgba(55, 65, 81, 0.5);
+        }
+        
+        .dark-mode #search-modal .search-result-item h4 {
+            color: #f9fafb;
+        }
+        
+        .dark-mode #search-modal .search-result-item .category-tag {
+            background-color: rgba(75, 85, 99, 0.5);
+            color: #d1d5db;
+        }
     </style>
 </head>
 
@@ -833,7 +1103,15 @@
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
         <!-- 集成功能按钮 -->
-        <div class="fixed bottom-4 right-4 z-50 flex items-center">
+        <div class="fixed bottom-4 right-4 z-50 flex items-center gap-4">
+            <!-- 独立搜索按钮 -->
+            <button id="search-toggle" class="theme-button theme-button-enhanced" title="搜索">
+                <i id="search-icon" class="fa fa-search"></i>
+            </button>
+            <!-- 返回顶部按钮 -->
+            <button id="back-to-top" class="theme-button theme-button-enhanced hidden" title="返回顶部">
+                <i class="fa fa-arrow-up"></i>
+            </button>
             <div class="multi-function-container">
                 <button id="multi-function-toggle" class="theme-button theme-button-enhanced">
                     <i id="multi-function-icon" class="fa fa-cog"></i>
@@ -850,6 +1128,9 @@
                     </button>
                     <button id="font-toggle" class="theme-button theme-button-enhanced" title="字体调整">
                         <i class="fa fa-text-height"></i>
+                    </button>
+                    <button id="expand-all-articles" class="theme-button theme-button-enhanced" title="展开全部文章">
+                        <i id="expand-all-icon" class="fa fa-expand"></i>
                     </button>
                     <div class="font-size-options">
                         <button id="font-decrease" class="font-size-btn" title="减小字体">
@@ -868,6 +1149,43 @@
         
         <!-- 音乐播放器 -->
         <audio id="background-music" src="audio/canon.mp3" loop preload="auto"></audio>
+
+        <!-- 搜索模态框 -->
+        <div id="search-modal" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300">
+            <div class="flex items-center justify-center min-h-screen px-4">
+                <div class="search-modal-content bg-white/90 backdrop-blur-md rounded-xl shadow-lg max-w-lg w-full p-5 transform scale-95 transition-transform duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa fa-search text-lg text-primary/70"></i>
+                            <h3 class="text-lg font-playfair font-medium">搜索</h3>
+                        </div>
+                        <button id="search-close" class="text-gray-400 hover:text-primary transition-colors p-1.5 rounded-lg hover:bg-gray-100">
+                            <i class="fa fa-times text-sm"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="relative mb-4">
+                        <input type="text" id="search-input" placeholder="搜索文章..." 
+                               class="w-full px-4 py-2.5 pl-10 pr-10 border border-gray-200/80 rounded-lg focus:outline-none focus:border-primary/60 focus:ring-1 focus:ring-primary/20 transition-all text-sm bg-white/50">
+                        <i class="fa fa-search absolute left-3.5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <button id="search-clear" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors hidden">
+                            <i class="fa fa-times text-xs"></i>
+                        </button>
+                    </div>
+                    
+                    <div id="search-stats" class="text-xs text-gray-500 mb-3 hidden">
+                        找到 <span id="search-count" class="font-medium text-primary">0</span> 篇
+                    </div>
+                    
+                    <div id="search-results" class="max-h-[400px] overflow-y-auto pr-1">
+                        <div id="search-placeholder" class="text-center py-8">
+                            <i class="fa fa-search text-4xl text-gray-200/60 mb-3"></i>
+                            <p class="text-gray-400 text-sm">输入关键词开始搜索</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- 首页 -->
         <section id="home-page" class="h-screen flex items-center justify-center px-4 transition-smooth-slow bg-white page-transition page-visible">
@@ -1054,7 +1372,7 @@
                 </div>
 
                 <!-- 文章列表 -->
-                <div id="dynamic-tech-articles-list" class="w-full max-w-4xl space-y-4">
+                <div id="dynamic-tech-articles-list" class="w-full max-w-3xl space-y-4">
                     <!-- "科技与未来"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -1100,7 +1418,7 @@
                         </a>
                     </div>
                  <!-- 文章列表容器 (新添加) -->
-                <div id="dynamic-art-creativity-articles-list" class="w-full max-w-4xl space-y-4 mt-12">
+                <div id="dynamic-art-creativity-articles-list" class="w-full max-w-3xl space-y-4 mt-12">
                     <!-- "艺术与创意"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -1245,7 +1563,7 @@
                 </div>
 
                 <!-- 文章列表 -->
-                <div class="w-full max-w-4xl space-y-6">
+                <div class="w-full max-w-3xl space-y-6">
                     <div id="dynamic-articles-list"></div>
                     <!-- 可以添加更多文章 -->
                 </div>
@@ -1279,7 +1597,7 @@
                 </div>
 
                 <!-- 子栏目导航 -->
-                <div class="w-full max-w-4xl mb-8">
+                <div class="w-full max-w-3xl mb-8">
                     <div class="flex flex-wrap justify-center gap-4 mb-8">
                         <button id="btn-all-whatidid" class="px-6 py-3 bg-black text-white rounded-lg transition-colors duration-300 hover:bg-gray-800 active scale-subtle" onclick="filterWhatIDidCategory('all')">
                             更新记录
@@ -1291,12 +1609,12 @@
                 </div>
 
                 <!-- 文章容器 -->
-                <div id="dynamic-whatidid-articles-list" class="w-full max-w-4xl space-y-6">
+                <div id="dynamic-whatidid-articles-list" class="w-full max-w-3xl space-y-6">
                     <!-- "干了啥"系列的文章将动态加载到这里 -->
                 </div>
                 
                 <!-- 考研100天记录文章容器 -->
-                <div id="dynamic-kaoyan100-articles-list" class="w-full max-w-4xl space-y-6 hidden">
+                <div id="dynamic-kaoyan100-articles-list" class="w-full max-w-3xl space-y-6 hidden">
                     <!-- "考研100天记录"系列的文章将动态加载到这里 -->
                 </div>
             </div>
@@ -1308,12 +1626,32 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/background-animation.js"></script>
-    <script src="js/article-features.js"></script>
+    <script src="js/main.js?v=3"></script>
+    <script src="js/background-animation.js?v=3"></script>
+    <script src="js/article-features.js?v=3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             showPage(homePage); // 确保初始时canvas隐藏
+
+            // 返回顶部按钮控制
+            const backToTopBtn = document.getElementById('back-to-top');
+            const scrollThreshold = 300; // 滚动300px后显示返回顶部按钮
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > scrollThreshold) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+
+            // 返回顶部按钮点击事件
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
 
         // 添加重试机制的fetch函数
@@ -1471,6 +1809,7 @@
             const sortedArticles = [...pinnedArticles, ...normalArticles];
 
             let html = '';
+            
             for (const article of sortedArticles) {
                 const category = article.category || defaultCategory;
                 const preview = getArticlePreview(article);
@@ -1480,7 +1819,10 @@
                 html += `
                 <div class="article-card slide-in card-enhanced ${isPinned ? 'pinned-article' : ''}" style="transition-delay: 0.1s" onclick="toggleArticleContent('${article.filename}', '${typePrefix}')">
                     <div class="article-card-content">
-                        <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-start mb-3">
+                            <div class="article-actions mr-3" style="margin-top: 0.5rem;">
+                                <i class="fa fa-chevron-down toggle-icon-enhanced"></i>
+                            </div>
                             <div class="flex-1">
                                 <div class="flex items-center mb-2">
                                     <h3 class="article-title ${isPinned ? 'pinned-title' : ''}">${article.title}</h3>
@@ -1505,14 +1847,6 @@
                         <div class="article-preview article-preview-text">
                             ${preview}
                         </div>
-                        
-                        <div class="article-actions">
-                            <a href="#" class="read-more-btn scale-subtle" onclick="event.preventDefault(); event.stopPropagation();">
-                                <span>阅读全文</span>
-                                <i class="fa fa-arrow-right"></i>
-                            </a>
-                            <i class="fa fa-chevron-down toggle-icon-enhanced"></i>
-                        </div>
                     </div>
                     <div id="content-${typePrefix}-${article.filename.replace(/[^a-zA-Z0-9]/g, '')}" class="px-6 pb-6 content-collapsed"></div>
                 </div>
@@ -1531,7 +1865,7 @@
             }, 100);
         }
 
-        // 改进的文章内容切换函数，添加重试机制
+        // 改进的文章内容切换函数，添加重试机制和手风琴效果
         window.toggleArticleContent = async function(filename, typePrefix) {
             const contentId = `content-${typePrefix}-${filename.replace(/[^a-zA-Z0-9]/g, '')}`;
             const contentDiv = document.getElementById(contentId);
@@ -1541,6 +1875,18 @@
             const icon = articleCard ? articleCard.querySelector('.toggle-icon-enhanced') : null;
 
             if (contentDiv.classList.contains('content-collapsed')) {
+                // 手风琴效果：展开当前文章前，先折叠所有其他已展开的文章
+                const allContentDivs = document.querySelectorAll('.content-expanded');
+                allContentDivs.forEach(div => {
+                    if (div !== contentDiv) {
+                        div.classList.remove('content-expanded');
+                        div.classList.add('content-collapsed');
+                        const otherCard = div.closest('.article-card');
+                        const otherIcon = otherCard ? otherCard.querySelector('.toggle-icon-enhanced') : null;
+                        if (otherIcon) otherIcon.classList.remove('expanded');
+                    }
+                });
+
                 if (contentDiv.children.length === 0) {
                     // 显示加载指示器
                     contentDiv.innerHTML = `
@@ -1585,26 +1931,403 @@
                 contentDiv.classList.add('content-collapsed');
                 if(icon) icon.classList.remove('expanded');
                 
-                // 折叠文章时滚动到文章标题位置
+                // 折叠文章时，只在文章标题不在视口内时才滚动
                 if (articleCard) {
-                    // 获取文章卡片的标题元素
                     const titleElement = articleCard.querySelector('h3, h4, h5');
                     if (titleElement) {
-                        // 计算标题位置，考虑页面滚动
-                        const titlePosition = titleElement.getBoundingClientRect().top + window.pageYOffset;
+                        const titleRect = titleElement.getBoundingClientRect();
                         
-                        // 添加一些偏移量，确保标题在视口中可见
-                        const offset = 20; // 20px的偏移量
-                        
-                        // 平滑滚动到标题位置
-                        window.scrollTo({
-                            top: titlePosition - offset,
-                            behavior: 'smooth'
-                        });
+                        // 只在标题不在视口内时才滚动
+                        if (titleRect.top < 0 || titleRect.bottom > window.innerHeight) {
+                            const titlePosition = titleElement.getBoundingClientRect().top + window.pageYOffset;
+                            const offset = 20;
+                            
+                            window.scrollTo({
+                                top: titlePosition - offset,
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 }
             }
         }
+        
+        // 搜索功能
+        const searchToggle = document.getElementById('search-toggle');
+        const searchModal = document.getElementById('search-modal');
+        const searchClose = document.getElementById('search-close');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        
+        let allArticles = [];
+        let articleCategories = [
+            { file: 'articles/articles.json', category: '思考与探索' },
+            { file: 'articles/whatidid-articles.json', category: '干了啥' },
+            { file: 'articles/tech-articles.json', category: '科技与未来' },
+            { file: 'articles/art-creativity-articles.json', category: '艺术与创意' },
+            { file: 'articles/kaoyan100-articles.json', category: '考研100天记录' }
+        ];
+        
+        async function loadAllArticles() {
+            if (allArticles.length > 0) return allArticles;
+            
+            try {
+                for (const cat of articleCategories) {
+                    try {
+                        const res = await fetchWithRetry(cat.file);
+                        const articles = await res.json();
+                        allArticles = allArticles.concat(articles.map(a => ({...a, category: cat.category})));
+                    } catch (e) {
+                        console.warn(`无法加载 ${cat.file}:`, e);
+                    }
+                }
+            } catch (e) {
+                console.error('加载文章失败:', e);
+            }
+            
+            return allArticles;
+        }
+        
+        function searchArticles(query) {
+            if (!query.trim()) {
+                searchResults.innerHTML = '<p class="text-center text-gray-500 py-8">输入关键词开始搜索</p>';
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            let searchTerms = [lowerQuery];
+            
+            // 如果查询包含数字，尝试转换为中文数字
+            const numberMatch = query.match(/\d+/);
+            if (numberMatch) {
+                const chineseNumber = numberToChinese(parseInt(numberMatch[0]));
+                if (chineseNumber) {
+                    searchTerms.push(chineseNumber);
+                }
+            }
+            
+            const results = allArticles.filter(article => {
+                return searchTerms.some(term => {
+                    const titleMatch = article.title && article.title.toLowerCase().includes(term);
+                    const descMatch = article.description && article.description.toLowerCase().includes(term);
+                    return titleMatch || descMatch;
+                });
+            });
+            
+            displaySearchResults(results, query);
+        }
+        
+        function numberToChinese(num) {
+            const digits = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+            const units = ['', '十', '百', '千', '万'];
+            
+            if (num === 0) return '零';
+            
+            let result = '';
+            let str = num.toString();
+            let zeroFlag = false;
+            
+            for (let i = 0; i < str.length; i++) {
+                const digit = parseInt(str[i]);
+                const pos = str.length - i - 1;
+                
+                if (digit === 0) {
+                    zeroFlag = true;
+                    continue;
+                }
+                
+                if (zeroFlag) {
+                    result += '零';
+                    zeroFlag = false;
+                }
+                
+                result += digits[digit];
+                if (pos > 0) {
+                    result += units[pos];
+                }
+            }
+            
+            // 处理"一十"开头的特殊情况
+            if (result.startsWith('一十')) {
+                result = result.substring(1);
+            }
+            
+            return result;
+        }
+        
+        function displaySearchResults(results, query) {
+            const searchStats = document.getElementById('search-stats');
+            const searchCount = document.getElementById('search-count');
+            const searchPlaceholder = document.getElementById('search-placeholder');
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa fa-search-minus"></i>
+                        <p class="text-lg mb-2">没有找到与"<strong>${query}</strong>"相关的内容</p>
+                        <p class="text-sm">试试其他关键词或数字（如：99）</p>
+                    </div>
+                `;
+                searchStats.classList.add('hidden');
+                return;
+            }
+            
+            searchStats.classList.remove('hidden');
+            searchCount.textContent = results.length;
+            
+            searchResults.innerHTML = results.map(article => `
+                <div class="search-result-item" data-filename="${article.filename}" data-category="${article.category}">
+                    <h4 class="font-medium">${article.title}</h4>
+                    <p>${article.description || '无描述'}</p>
+                    <span class="category-tag">${article.category}</span>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.search-result-item').forEach(item => {
+                item.addEventListener('click', async () => {
+                    const filename = item.dataset.filename;
+                    const category = item.dataset.category;
+                    await openArticle(filename, category);
+                    closeSearchModal();
+                });
+            });
+        }
+        
+        function openArticle(filename, category) {
+            const categoryMap = {
+                '思考与探索': { pageId: 'thinking-articles-page', typePrefix: 'thinking' },
+                '干了啥': { pageId: 'what-i-did-page', typePrefix: 'whatidid' },
+                '科技与未来': { pageId: 'tech-articles-page', typePrefix: 'tech' },
+                '艺术与创意': { pageId: 'art-articles-page', typePrefix: 'art-creativity' },
+                '考研100天记录': { pageId: 'what-i-did-page', typePrefix: 'kaoyan100' }
+            };
+            
+            const target = categoryMap[category];
+            if (!target) {
+                console.error('未知的文章分类:', category);
+                return;
+            }
+            
+            const targetPage = document.getElementById(target.pageId);
+            if (!targetPage) {
+                console.error('未找到目标页面:', target.pageId);
+                return;
+            }
+            
+            // 如果是考研100天记录，需要先切换到干了啥页面，然后切换到考研100天标签
+            if (category === '考研100天记录') {
+                if (typeof showPage === 'function') {
+                    showPage(targetPage);
+                    setTimeout(() => {
+                        if (typeof window.filterWhatIDidCategory === 'function') {
+                            window.filterWhatIDidCategory('kaoyan100');
+                            setTimeout(() => {
+                                if (typeof window.toggleArticleContent === 'function') {
+                                    window.toggleArticleContent(filename, target.typePrefix);
+                                    setTimeout(() => {
+                                        scrollToArticle(filename, target.typePrefix);
+                                    }, 600);
+                                }
+                            }, 500);
+                        }
+                    }, 300);
+                }
+            } else {
+                if (typeof showPage === 'function') {
+                    showPage(targetPage);
+                    setTimeout(() => {
+                        if (typeof window.toggleArticleContent === 'function') {
+                            window.toggleArticleContent(filename, target.typePrefix);
+                            setTimeout(() => {
+                                scrollToArticle(filename, target.typePrefix);
+                            }, 100);
+                        }
+                    }, 300);
+                }
+            }
+        }
+        
+        function scrollToArticle(filename, typePrefix) {
+            const contentId = `content-${typePrefix}-${filename.replace(/[^a-zA-Z0-9]/g, '')}`;
+            const contentDiv = document.getElementById(contentId);
+            if (contentDiv) {
+                const articleCard = contentDiv.closest('.article-card');
+                if (articleCard) {
+                    setTimeout(() => {
+                        articleCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                } else {
+                    setTimeout(() => {
+                        contentDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                }
+            }
+        }
+        
+        function openSearchModal() {
+            searchModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                searchModal.classList.add('visible');
+                searchInput.focus();
+            }, 10);
+            loadAllArticles();
+        }
+        
+        function closeSearchModal() {
+            searchModal.classList.remove('visible');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                searchModal.classList.add('hidden');
+                searchInput.value = '';
+                document.getElementById('search-clear').classList.add('hidden');
+                document.getElementById('search-stats').classList.add('hidden');
+                searchResults.innerHTML = `
+                    <div id="search-placeholder" class="text-center py-8">
+                        <i class="fa fa-search text-4xl text-gray-200/60 mb-3"></i>
+                        <p class="text-gray-400 text-sm">输入关键词开始搜索</p>
+                    </div>
+                `;
+            }, 300);
+        }
+        
+        searchToggle.addEventListener('click', openSearchModal);
+        searchClose.addEventListener('click', closeSearchModal);
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) closeSearchModal();
+        });
+        searchInput.addEventListener('input', (e) => {
+            const value = e.target.value;
+            const clearBtn = document.getElementById('search-clear');
+            
+            if (value.trim()) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            
+            searchArticles(value);
+        });
+        
+        document.getElementById('search-clear').addEventListener('click', () => {
+            searchInput.value = '';
+            document.getElementById('search-clear').classList.add('hidden');
+            document.getElementById('search-stats').classList.add('hidden');
+            searchResults.innerHTML = `
+                <div id="search-placeholder" class="text-center py-8">
+                    <i class="fa fa-search text-4xl text-gray-200/60 mb-3"></i>
+                    <p class="text-gray-400 text-sm">输入关键词开始搜索</p>
+                </div>
+            `;
+            searchInput.focus();
+        });
+        
+        // 展开全部文章功能
+        const expandAllBtn = document.getElementById('expand-all-articles');
+        const expandAllIcon = document.getElementById('expand-all-icon');
+        let isAllArticlesExpanded = false;
+        
+        if (expandAllBtn) {
+            expandAllBtn.addEventListener('click', () => {
+                isAllArticlesExpanded = !isAllArticlesExpanded;
+                
+                if (isAllArticlesExpanded) {
+                    expandAllIcon.classList.remove('fa-expand');
+                    expandAllIcon.classList.add('fa-compress');
+                } else {
+                    expandAllIcon.classList.remove('fa-compress');
+                    expandAllIcon.classList.add('fa-expand');
+                }
+                
+                // 获取所有可见的文章内容区域
+                const allContentDivs = document.querySelectorAll('.content-collapsed, .content-expanded');
+                const allIcons = document.querySelectorAll('.toggle-icon-enhanced');
+                
+                if (isAllArticlesExpanded) {
+                    // 展开全部
+                    allContentDivs.forEach(contentDiv => {
+                        if (contentDiv.classList.contains('content-collapsed')) {
+                            const articleCard = contentDiv.closest('.article-card');
+                            const icon = articleCard ? articleCard.querySelector('.toggle-icon-enhanced') : null;
+                            
+                            if (contentDiv.children.length === 0) {
+                                contentDiv.innerHTML = `
+                                    <div class="flex items-center justify-center py-8">
+                                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3"></div>
+                                        <span class="text-gray-600">正在加载文章内容...</span>
+                                    </div>
+                                `;
+                                
+                                const contentId = contentDiv.id;
+                                const match = contentId.match(/content-(.+)-(.+)/);
+                                if (match) {
+                                    const typePrefix = match[1];
+                                    const filenameEncoded = match[2];
+                                    
+                                    // 根据typePrefix找到对应的文章列表
+                                    let articles = [];
+                                    if (typePrefix === 'thinking') {
+                                        articles = window.thinkingArticles || [];
+                                    } else if (typePrefix === 'whatidid') {
+                                        articles = window.whatididArticles || [];
+                                    } else if (typePrefix === 'tech') {
+                                        articles = window.techArticles || [];
+                                    } else if (typePrefix === 'art-creativity') {
+                                        articles = window.artCreativityArticles || [];
+                                    } else if (typePrefix === 'kaoyan100') {
+                                        articles = window.kaoyan100Articles || [];
+                                    }
+                                    
+                                    const filename = articles.find(a => 
+                                        `content-${typePrefix}-${a.filename.replace(/[^a-zA-Z0-9]/g, '')}` === contentId
+                                    )?.filename;
+                                    
+                                    if (filename) {
+                                        fetchWithRetry('articles/' + filename)
+                                            .then(res => res.text())
+                                            .then(md => {
+                                                contentDiv.innerHTML = `<div class="prose prose-gray max-w-none">${marked.parse(md)}</div>`;
+                                                contentDiv.classList.remove('content-collapsed');
+                                                contentDiv.classList.add('content-expanded');
+                                                if(icon) icon.classList.add('expanded');
+                                            })
+                                            .catch(e => {
+                                                console.error("Error fetching article content:", e);
+                                                contentDiv.innerHTML = `
+                                                    <div class="flex flex-col items-center justify-center py-8">
+                                                        <i class="fa fa-exclamation-triangle text-2xl text-red-500 mb-3"></i>
+                                                        <p class="text-gray-600">文章内容加载失败</p>
+                                                    </div>
+                                                `;
+                                            });
+                                    }
+                                }
+                            } else {
+                                contentDiv.classList.remove('content-collapsed');
+                                contentDiv.classList.add('content-expanded');
+                                if(icon) icon.classList.add('expanded');
+                            }
+                        }
+                    });
+                } else {
+                    // 折叠全部
+                    allContentDivs.forEach(contentDiv => {
+                        contentDiv.classList.remove('content-expanded');
+                        contentDiv.classList.add('content-collapsed');
+                    });
+                    
+                    allIcons.forEach(icon => {
+                        icon.classList.remove('expanded');
+                    });
+                }
+            });
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && searchModal.classList.contains('visible')) {
+                closeSearchModal();
+            }
+        });
     </script>
 </body>
 
