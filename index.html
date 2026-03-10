@@ -1023,40 +1023,55 @@
                     0 2px 8px rgba(0, 0, 0, 0.2) !important;
             }
 
-            /* HarmonyOS 风格导航链接 */
+            /* HarmonyOS 风格导航链接 - 统一胶囊按钮 */
             header a {
-                padding: 8px 16px !important;
-                border-radius: 12px !important;
+                padding: 10px 20px !important;
+                border-radius: 16px !important;
                 transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
                 position: relative;
                 overflow: hidden;
+                background: rgba(0, 0, 0, 0.03);
+                margin: 0 4px;
+                font-weight: 500;
+                letter-spacing: 0.5px;
             }
 
             header a:hover {
-                background: rgba(0, 0, 0, 0.06) !important;
-                transform: translateY(-1px);
+                background: rgba(0, 0, 0, 0.08) !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .dark-mode header a {
+                background: rgba(255, 255, 255, 0.06);
             }
 
             .dark-mode header a:hover {
-                background: rgba(255, 255, 255, 0.1) !important;
+                background: rgba(255, 255, 255, 0.12) !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             }
 
-            /* 返回按钮特殊样式 */
+            /* 返回按钮特殊样式 - 带边框 */
             header a:first-child {
-                background: rgba(0, 0, 0, 0.05);
-                font-weight: 500;
+                background: transparent;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                font-weight: 600;
+                padding-left: 16px !important;
             }
 
             header a:first-child:hover {
-                background: rgba(0, 0, 0, 0.1) !important;
+                background: rgba(0, 0, 0, 0.05) !important;
+                border-color: rgba(0, 0, 0, 0.25);
             }
 
             .dark-mode header a:first-child {
-                background: rgba(255, 255, 255, 0.08);
+                background: transparent;
+                border-color: rgba(255, 255, 255, 0.2);
             }
 
             .dark-mode header a:first-child:hover {
-                background: rgba(255, 255, 255, 0.15) !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(255, 255, 255, 0.35);
             }
 
             /* 添加淡入动画 */
