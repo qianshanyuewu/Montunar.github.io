@@ -2,7 +2,7 @@
 结合开源项目案例阐述实现原理与应用场景，最后展望智能控制理论的综合应用与发展趋势。
 
 <div class="my-6 flex justify-center">
-    <a href="research_report.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
+    <a href="../assets/documents/research_report.pdf" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors">
         <i class="fa fa-file-pdf text-red-500 text-xl mr-2"></i>
         <span>点击查看完整研究报告 (PDF)</span>
     </a>
