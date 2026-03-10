@@ -1224,7 +1224,7 @@
                 gap: 0;
             }
 
-            /* 线条书籍基础样式 */
+            /* 线条书籍基础样式 - HarmonyOS 风格增强 */
             .notebook-cover {
                 position: relative;
                 width: 320px;
@@ -1240,44 +1240,104 @@
                 transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
 
-            /* 最底层 - 艺术与创意 */
+            /* 最底层 - 艺术与创意（暖色调） */
             .notebook-stack-bottom {
                 z-index: 1;
                 transform: translateY(60px) scale(0.9);
-                opacity: 0.7;
+                opacity: 0.85;
+                filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
             }
 
-            /* 中间层 - 科技与未来 */
+            .notebook-stack-bottom .notebook-front {
+                background: linear-gradient(135deg, #fdfcfb 0%, #f5f0e8 100%);
+            }
+
+            /* 中间层 - 科技与未来（冷色调） */
             .notebook-stack-middle {
                 z-index: 2;
                 transform: translateY(30px) scale(0.95);
-                opacity: 0.85;
+                opacity: 0.92;
                 margin-top: -180px;
+                filter: drop-shadow(0 15px 30px rgba(0,0,0,0.12));
             }
 
-            /* 最顶层 - 思考与探索 */
+            .notebook-stack-middle .notebook-front {
+                background: linear-gradient(135deg, #f8fafc 0%, #eef2f6 100%);
+            }
+
+            /* 最顶层 - 思考与探索（中性色调） */
             .notebook-stack-top {
                 z-index: 3;
                 transform: translateY(0) scale(1);
                 margin-top: -180px;
+                filter: drop-shadow(0 10px 25px rgba(0,0,0,0.1));
             }
 
-            /* 悬停效果 - 抽出效果 */
+            .notebook-stack-top .notebook-front {
+                background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            }
+
+            /* 暗夜模式色调 */
+            .dark-mode .notebook-stack-bottom .notebook-front {
+                background: linear-gradient(135deg, #2a2520 0%, #1f1c18 100%);
+            }
+
+            .dark-mode .notebook-stack-middle .notebook-front {
+                background: linear-gradient(135deg, #1f2328 0%, #181b20 100%);
+            }
+
+            .dark-mode .notebook-stack-top .notebook-front {
+                background: linear-gradient(135deg, #1e1e1e 0%, #151515 100%);
+            }
+
+            /* 悬停效果 - 抽出效果增强 */
             .notebook-stack-bottom:hover:not(.notebook-opening) {
-                transform: translateY(20px) scale(0.92);
-                opacity: 0.9;
+                transform: translateY(30px) scale(0.93);
+                opacity: 1;
                 z-index: 10;
+                filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
             }
 
             .notebook-stack-middle:hover:not(.notebook-opening) {
-                transform: translateY(-10px) scale(0.98);
-                opacity: 0.95;
+                transform: translateY(-5px) scale(0.97);
+                opacity: 1;
                 z-index: 10;
+                filter: drop-shadow(0 25px 50px rgba(0,0,0,0.18));
             }
 
             .notebook-stack-top:hover:not(.notebook-opening) {
-                transform: translateY(-20px) scale(1.02);
+                transform: translateY(-15px) scale(1.03);
                 z-index: 10;
+                filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+            }
+
+            /* 悬停提示 */
+            .notebook-cover::after {
+                content: '点击进入';
+                position: absolute;
+                bottom: -35px;
+                left: 50%;
+                transform: translateX(-50%) translateY(10px);
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 6px 14px;
+                border-radius: 20px;
+                font-size: 12px;
+                opacity: 0;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                white-space: nowrap;
+                z-index: 20;
+            }
+
+            .notebook-cover:hover::after {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .dark-mode .notebook-cover::after {
+                background: rgba(255,255,255,0.9);
+                color: #333;
             }
 
             /* 书脊 - 线条风格 */
@@ -1414,9 +1474,50 @@
                     );
             }
 
-            /* 书籍揭开动画 */
+            /* 书籍揭开动画 - 增强版 */
             .notebook-opening .notebook-front {
-                transform: rotateY(-100deg);
+                transform: rotateY(-110deg);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            }
+
+            .notebook-opening {
+                animation: notebookPulse 0.6s ease;
+            }
+
+            @keyframes notebookPulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+                100% { transform: scale(1); }
+            }
+
+            /* 笔记本纹理增强 */
+            .notebook-texture {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(0,0,0,0.01) 2px,
+                        rgba(0,0,0,0.01) 4px
+                    );
+                pointer-events: none;
+                border-radius: 0 10px 10px 0;
+            }
+
+            .dark-mode .notebook-texture {
+                background: 
+                    repeating-linear-gradient(
+                        0deg,
+                        transparent,
+                        transparent 2px,
+                        rgba(255,255,255,0.01) 2px,
+                        rgba(255,255,255,0.01) 4px
+                    );
             }
             
             /* 笔记本纹理 */
@@ -1478,26 +1579,61 @@
                 color: rgba(255,255,255,0.4);
             }
 
-            /* 书籍装饰图标 - 简化 */
+            /* 书籍装饰图标 - HarmonyOS 风格增强 */
             .notebook-decoration {
                 position: absolute;
-                bottom: 2.5rem;
-                font-size: 1.25rem;
-                color: rgba(0,0,0,0.15);
-                transition: all 0.3s ease;
+                bottom: 2rem;
+                font-size: 1.5rem;
+                color: rgba(0,0,0,0.2);
+                transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+                width: 48px;
+                height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 14px;
+                background: rgba(0,0,0,0.03);
             }
 
             .dark-mode .notebook-decoration {
-                color: rgba(255,255,255,0.15);
+                color: rgba(255,255,255,0.25);
+                background: rgba(255,255,255,0.05);
             }
 
             .notebook-cover:hover .notebook-decoration {
-                color: rgba(0,0,0,0.3);
-                transform: scale(1.1);
+                color: rgba(0,0,0,0.5);
+                transform: scale(1.15) translateY(-5px);
+                background: rgba(0,0,0,0.06);
             }
 
             .dark-mode .notebook-cover:hover .notebook-decoration {
-                color: rgba(255,255,255,0.3);
+                color: rgba(255,255,255,0.6);
+                background: rgba(255,255,255,0.1);
+            }
+
+            /* 各笔记本图标特殊颜色 */
+            .notebook-stack-bottom .notebook-decoration {
+                color: rgba(200, 150, 100, 0.4);
+            }
+
+            .notebook-stack-bottom:hover .notebook-decoration {
+                color: rgba(200, 150, 100, 0.8);
+            }
+
+            .notebook-stack-middle .notebook-decoration {
+                color: rgba(100, 150, 200, 0.4);
+            }
+
+            .notebook-stack-middle:hover .notebook-decoration {
+                color: rgba(100, 150, 200, 0.8);
+            }
+
+            .notebook-stack-top .notebook-decoration {
+                color: rgba(150, 150, 150, 0.4);
+            }
+
+            .notebook-stack-top:hover .notebook-decoration {
+                color: rgba(100, 100, 100, 0.8);
             }
             
             /* 笔记本装订线效果 - 白天模式 */
