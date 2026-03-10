@@ -1406,7 +1406,8 @@
                 justify-content: center;
                 align-items: center;
                 padding: 2rem;
-                overflow: hidden;
+                padding-bottom: 3.5rem;
+                overflow: visible;
                 transform-style: preserve-3d;
                 backface-visibility: hidden;
                 transform-origin: left center;
@@ -1582,17 +1583,18 @@
             /* 书籍装饰图标 - HarmonyOS 风格增强 */
             .notebook-decoration {
                 position: absolute;
-                bottom: 2rem;
-                font-size: 1.5rem;
-                color: rgba(0,0,0,0.2);
+                bottom: 0.8rem;
+                font-size: 1.25rem;
+                color: rgba(0,0,0,0.25);
                 transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-                width: 48px;
-                height: 48px;
+                width: 40px;
+                height: 40px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-radius: 14px;
-                background: rgba(0,0,0,0.03);
+                border-radius: 12px;
+                background: rgba(0,0,0,0.04);
+                z-index: 10;
             }
 
             .dark-mode .notebook-decoration {
@@ -2166,7 +2168,7 @@
                                 <span class="notebook-subtitle">Thinking & Exploration</span>
                             </div>
                             <div class="notebook-decoration">
-                                <i class="fa fa-lightbulb-o"></i>
+                                <i class="fa fa-regular fa-lightbulb"></i>
                             </div>
                         </div>
                     </div>
@@ -2697,7 +2699,7 @@
         // 获取文章图标的函数
         function getArticleIcon(category) {
             const categoryIcons = {
-                '思考与探索': 'fa-lightbulb-o',
+                '思考与探索': 'fa-lightbulb',
                 '科技与未来': 'fa-rocket',
                 '艺术与创意': 'fa-paint-brush',
                 '干了啥': 'fa-calendar-o',
