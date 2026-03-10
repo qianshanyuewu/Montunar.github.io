@@ -10,7 +10,37 @@
     <link rel="shortcut icon" href="Montunar.github.io/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- HarmonyOS Sans 字体 -->
+    <style>
+        @font-face {
+            font-family: 'HarmonyOS Sans';
+            src: url('fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'HarmonyOS Sans';
+            src: url('fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'HarmonyOS Sans';
+            src: url('fonts/HarmonyOS_Sans_SC_Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'HarmonyOS Sans';
+            src: url('fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
     <script>
         tailwind.config = {
             theme: {
@@ -22,8 +52,8 @@
                         'neutral-dark': '#e0e0e0',
                     },
                     fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                        playfair: ['Playfair Display', 'serif'],
+                        sans: ['HarmonyOS Sans', 'system-ui', '-apple-system', 'sans-serif'],
+                        harmony: ['HarmonyOS Sans', 'system-ui', '-apple-system', 'sans-serif'],
                     },
                 }
             }
@@ -296,7 +326,7 @@
                 line-height: 1.8;
                 margin-bottom: 0.75rem;
                 color: #1a1a1a;
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
                 letter-spacing: 2px;
                 transition: color 0.25s ease;
                 padding-bottom: 0.5rem;
@@ -324,7 +354,7 @@
                 margin-bottom: 0.75rem;
                 font-size: 0.7rem;
                 color: rgba(0, 0, 0, 0.4);
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
                 letter-spacing: 1px;
             }
 
@@ -349,7 +379,7 @@
                 border-radius: 3px;
                 font-size: 0.65rem;
                 font-weight: 400;
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
                 letter-spacing: 1px;
                 color: rgba(0, 0, 0, 0.5);
                 text-transform: uppercase;
@@ -488,7 +518,7 @@
                 padding: 2px 8px;
                 border-radius: 3px;
                 margin-left: 0.5rem;
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
                 letter-spacing: 1px;
             }
 
@@ -1292,7 +1322,7 @@
                 color: #1a1a1a;
                 letter-spacing: 4px;
                 margin-bottom: 0.75rem;
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
             }
 
             .dark-mode .notebook-title {
@@ -1305,7 +1335,7 @@
                 color: rgba(0,0,0,0.4);
                 letter-spacing: 4px;
                 text-transform: uppercase;
-                font-family: 'Courier New', monospace;
+                font-family: 'HarmonyOS Sans', monospace;
             }
 
             .dark-mode .notebook-subtitle {
@@ -1661,7 +1691,7 @@
     </style>
 </head>
 
-<body class="font-inter text-primary antialiased overflow-x-hidden">
+<body class="font-harmony text-primary antialiased overflow-x-hidden">
     <canvas id="canvas"></canvas>
     <!-- 页面容器 -->
     <div id="app-container" class="min-h-screen flex flex-col">
@@ -1721,7 +1751,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
                             <i class="fa fa-search text-lg text-primary/70"></i>
-                            <h3 class="text-lg font-playfair font-medium">搜索</h3>
+                            <h3 class="text-lg font-harmony font-medium">搜索</h3>
                         </div>
                         <button id="search-close" class="text-gray-400 hover:text-primary transition-colors p-1.5 rounded-lg hover:bg-gray-100">
                             <i class="fa fa-times text-sm"></i>
@@ -1754,7 +1784,7 @@
         <!-- 首页 -->
         <section id="home-page" class="h-screen flex items-center justify-center px-4 transition-smooth-slow bg-white page-transition page-visible">
             <div class="text-center max-w-3xl mx-auto fade-in-up">
-                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-playfair leading-tight cursor-pointer hover:text-secondary transition-colors duration-300 interactive-element">
+                <h1 id="home-title" class="text-[clamp(2.5rem,8vw,5rem)] font-harmony leading-tight cursor-pointer hover:text-secondary transition-colors duration-300 interactive-element">
                     <!-- 这里的文本将在 JavaScript 中逐个插入 -->
                 </h1>
                 <div class="mt-12 opacity-70 interactive-element">
@@ -1788,7 +1818,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 中央内容 -->
                 <div class="w-full text-center py-16">
-                    <h3 class="text-[clamp(1.5rem,4vw,3rem)] font-playfair mb-8">
+                    <h3 class="text-[clamp(1.5rem,4vw,3rem)] font-harmony mb-8">
                         千里之行，始于足下
                     </h3>
                     <div class="w-24 h-px bg-primary mx-auto mb-12"></div>
@@ -1814,7 +1844,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         碎碎念
                     </h2>
                 </div>
@@ -1890,7 +1920,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         关于
                     </h2>
                 </div>
@@ -1939,7 +1969,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         科技与未来
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -1971,7 +2001,7 @@
             <div class="flex-grow flex flex-col items-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         艺术与创意
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -2025,7 +2055,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         光影一刻（摄影）
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -2103,7 +2133,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         美术鉴赏
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -2138,7 +2168,7 @@
             <div class="flex-grow flex flex-col items-center justify-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-16 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         思考与探索
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -2171,7 +2201,7 @@
             <div class="flex-grow flex flex-col items-center max-w-6xl mx-auto w-full mt-8 relative">
                 <!-- 页面标题 -->
                 <div class="w-full text-center mb-8 slide-in">
-                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-playfair mb-4">
+                    <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-harmony mb-4">
                         干了啥系列
                     </h2>
                     <p class="text-gray-600 text-lg max-w-2xl mx-auto">
