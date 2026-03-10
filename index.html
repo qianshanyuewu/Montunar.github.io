@@ -997,20 +997,66 @@
                 transform: rotate(30deg) scale(1.05);
             }
 
-            /* HarmonyOS 风格毛玻璃导航栏 */
+            /* HarmonyOS 风格悬浮胶囊导航栏 */
             header {
-                background: rgba(255, 255, 255, 0.85) !important;
+                background: rgba(255, 255, 255, 0.75) !important;
                 backdrop-filter: blur(20px) saturate(180%);
                 -webkit-backdrop-filter: blur(20px) saturate(180%);
-                border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+                border: 1px solid rgba(0, 0, 0, 0.08) !important;
+                border-radius: 20px !important;
+                margin: 16px auto !important;
+                max-width: calc(100% - 32px) !important;
+                width: auto !important;
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.08),
+                    0 2px 8px rgba(0, 0, 0, 0.04) !important;
                 position: sticky;
-                top: 0;
+                top: 16px;
                 z-index: 40;
             }
 
             .dark-mode header {
-                background: rgba(18, 18, 18, 0.85) !important;
-                border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+                background: rgba(30, 30, 30, 0.75) !important;
+                border-color: rgba(255, 255, 255, 0.1) !important;
+                box-shadow: 
+                    0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 2px 8px rgba(0, 0, 0, 0.2) !important;
+            }
+
+            /* HarmonyOS 风格导航链接 */
+            header a {
+                padding: 8px 16px !important;
+                border-radius: 12px !important;
+                transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+                position: relative;
+                overflow: hidden;
+            }
+
+            header a:hover {
+                background: rgba(0, 0, 0, 0.06) !important;
+                transform: translateY(-1px);
+            }
+
+            .dark-mode header a:hover {
+                background: rgba(255, 255, 255, 0.1) !important;
+            }
+
+            /* 返回按钮特殊样式 */
+            header a:first-child {
+                background: rgba(0, 0, 0, 0.05);
+                font-weight: 500;
+            }
+
+            header a:first-child:hover {
+                background: rgba(0, 0, 0, 0.1) !important;
+            }
+
+            .dark-mode header a:first-child {
+                background: rgba(255, 255, 255, 0.08);
+            }
+
+            .dark-mode header a:first-child:hover {
+                background: rgba(255, 255, 255, 0.15) !important;
             }
 
             /* 添加淡入动画 */
