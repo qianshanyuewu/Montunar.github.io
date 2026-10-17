@@ -1,0 +1,106 @@
+{
+  "environment": "Unchanged original site served locally at the required project base; desktop 1440x1000, unthrottled. Native page switching function used to select the notebook view for a visual reference. No baseline performance pass is claimed.",
+  "errors": [],
+  "resources": [
+    {
+      "url": "https://cdn.tailwindcss.com/",
+      "bytes": 0,
+      "transfer": 0
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css",
+      "bytes": 18183,
+      "transfer": 18483
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/%E6%B5%8B%E8%AF%95.gif",
+      "bytes": 9882383,
+      "transfer": 9882683
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/%E6%B5%8B%E8%AF%950.gif",
+      "bytes": 12142320,
+      "transfer": 12142620
+    },
+    {
+      "url": "https://picsum.photos/200/200?random=20",
+      "bytes": 0,
+      "transfer": 0
+    },
+    {
+      "url": "https://picsum.photos/600/400?random=10",
+      "bytes": 0,
+      "transfer": 0
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/a.jpg",
+      "bytes": 221421,
+      "transfer": 221721
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/b.jpg",
+      "bytes": 2034955,
+      "transfer": 2035255
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/c.jpg",
+      "bytes": 1583196,
+      "transfer": 1583496
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/d.jpg",
+      "bytes": 2597799,
+      "transfer": 2598099
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/e.jpg",
+      "bytes": 1119462,
+      "transfer": 1119762
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/js/main.js?v=3",
+      "bytes": 29851,
+      "transfer": 30151
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/js/background-animation.js?v=3",
+      "bytes": 5836,
+      "transfer": 6136
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/js/article-features.js?v=3",
+      "bytes": 15086,
+      "transfer": 15386
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/marked/marked.min.js",
+      "bytes": 12952,
+      "transfer": 13252
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/images/f.jpg",
+      "bytes": 2614650,
+      "transfer": 2614950
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/fonts/HarmonyOS_Sans_SC_Bold.ttf",
+      "bytes": 8158996,
+      "transfer": 8159296
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/fonts/HarmonyOS_Sans_SC_Medium.ttf",
+      "bytes": 8227312,
+      "transfer": 8227612
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/fonts/HarmonyOS_Sans_SC_Regular.ttf",
+      "bytes": 8261128,
+      "transfer": 8261428
+    },
+    {
+      "url": "http://127.0.0.1:4321/Montunar.github.io/fonts/HarmonyOS_Sans_SC_Light.ttf",
+      "bytes": 8336364,
+      "transfer": 8336664
+    }
+  ]
+}

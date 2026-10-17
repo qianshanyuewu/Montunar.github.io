@@ -1,0 +1,10 @@
+import { setupPreferences } from './preferences';
+import { setupSearch } from './search';
+import { setupReading } from './reading';
+import { setupCanvas } from './canvas';
+import { setupMusic } from './music';
+setupPreferences();
+setupSearch();
+setupReading();
+setupCanvas();
+setupMusic();

@@ -1,0 +1,111 @@
+---
+import Icon from './Icon.astro';
+import { url } from '../lib/blog';
+interface Props {
+  article?: boolean;
+  list?: boolean;
+}
+const { article = false, list = false } = Astro.props;
+---
+
+<aside class="toolbar" aria-label="阅读工具">
+  <button id="theme-toggle" class="tool-button" aria-label="切换明暗主题" title="切换明暗主题">
+    <Icon name="sun" />
+  </button>
+  <button id="search-toggle" class="tool-button" aria-label="搜索文章" title="搜索文章">
+    <Icon name="search" />
+  </button>
+  <button
+    id="music-toggle"
+    class="tool-button"
+    aria-label="播放背景音乐"
+    title="播放背景音乐"
+    aria-pressed="false"
+  >
+    <Icon name="music" />
+  </button>
+  <button
+    id="settings-toggle"
+    class="tool-button"
+    aria-label="阅读设置"
+    title="阅读设置"
+    aria-expanded="false"
+    aria-controls="reading-settings"
+  >
+    <Icon name="settings" />
+  </button>
+  <div id="reading-settings" class="reading-settings" hidden>
+    <span>正文字号</span>
+    <div class="font-controls">
+      <button data-font="-10" aria-label="减小字体">
+        A−
+      </button>
+      <button data-font="0" aria-label="重置字体">
+        重置
+      </button>
+      <button data-font="10" aria-label="增大字体">
+        A＋
+      </button>
+    </div>
+    <button id="animation-toggle" aria-pressed="false">
+      切换页面动效
+    </button>
+    {list && (
+      <button id="expand-all-articles" aria-pressed="false">
+        展开全部文章
+      </button>
+    )}
+    {article && <button data-immersive-page>进入沉浸阅读</button>}
+  </div>
+  <button id="back-to-top" class="tool-button" aria-label="返回顶部" title="返回顶部" hidden>
+    <Icon name="up" />
+  </button>
+</aside>
+<audio id="background-music" data-src={url('audio/canon.mp3')} preload="none" loop></audio>
+<p id="tool-status" class="tool-status" role="status" aria-live="polite"></p>
+<dialog id="search-dialog" class="search-dialog" aria-labelledby="search-heading">
+  <div class="dialog-header">
+    <h2 id="search-heading">搜索文章</h2>
+    <button data-close-dialog class="tool-button" aria-label="关闭搜索">
+      <Icon name="close" />
+    </button>
+  </div>
+  <label class="sr-only" for="search-input">
+    搜索标题或正文
+  </label>
+  <input
+    id="search-input"
+    type="search"
+    placeholder="搜索标题、正文，或输入天数…"
+    autocomplete="off"
+  />
+  <p id="search-status" class="muted" role="status">
+    输入关键词开始搜索
+  </p>
+  <button id="search-retry" hidden>
+    重新加载搜索
+  </button>
+  <ul id="search-results" class="search-results"></ul>
+</dialog>
+<dialog id="immersive-dialog" class="immersive-dialog" aria-labelledby="immersive-heading">
+  <div class="immersive-tools">
+    <div class="font-controls">
+      <button data-font="-10" aria-label="沉浸阅读减小字体">
+        A−
+      </button>
+      <button data-font="0" aria-label="沉浸阅读重置字体">
+        重置
+      </button>
+      <button data-font="10" aria-label="沉浸阅读增大字体">
+        A＋
+      </button>
+    </div>
+    <button data-close-dialog class="tool-button" aria-label="退出沉浸阅读">
+      <Icon name="close" />
+    </button>
+  </div>
+  <div class="immersive-inner">
+    <h2 id="immersive-heading"></h2>
+    <div id="immersive-body" class="prose"></div>
+  </div>
+</dialog>

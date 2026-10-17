@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/blog';
+---
+
+<Base title="页面未找到" back="" backLabel="回到首页">
+  <section class="section-heading">
+    <p class="eyebrow">404</p>
+    <h1>这一页，暂时不在这里。</h1>
+    <p>
+      <a href={url('talking/')}>去慢慢谈说看看 →</a>
+    </p>
+  </section>
+</Base>

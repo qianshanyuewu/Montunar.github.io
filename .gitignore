@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+output/
+test-results/
+playwright-report/
+.DS_Store
+.cache/
+public/audio/
+public/images/
+public/assets/
+public/favicon.ico

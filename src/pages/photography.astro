@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/blog';
+const photos = [
+  ['a', '蓝天中飘浮着形态蓬松的白云，色调清新明快。'],
+  ['b', '水边生长着棕绿相间的芦苇，水面泛起波纹，尽显自然野趣。'],
+  ['c', '草地上木栅栏旁，阳光洒落，枯叶与绿草相映，氛围静谧。'],
+  ['d', '湖泊畔石块静卧，远处城市建筑与绿树错落，展现城市中的自然景观。'],
+  ['e', '湖边紫色鸢尾花绽放，背景湖水波光粼粼，隐约可见黑天鹅身影，充满生机。'],
+  [
+    'f',
+    'henu经管楼的胶片感，木质桌椅整齐排列，大窗透进自然光线，窗外树木与室内暖调相融，静谧温馨。',
+  ],
+];
+---
+
+<Base title="光影一刻（摄影）" back="categories/art/">
+  <section class="section-heading">
+    <h1>光影一刻</h1>
+    <p>把日常，留在光里。</p>
+  </section>
+  <div class="photo-grid">
+    {photos.map(([key, description]) => (
+      <figure class="photo-card">
+        <a
+          href={url(`images/${key}.jpg`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`查看原图：${description}`}
+        >
+          <img
+            src={url(`media/photo-${key}-640.webp`)}
+            srcset={`${url(`media/photo-${key}-640.webp`)} 640w, ${url(`media/photo-${key}-1280.webp`)} 1280w`}
+            sizes="(max-width: 650px) 90vw, (max-width: 1000px) 44vw, 30vw"
+            width="640"
+            height="430"
+            loading="lazy"
+            decoding="async"
+            alt={description}
+          />
+        </a>
+        <figcaption>{description}</figcaption>
+      </figure>
+    ))}
+  </div>
+</Base>

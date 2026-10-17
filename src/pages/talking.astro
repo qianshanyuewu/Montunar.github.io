@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { categories, url } from '../lib/blog';
+---
+
+<Base title="慢慢谈说">
+  <section class="section-heading">
+    <h1>碎碎念</h1>
+  </section>
+  <div class="notebook-stack">
+    {(['art', 'technology', 'thinking'] as const).map((key, i) => (
+      <a class:list={['notebook-cover', `notebook-${i}`]} href={url(`categories/${key}/`)}>
+        <span class="notebook-pages" aria-hidden="true"></span>
+        <span class="notebook-front">
+          <span class="notebook-label">{categories[key].title}</span>
+          <span class="notebook-subtitle">{categories[key].subtitle}</span>
+          <span class="notebook-mark" aria-hidden="true">
+            {['✧', '⌘', '◌'][i]}
+          </span>
+        </span>
+      </a>
+    ))}
+  </div>
+</Base>
