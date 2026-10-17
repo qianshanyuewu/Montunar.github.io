@@ -1,0 +1,68 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { allPosts, categories, postUrl, url } from '../../lib/blog';
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  return posts.map((post) => ({ params: { slug: post.data.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const siblings = (await allPosts())
+  .filter((p) => p.data.category === post.data.category)
+  .sort((a, b) => a.data.date.localeCompare(b.data.date));
+const index = siblings.findIndex((p) => p.id === post.id);
+const previous = siblings[index - 1];
+const next = siblings[index + 1];
+---
+
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  article
+  date={post.data.date}
+  back={`categories/${post.data.category}/`}
+  backLabel={categories[post.data.category].title}
+>
+  <div
+    id="reading-progress"
+    role="progressbar"
+    aria-label="阅读进度"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="0"
+  ></div>
+  <article class="article-page">
+    <header class="article-header">
+      <a class="eyebrow" href={url(`categories/${post.data.category}/`)}>
+        {categories[post.data.category].title}
+      </a>
+      <h1>{post.data.title}</h1>
+      <time class="muted" datetime={post.data.date}>
+        {post.data.date}
+      </time>
+    </header>
+    <div id="article-prose" class="prose">
+      <Content />
+    </div>
+    <nav class="article-pagination" aria-label="相邻文章">
+      {previous ? (
+        <a href={postUrl(previous)}>
+          <small>上一篇</small>
+          {previous.data.title}
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a href={postUrl(next)}>
+          <small>下一篇</small>
+          {next.data.title}
+        </a>
+      )}
+    </nav>
+    <a class="subtle-link" href={url(`categories/${post.data.category}/`)}>
+      ← 返回{categories[post.data.category].title}
+    </a>
+  </article>
+</Base>

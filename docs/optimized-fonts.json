@@ -1,0 +1,16 @@
+[
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Light.ttf",
+    "output": "public/media/harmony-300.woff2",
+    "sourceBytes": 8336364,
+    "outputBytes": 165128,
+    "requestedCodepoints": 1380
+  },
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Regular.ttf",
+    "output": "public/media/harmony-400.woff2",
+    "sourceBytes": 8261128,
+    "outputBytes": 165444,
+    "requestedCodepoints": 1380
+  }
+]

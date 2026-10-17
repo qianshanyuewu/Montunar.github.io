@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/blog';
+import Icon from '../components/Icon.astro';
+---
+
+<Base home>
+  <div class="home-visual" aria-hidden="true"></div>
+  <a class="home-invitation" href={url('journal/')}>
+    <h1>
+      一个小小的
+      <br class="mobile-break" />
+      思考地方<span class="title-dots">...</span>
+    </h1>
+    <span class="home-chevron">
+      <Icon name="down" size={23} />
+    </span>
+    <span class="sr-only">进入博客</span>
+  </a>
+</Base>
+<style>
+  .home-visual {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.12;
+    filter: blur(2px) grayscale(30%);
+    background-position: center;
+    background-size: cover;
+    background-image: url('/media/home-light.webp');
+  }
+  :global(html[data-theme='dark']) .home-visual {
+    background-image: url('/media/home-dark.webp');
+    opacity: 0.15;
+  }
+  .home-invitation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.45;
+    letter-spacing: 0.015em;
+    margin: 0;
+  }
+  .home-chevron {
+    opacity: 0.6;
+    animation: drift 2.5s ease-in-out infinite;
+  }
+  .mobile-break {
+    display: none;
+  }
+  @keyframes drift {
+    50% {
+      transform: translateY(7px);
+    }
+  }
+  @media (max-width: 600px) {
+    .mobile-break {
+      display: block;
+    }
+    .home-invitation {
+      gap: 2rem;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 8vw, 3rem);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home-visual {
+      background-image: url('/media/home-poster.webp') !important;
+    }
+    .home-chevron {
+      animation: none;
+    }
+  }
+</style>

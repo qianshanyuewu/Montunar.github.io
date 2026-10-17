@@ -1,0 +1,18 @@
+[
+  {
+    "source": "images/\u6d4b\u8bd50.gif",
+    "output": "public/media/home-light.webp",
+    "sourceBytes": 12142320,
+    "outputBytes": 485654,
+    "frames": 53,
+    "durationMs": 3140
+  },
+  {
+    "source": "images/\u6d4b\u8bd5.gif",
+    "output": "public/media/home-dark.webp",
+    "sourceBytes": 9882383,
+    "outputBytes": 290846,
+    "frames": 53,
+    "durationMs": 3140
+  }
+]

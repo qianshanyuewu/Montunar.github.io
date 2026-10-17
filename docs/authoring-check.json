@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "articleCountBefore": 115,
+  "articleCountDuringTest": 116,
+  "generated": [
+    "standalone page",
+    "category listing",
+    "sitemap",
+    "full-text search"
+  ],
+  "manualIndexChanges": false,
+  "measuredAt": "2026-10-17T06:59:30.989Z",
+  "temporaryArticleRemoved": true
+}

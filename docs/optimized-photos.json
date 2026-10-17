@@ -1,0 +1,86 @@
+[
+  {
+    "source": "images/a.jpg",
+    "output": "public/media/photo-a-640.webp",
+    "bytes": 5360,
+    "width": 640,
+    "height": 426
+  },
+  {
+    "source": "images/a.jpg",
+    "output": "public/media/photo-a-1280.webp",
+    "bytes": 13414,
+    "width": 1280,
+    "height": 852
+  },
+  {
+    "source": "images/b.jpg",
+    "output": "public/media/photo-b-640.webp",
+    "bytes": 41184,
+    "width": 640,
+    "height": 426
+  },
+  {
+    "source": "images/b.jpg",
+    "output": "public/media/photo-b-1280.webp",
+    "bytes": 150856,
+    "width": 1280,
+    "height": 852
+  },
+  {
+    "source": "images/c.jpg",
+    "output": "public/media/photo-c-640.webp",
+    "bytes": 47994,
+    "width": 640,
+    "height": 426
+  },
+  {
+    "source": "images/c.jpg",
+    "output": "public/media/photo-c-1280.webp",
+    "bytes": 138108,
+    "width": 1280,
+    "height": 852
+  },
+  {
+    "source": "images/d.jpg",
+    "output": "public/media/photo-d-640.webp",
+    "bytes": 76690,
+    "width": 640,
+    "height": 480
+  },
+  {
+    "source": "images/d.jpg",
+    "output": "public/media/photo-d-1280.webp",
+    "bytes": 296310,
+    "width": 1280,
+    "height": 960
+  },
+  {
+    "source": "images/e.jpg",
+    "output": "public/media/photo-e-640.webp",
+    "bytes": 47642,
+    "width": 640,
+    "height": 480
+  },
+  {
+    "source": "images/e.jpg",
+    "output": "public/media/photo-e-1280.webp",
+    "bytes": 122498,
+    "width": 1280,
+    "height": 960
+  },
+  {
+    "source": "images/f.jpg",
+    "output": "public/media/photo-f-640.webp",
+    "bytes": 47250,
+    "width": 640,
+    "height": 539
+  },
+  {
+    "source": "images/f.jpg",
+    "output": "public/media/photo-f-1280.webp",
+    "bytes": 171882,
+    "width": 1280,
+    "height": 1077
+  }
+]

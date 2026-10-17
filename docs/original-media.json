@@ -1,0 +1,77 @@
+[
+  {
+    "source": "assets/documents/research_report.pdf",
+    "bytes": 460773,
+    "sha256": "5af1a5a958ae6538ac92ae0633356c5e54fd67b97e37391efb707df41c3ceffb"
+  },
+  {
+    "source": "audio/canon.mp3",
+    "bytes": 5178011,
+    "sha256": "6955a6b8a3305ba261d3f306d98b4cba0c1fc89844c0acc43b8def0d1de10311"
+  },
+  {
+    "source": "favicon.ico",
+    "bytes": 4286,
+    "sha256": "54ece74dd95cd8e52eab0b738a1b68d287b54b56b269c107e9df267cde10aa85"
+  },
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Bold.ttf",
+    "bytes": 8158996,
+    "sha256": "43a424b85e47fb53a17b3b32026a71801f86f8e022ca6798d186b47d39fa5f01"
+  },
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Light.ttf",
+    "bytes": 8336364,
+    "sha256": "dd366290b40861bc6ced85801e850ab66d6fe4c5b33bc43095a9747fa29288d8"
+  },
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Medium.ttf",
+    "bytes": 8227312,
+    "sha256": "6ed1553edccddc48eb27ff25d134a4a715cf54211238d4840b3038576cba1944"
+  },
+  {
+    "source": "fonts/HarmonyOS_Sans_SC_Regular.ttf",
+    "bytes": 8261128,
+    "sha256": "297b088424be212207df2ce8b98e335468b782aa6b96832af0b8b773d711e2b1"
+  },
+  {
+    "source": "images/a.jpg",
+    "bytes": 221421,
+    "sha256": "7d653a97208f278f627a168e60c92f217064cc9b33e2013a552d396bb784645b"
+  },
+  {
+    "source": "images/b.jpg",
+    "bytes": 2034955,
+    "sha256": "1dc29d0b0a6145f0cdfc271b47e38e001d8e8424680b113e5b41058f0caee00a"
+  },
+  {
+    "source": "images/c.jpg",
+    "bytes": 1583196,
+    "sha256": "51fec388b102d3162d03918359206d967a4eb6a8ddc7e80009b19a01d0490a19"
+  },
+  {
+    "source": "images/d.jpg",
+    "bytes": 2597799,
+    "sha256": "7a88602ffa7b8bd3daa631ec7923ae7ba77445d2703b97a9f0ec072d202070cf"
+  },
+  {
+    "source": "images/e.jpg",
+    "bytes": 1119462,
+    "sha256": "0fc151834e94f945f185751ace69b6f4775c2552e591df45a3d27b389411ebf4"
+  },
+  {
+    "source": "images/f.jpg",
+    "bytes": 2614650,
+    "sha256": "3eaf2df6c52229a0538fa0cbbfcf3eef2460ef63bb6a165e4d371e95a02adae7"
+  },
+  {
+    "source": "images/测试.gif",
+    "bytes": 9882383,
+    "sha256": "39ff2d9467cec7bf413c267098bbefd759d4dee5553bf175e884a70893b6a2af"
+  },
+  {
+    "source": "images/测试0.gif",
+    "bytes": 12142320,
+    "sha256": "4da786ad73431e47fb08a49a05de4503be3330e1a3da4cf84b12e3f704a7ff94"
+  }
+]

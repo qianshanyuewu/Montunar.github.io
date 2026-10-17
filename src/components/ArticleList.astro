@@ -1,0 +1,45 @@
+---
+import type { Post } from '../lib/blog';
+import { postUrl, url, categories } from '../lib/blog';
+import Icon from './Icon.astro';
+interface Props {
+  posts: Post[];
+}
+const { posts } = Astro.props;
+---
+
+<div class="article-list">
+  {posts.map((post) => (
+    <details
+      class="article-card"
+      data-article={post.data.slug}
+      data-endpoint={url(`content/${post.data.slug}.json`)}
+    >
+      <summary>
+        <div class="card-heading">
+          <span class="article-title">{post.data.title}</span>
+          {post.data.pinned && <span class="pinned-label">置顶</span>}
+          <Icon name="down" size={17} />
+        </div>
+        <div class="article-meta">
+          <time datetime={post.data.date}>{post.data.date}</time>
+          <span>{categories[post.data.category].title}</span>
+        </div>
+        <p class="article-excerpt">{post.data.description || '点击展开阅读完整内容'}</p>
+      </summary>
+      <div class="article-body" data-article-body aria-live="polite">
+        <p class="muted">正在加载正文…</p>
+      </div>
+      <div class="card-footer">
+        <a href={postUrl(post)}>
+          独立阅读 <span aria-hidden="true">↗</span>
+        </a>
+        <button data-immersive-card>沉浸阅读</button>
+      </div>
+      <noscript>
+        <p>当前未启用 JavaScript，请使用“独立阅读”打开完整文章。</p>
+      </noscript>
+    </details>
+  ))}
+  {posts.length === 0 && <p class="empty-state">这一页，留给下一次灵感。</p>}
+</div>

@@ -1,0 +1,307 @@
+{
+  "measuredAt": "2026-10-17T07:03:33.284Z",
+  "environment": "Local production build; Chromium CDP; HTTP uncompressed; cold cache and fresh browser context for each run; no third-party assets",
+  "browser": "153.0.8010.12",
+  "settings": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 2,
+    "isMobile": true,
+    "hasTouch": true,
+    "cpuSlowdown": 4,
+    "network": {
+      "latency": 150,
+      "downloadThroughput": 200000,
+      "uploadThroughput": 93750
+    }
+  },
+  "summary": [
+    {
+      "route": "/",
+      "lcpMedianMs": 540,
+      "clsMedian": 0,
+      "maxTransferBytes": 851012,
+      "runs": 3,
+      "errors": []
+    },
+    {
+      "route": "posts/updates-2026-03-10/",
+      "lcpMedianMs": 572,
+      "clsMedian": 0,
+      "maxTransferBytes": 207109,
+      "runs": 3,
+      "errors": []
+    },
+    {
+      "route": "categories/exam/",
+      "lcpMedianMs": 604,
+      "clsMedian": 0.007492898770329646,
+      "maxTransferBytes": 321776,
+      "runs": 3,
+      "errors": []
+    }
+  ],
+  "pass": true,
+  "results": [
+    {
+      "route": "/",
+      "run": 1,
+      "lcp": 532,
+      "cls": 0,
+      "transferBytes": 851012,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/",
+          "bytes": 8820
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/home-light.webp",
+          "bytes": 485854
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-300.woff2",
+          "bytes": 165328
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "run": 2,
+      "lcp": 552,
+      "cls": 0,
+      "transferBytes": 851012,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/",
+          "bytes": 8820
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/home-light.webp",
+          "bytes": 485854
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-300.woff2",
+          "bytes": 165328
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "run": 3,
+      "lcp": 540,
+      "cls": 0,
+      "transferBytes": 851012,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/",
+          "bytes": 8820
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/home-light.webp",
+          "bytes": 485854
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-300.woff2",
+          "bytes": 165328
+        }
+      ]
+    },
+    {
+      "route": "posts/updates-2026-03-10/",
+      "run": 1,
+      "lcp": 572,
+      "cls": 0,
+      "transferBytes": 207109,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/posts/updates-2026-03-10/",
+          "bytes": 16099
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        }
+      ]
+    },
+    {
+      "route": "posts/updates-2026-03-10/",
+      "run": 2,
+      "lcp": 568,
+      "cls": 0,
+      "transferBytes": 207109,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/posts/updates-2026-03-10/",
+          "bytes": 16099
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        }
+      ]
+    },
+    {
+      "route": "posts/updates-2026-03-10/",
+      "run": 3,
+      "lcp": 592,
+      "cls": 0,
+      "transferBytes": 207109,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/posts/updates-2026-03-10/",
+          "bytes": 16099
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        }
+      ]
+    },
+    {
+      "route": "categories/exam/",
+      "run": 1,
+      "lcp": 600,
+      "cls": 0.007492898770329646,
+      "transferBytes": 321776,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/categories/exam/",
+          "bytes": 130766
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        }
+      ]
+    },
+    {
+      "route": "categories/exam/",
+      "run": 2,
+      "lcp": 604,
+      "cls": 0.007492898770329646,
+      "transferBytes": 321776,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/categories/exam/",
+          "bytes": 130766
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        }
+      ]
+    },
+    {
+      "route": "categories/exam/",
+      "run": 3,
+      "lcp": 608,
+      "cls": 0.007492898770329646,
+      "transferBytes": 321776,
+      "errors": [],
+      "resources": [
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/categories/exam/",
+          "bytes": 130766
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.BsOCHANE.css",
+          "bytes": 14848
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/media/harmony-400.woff2",
+          "bytes": 165644
+        },
+        {
+          "url": "http://127.0.0.1:4323/Montunar.github.io/_astro/Base.astro_astro_type_script_index_0_lang.CBCfftZi.js",
+          "bytes": 10518
+        }
+      ]
+    }
+  ]
+}

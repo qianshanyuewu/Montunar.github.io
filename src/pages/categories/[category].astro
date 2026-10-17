@@ -1,0 +1,54 @@
+---
+import Base from '../../layouts/Base.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { allPosts, categories, url } from '../../lib/blog';
+export async function getStaticPaths() {
+  const posts = await allPosts();
+  return Object.entries(categories).map(([category, info]) => ({
+    params: { category },
+    props: { info, category, posts: posts.filter((post) => post.data.category === category) },
+  }));
+}
+const { info, category, posts } = Astro.props;
+---
+
+<Base title={info.title} list back={info.parent}>
+  <section class="section-heading">
+    <h1>{info.title}</h1>
+    {category === 'updates' && <p>记录生活中的点滴，也记下每一次向前。</p>}
+  </section>
+  {['updates', 'exam'].includes(category) && (
+    <nav class="category-tabs" aria-label="干了啥子栏目">
+      <a
+        href={url('categories/updates/')}
+        aria-current={category === 'updates' ? 'page' : undefined}
+      >
+        更新记录
+      </a>
+      <a href={url('categories/exam/')} aria-current={category === 'exam' ? 'page' : undefined}>
+        考研100天记录
+      </a>
+    </nav>
+  )}
+  {category === 'art' && (
+    <a class="photo-feature" href={url('photography/')}>
+      <div class="photo-frame">
+        <img
+          src={url('media/photo-a-640.webp')}
+          width="640"
+          height="426"
+          loading="lazy"
+          alt="蓝天与白云"
+        />
+      </div>
+      <h2>光影一刻（摄影）</h2>
+      <span>阅读更多 →</span>
+    </a>
+  )}
+  {category === 'art' && (
+    <a class="subtle-link" href={url('appreciation/')}>
+      美术鉴赏 →
+    </a>
+  )}
+  <ArticleList posts={posts} />
+</Base>
