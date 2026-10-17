@@ -42,7 +42,9 @@ for (const [index, category, categoryTitle] of groups) {
     const frontmatter = Object.entries(data)
       .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
       .join('\n');
-    await writeFile(`src/content/posts/${slug}.md`, `---\n${frontmatter}\n---\n${body}`);
+    await writeFile(`src/content/posts/${slug}.md`, `---\n${frontmatter}\n---\n${body}`, {
+      flag: 'wx',
+    });
     manifest.push({
       originalIndex: `articles/${index}`,
       originalFilename,

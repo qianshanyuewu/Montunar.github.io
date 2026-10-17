@@ -13,8 +13,10 @@ const build = () => {
   if (run.status !== 0) throw new Error(run.stdout + run.stderr);
 };
 let result;
+let created = false;
 try {
   await writeFile(file, source, { flag: 'wx' });
+  created = true;
   build();
   const [page, list, sitemap, index] = await Promise.all([
     readFile(`dist/posts/${slug}/index.html`, 'utf8'),
@@ -38,8 +40,10 @@ try {
     manualIndexChanges: false,
   };
 } finally {
-  await unlink(file).catch(() => {});
-  build();
+  if (created) {
+    await unlink(file);
+    build();
+  }
 }
 await writeFile(
   'docs/authoring-check.json',

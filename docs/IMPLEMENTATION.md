@@ -18,7 +18,8 @@ Source baseline: main at 0a77af1020c193bfbef93f1da53d407005790bc9.
 - [x] Validate content, built links, desktop/mobile flows and direct navigation.
 - [x] Measure three cold mobile runs; median LCP <= 2500 ms, CLS <= 0.1;
       homepage automatic transfer <= 2,000,000 bytes.
-- [ ] Publish a reviewable PR and attach it to this chat; do not merge or deploy.
+- [x] Publish a reviewable PR and attach it to this chat; do not merge or deploy.
+      https://github.com/qianshanyuewu/Montunar.github.io/pull/1
 
 The active source of truth will be src/content/posts with frontmatter. The
 original articles and media remain as archival inputs. A migration manifest must
